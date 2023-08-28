@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="fragments.Home">
+
+    <Button
+        android:id="@+id/btnNavigate8"
+        android:layout_width="252dp"
+        android:layout_height="76dp"
+        android:backgroundTint="#009688"
+        android:text="Ver mi perfil"
+        android:textColorHighlight="#009688"
+        android:textColorLink="#009688"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.145"
+        app:rippleColor="#009688" />
+
+    <Button
+        android:id="@+id/btnNavigate9"
+        android:layout_width="252dp"
+        android:layout_height="76dp"
+        android:backgroundTint="#009688"
+        android:text="Mis pedidos"
+        android:textColorHighlight="#009688"
+        android:textColorLink="#009688"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.588"
+        app:rippleColor="#009688" />
+
+    <Button
+        android:id="@+id/btnNavigate10"
+        android:layout_width="252dp"
+        android:layout_height="76dp"
+        android:backgroundTint="#009688"
+        android:text="Mis reservas"
+        android:textColorHighlight="#009688"
+        android:textColorLink="#009688"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.813"
+        app:rippleColor="#009688" />
+
+    <Button
+        android:id="@+id/btnNavigate7"
+        android:layout_width="252dp"
+        android:layout_height="76dp"
+        android:backgroundTint="#009688"
+        android:text="Mi mascota"
+        android:textColorHighlight="#009688"
+        android:textColorLink="#009688"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.373"
+        app:rippleColor="#009688" />
+</androidx.constraintlayout.widget.ConstraintLayout>

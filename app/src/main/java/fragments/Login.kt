@@ -15,7 +15,8 @@ import entities.User
 class Login : Fragment() {
 
     lateinit var v: View
-    lateinit var btnNavigate: Button
+    lateinit var btnLogin: Button
+    lateinit var btnRegister: Button
     lateinit var name: EditText
     lateinit var pass: EditText
     var userList: MutableList<User> = mutableListOf()
@@ -26,7 +27,8 @@ class Login : Fragment() {
     ): View? {
         v = inflater.inflate(R.layout.fragment_login, container, false)
 
-        btnNavigate = v.findViewById(R.id.btnNavigate)
+        btnLogin = v.findViewById(R.id.btnNavigate2)
+        btnRegister = v.findViewById(R.id.btnNavigate)
         name = v.findViewById(R.id.userName)
         pass = v.findViewById(R.id.userPassword)
 
@@ -38,7 +40,7 @@ class Login : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        btnNavigate.setOnClickListener {
+        btnLogin.setOnClickListener {
 
             var name = name.text.toString()
             var enteredPass = pass.text.toString()
@@ -48,14 +50,22 @@ class Login : Fragment() {
                 val user = userList.find { it.name == name }
                 if (user != null) {
                     if (user.password == enteredPass) {
-                        val action = LoginDirections.actionFirstFragmentToRegisterOptions()
+                        val bundle = Bundle()
+                        bundle.putString("userName", name)
+                        val action = LoginDirections.actionLoginToHome2()
                         findNavController(v).navigate(action)
-                    } else {
-                        Snackbar.make(v, "Contraseña incorrecta", Snackbar.LENGTH_SHORT).show()
                     }
+                    }
+                else {
+                    Snackbar.make(v, "Contraseña incorrecta", Snackbar.LENGTH_SHORT).show()
                 }
             }
 
+        }
+
+        btnRegister.setOnClickListener{
+            val action = LoginDirections.actionLoginToRegisterOptions2()
+            findNavController(v).navigate(action)
         }
     }
 }
