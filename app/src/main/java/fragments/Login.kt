@@ -1,13 +1,13 @@
 package fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import androidx.navigation.Navigation.findNavController
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
 import com.google.android.material.snackbar.Snackbar
 import entities.User
@@ -41,36 +41,30 @@ class Login : Fragment() {
         super.onStart()
 
         btnLogin.setOnClickListener {
-
-            var name = name.text.toString()
-            var enteredPass = pass.text.toString()
-
+            val name = name.text.toString()
+            val enteredPass = pass.text.toString()
 
             if (userList.isNotEmpty()) {
                 val user = userList.find { it.name == name }
                 if (user != null) {
                     if (user.password == enteredPass) {
+
                         val bundle = Bundle()
                         bundle.putString("userName", name)
-                        val action = LoginDirections.actionLoginToHome2()
-                        findNavController(v).navigate(action)
+                        findNavController().navigate(R.id.action_login_to_home2, bundle)
+
+                    } else {
+                        Snackbar.make(v, "Contraseña incorrecta", Snackbar.LENGTH_SHORT).show()
                     }
-                    }
-                else {
-                    Snackbar.make(v, "Contraseña incorrecta", Snackbar.LENGTH_SHORT).show()
+                } else {
+                    Snackbar.make(v, "Usuario no encontrado", Snackbar.LENGTH_SHORT).show()
                 }
             }
-
         }
 
-        btnRegister.setOnClickListener{
+        btnRegister.setOnClickListener {
             val action = LoginDirections.actionLoginToRegisterOptions2()
-            findNavController(v).navigate(action)
+            findNavController().navigate(action)
         }
     }
 }
-
-
-
-
-
