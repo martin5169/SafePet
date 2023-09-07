@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout4"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="fragments.RegisterForm" >
+
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:backgroundTint="#009688"
+        android:text="Registrarme"
+        android:textColorHighlight="#009688"
+        android:textColorLink="#009688"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.894"
+        app:rippleColor="#009688" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/name"
+        android:layout_width="304dp"
+        android:layout_height="43dp"
+        android:hint="Nombre"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.401"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.165" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/lastName"
+        android:layout_width="304dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="44dp"
+        android:hint="Apellido"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/userName2"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/userName2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.266" />
+
+    <EditText
+        android:id="@+id/dni"
+        android:layout_width="304dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginEnd="1dp"
+        android:ems="10"
+        android:hint="DNI"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/userName3"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/userName3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.368" />
+
+    <EditText
+        android:id="@+id/mail"
+        android:layout_width="304dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="44dp"
+        android:ems="10"
+        android:hint="Ingresa tu email"
+        android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/editTextNumber"
+        app:layout_constraintHorizontal_bias="0.983"
+        app:layout_constraintStart_toEndOf="@+id/editTextNumber"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.475" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/pass"
+        android:layout_width="304dp"
+        android:layout_height="43dp"
+        android:hint="Contraseña"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.401"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.626" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/pass2"
+        android:layout_width="304dp"
+        android:layout_height="43dp"
+        android:hint="Confirmar contraseña"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.401"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.724" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

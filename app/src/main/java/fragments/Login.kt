@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
 import com.google.android.material.snackbar.Snackbar
-import entities.User
+import entities.UserRepository
 
 class Login : Fragment() {
 
@@ -19,7 +19,7 @@ class Login : Fragment() {
     lateinit var btnRegister: Button
     lateinit var name: EditText
     lateinit var pass: EditText
-    var userList: MutableList<User> = mutableListOf()
+    val userRepository = UserRepository.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,10 +29,8 @@ class Login : Fragment() {
 
         btnLogin = v.findViewById(R.id.btnNavigate2)
         btnRegister = v.findViewById(R.id.btnNavigate)
-        name = v.findViewById(R.id.userName)
+        name = v.findViewById(R.id.name)
         pass = v.findViewById(R.id.userPassword)
-
-        userList.add(User("Martin", "commisso17"))
 
         return v
     }
@@ -41,26 +39,29 @@ class Login : Fragment() {
         super.onStart()
 
         btnLogin.setOnClickListener {
-            val name = name.text.toString()
-            val enteredPass = pass.text.toString()
+            try {
+                val enteredMail = name.text.toString()
+                val enteredPass = pass.text.toString()
 
-            if (userList.isNotEmpty()) {
-                val user = userList.find { it.name == name }
-                if (user != null) {
-                    if (user.password == enteredPass) {
-
-                        val bundle = Bundle()
-                        bundle.putString("userName", name)
-                        findNavController().navigate(R.id.action_login_to_home2, bundle)
-
+                userRepository.getUsers { userList ->
+                    val user = userList.find { it.mail == enteredMail }
+                    if (user != null) {
+                        if (user.password == enteredPass) {
+                            val action = LoginDirections.actionLoginToHome2(user)
+                            findNavController().navigate(action)
+                        } else {
+                            Snackbar.make(v, "Contraseña incorrecta", Snackbar.LENGTH_SHORT).show()
+                        }
                     } else {
-                        Snackbar.make(v, "Contraseña incorrecta", Snackbar.LENGTH_SHORT).show()
+                        Snackbar.make(v, "Usuario no encontrado", Snackbar.LENGTH_SHORT).show()
                     }
-                } else {
-                    Snackbar.make(v, "Usuario no encontrado", Snackbar.LENGTH_SHORT).show()
                 }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Snackbar.make(v, "Ocurrió un error al iniciar sesión", Snackbar.LENGTH_SHORT).show()
             }
         }
+
 
         btnRegister.setOnClickListener {
             val action = LoginDirections.actionLoginToRegisterOptions2()

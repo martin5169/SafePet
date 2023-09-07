@@ -19,11 +19,11 @@
         app:layout_constraintVertical_bias="0.062" />
 
     <Button
-        android:id="@+id/btnNavigate6"
+        android:id="@+id/bntRegisterDueño"
         android:layout_width="252dp"
         android:layout_height="76dp"
         android:backgroundTint="#009688"
-        android:text="Soy dueño"
+        android:text="Dueño"
         android:textColorHighlight="#009688"
         android:textColorLink="#009688"
         android:textSize="20sp"
@@ -32,15 +32,15 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.799"
+        app:layout_constraintVertical_bias="0.698"
         app:rippleColor="#009688" />
 
     <Button
-        android:id="@+id/btnNavigate5"
+        android:id="@+id/btnRegisterPaseador"
         android:layout_width="252dp"
         android:layout_height="76dp"
         android:backgroundTint="#009688"
-        android:text="Quiero ser paseador"
+        android:text="Paseador"
         android:textColorHighlight="#009688"
         android:textColorLink="#009688"
         android:textSize="20sp"
@@ -49,23 +49,7 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.401"
+        app:layout_constraintVertical_bias="0.478"
         app:rippleColor="#009688" />
 
-    <Button
-        android:id="@+id/btnNavigate4"
-        android:layout_width="252dp"
-        android:layout_height="76dp"
-        android:backgroundTint="#009688"
-        android:text="Quiero ser cuidador"
-        android:textColorHighlight="#009688"
-        android:textColorLink="#009688"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.607"
-        app:rippleColor="#009688" />
 </androidx.constraintlayout.widget.ConstraintLayout>

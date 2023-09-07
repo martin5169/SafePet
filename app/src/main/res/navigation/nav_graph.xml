@@ -11,28 +11,73 @@
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/action_login_to_home2"
-            app:destination="@id/home2" />
+            app:destination="@id/home" />
         <action
             android:id="@+id/action_login_to_registerOptions2"
             app:destination="@id/registerOptions" />
     </fragment>
     <fragment
-        android:id="@+id/home2"
+        android:id="@+id/home"
         android:name="fragments.Home"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
-    <fragment
-        android:id="@+id/secondFragment"
-        android:name="fragments.SecondFragment"
-        android:label="fragment_register"
-        tools:layout="@layout/fragment_register" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_home2_to_userList"
+            app:destination="@id/paseadoresList" />
+        <action
+            android:id="@+id/action_home2_to_perfil"
+            app:destination="@id/perfilUser" />
+        <action
+            android:id="@+id/action_home2_to_perfilPet"
+            app:destination="@id/perfilPet" />
+        <argument
+            android:name="user"
+            app:argType="entities.User" />
+    </fragment>
     <fragment
         android:id="@+id/registerOptions"
         android:name="fragments.RegisterOptions"
         android:label="fragment_register_options"
         tools:layout="@layout/fragment_register_options" >
         <action
-            android:id="@+id/action_registerOptions_to_secondFragment"
-            app:destination="@id/secondFragment" />
+            android:id="@+id/action_registerOptions_to_registerForm"
+            app:destination="@id/registerForm" />
+    </fragment>
+    <fragment
+        android:id="@+id/paseadoresList"
+        android:name="fragments.PaseadoresList"
+        android:label="fragment_user_list"
+        tools:layout="@layout/fragment_paseadores_list" >
+        <action
+            android:id="@+id/action_paseadoresList_to_paseadorDetail"
+            app:destination="@id/paseadorDetail" />
+    </fragment>
+    <fragment
+        android:id="@+id/perfilUser"
+        android:name="fragments.Perfil"
+        android:label="fragment_perfil"
+        tools:layout="@layout/fragment_perfil" >
+        <argument
+            android:name="user"
+            app:argType="entities.User" />
+    </fragment>
+    <fragment
+        android:id="@+id/perfilPet"
+        android:name="fragments.PerfilPet"
+        android:label="fragment_perfil_pet"
+        tools:layout="@layout/fragment_perfil_pet" />
+    <fragment
+        android:id="@+id/registerForm"
+        android:name="fragments.RegisterForm"
+        android:label="fragment_register_form"
+        tools:layout="@layout/fragment_register_form" />
+    <fragment
+        android:id="@+id/paseadorDetail"
+        android:name="fragments.PaseadorDetail"
+        android:label="fragment_paseador_detail"
+        tools:layout="@layout/fragment_paseador_detail" >
+        <argument
+            android:name="paseador"
+            app:argType="entities.User" />
     </fragment>
 </navigation>
