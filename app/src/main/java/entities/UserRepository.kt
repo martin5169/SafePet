@@ -46,27 +46,23 @@ class UserRepository() {
   }
 
   fun updatePet(userDni: String, petName: String, petWeight: String, petAge: String, petBreed: String) {
-    // Buscar al usuario por su DNI en la base de datos
     val usersQuery = usersReference.orderByChild("dni").equalTo(userDni)
 
     usersQuery.addListenerForSingleValueEvent(object : ValueEventListener {
       override fun onDataChange(snapshot: DataSnapshot) {
         if (snapshot.exists()) {
           for (userSnapshot in snapshot.children) {
-            // Actualizar los datos de la mascota del usuario encontrado
+
             userSnapshot.child("mascota").child("nombre").getRef().setValue(petName)
             userSnapshot.child("mascota").child("peso").getRef().setValue(petWeight)
             userSnapshot.child("mascota").child("edad").getRef().setValue(petAge)
             userSnapshot.child("mascota").child("raza").getRef().setValue(petBreed)
           }
-        } else {
-          // No se encontró ningún usuario con el DNI proporcionado
-          // Puedes manejar esto como mejor te parezca, por ejemplo, lanzando una excepción o mostrando un mensaje de error.
         }
       }
 
       override fun onCancelled(error: DatabaseError) {
-        // Maneja el error aquí si es necesario
+
       }
     })
   }

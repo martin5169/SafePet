@@ -26,11 +26,11 @@ class PerfilPet : Fragment() {
     lateinit var v: View
     lateinit var btnRegister: Button
 
-    lateinit var petName: EditText
-    lateinit var weight: EditText
-    lateinit var age: EditText
-    lateinit var breed: EditText
-    lateinit var alert: TextView
+    lateinit var inputPetName: EditText
+    lateinit var inputPetWeight: EditText
+    lateinit var inputPetAge: EditText
+    lateinit var inputPetBreed: EditText
+    lateinit var alert : TextView
 
     lateinit var user: User
 
@@ -40,10 +40,12 @@ class PerfilPet : Fragment() {
     ): View? {
         v = inflater.inflate(R.layout.fragment_perfil_pet, container, false)
         btnRegister = v.findViewById(R.id.btnPerfilPetRegister)
-        petName = v.findViewById(R.id.petName)
-        weight = v.findViewById(R.id.petWeight)
-        age = v.findViewById(R.id.petAge)
-        breed = v.findViewById(R.id.petBreed)
+
+        inputPetName = v.findViewById(R.id.petName)
+        inputPetWeight = v.findViewById(R.id.petWeight)
+        inputPetAge = v.findViewById(R.id.petAge)
+        inputPetBreed = v.findViewById(R.id.petBreed)
+
         alert = v.findViewById(R.id.Alert)
 
         return v
@@ -61,10 +63,10 @@ class PerfilPet : Fragment() {
 
         if (petNameNotEmpty && petWeightNotEmpty && petAgeNotEmpty && petBreedNotEmpty) {
             btnRegister.text = "Editar datos"
-            petName.setText(user.getPetName())
-            weight.setText(user.getPetWeight())
-            age.setText(user.getPetAge())
-            breed.setText(user.getPetBreed())
+            inputPetName.setText(user.getPetName())
+            inputPetWeight.setText(user.getPetWeight())
+            inputPetAge.setText(user.getPetAge())
+            inputPetBreed.setText(user.getPetBreed())
 
         } else {
             btnRegister.visibility = View.VISIBLE
@@ -72,18 +74,15 @@ class PerfilPet : Fragment() {
         }
 
         btnRegister.setOnClickListener {
-            val enteredName = petName.text.toString()
-            val enteredWeight = weight.text.toString()
-            val enteredAge = age.text.toString()
-            val enteredBreed = breed.text.toString()
+            val enteredName = inputPetName.text.toString()
+            val enteredWeight = inputPetWeight.text.toString()
+            val enteredAge = inputPetAge.text.toString()
+            val enteredBreed = inputPetBreed.text.toString()
 
-            if (enteredName.isNotEmpty() && enteredWeight.isNotEmpty() && enteredAge.isNotEmpty() && enteredBreed.isNotEmpty()) {
-                userRepository.updatePet(user.dni, enteredName, enteredWeight, enteredAge, enteredBreed)
-                btnRegister.visibility = View.GONE
-                Snackbar.make(v, "Datos registrados con éxito", Snackbar.LENGTH_SHORT).show()
-            } else {
-                Snackbar.make(v, "Todos los campos son requeridos", Snackbar.LENGTH_SHORT).show()
-            }
+            userRepository.updatePet(user.dni, enteredName, enteredWeight, enteredAge, enteredBreed)
+
+            btnRegister.visibility = View.GONE
+            Snackbar.make(v, "Datos registrados con éxito", Snackbar.LENGTH_SHORT).show()
         }
     }
 }

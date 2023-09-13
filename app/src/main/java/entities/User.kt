@@ -23,34 +23,17 @@ class User(): Parcelable {
         this.mascota = Pet()
 
     }
-
     fun getPetName(): String {
         return this.mascota.nombre
     }
     fun getPetWeight(): String {
         return this.mascota.peso
     }
-
     fun getPetAge(): String {
         return this.mascota.edad
     }
     fun getPetBreed(): String {
         return this.mascota.raza
     }
-
-    fun setPetName(nombreIngresado :String ){
-        this.mascota.nombre=nombreIngresado
-    }
-    fun setPetWeight(pesoIngresado :String ){
-        this.mascota.peso=pesoIngresado
-    }
-
-    fun setPetAge(edadIngresada :String ){
-        this.mascota.edad=edadIngresada
-    }
-    fun setPetBreed(razaIngresada :String ){
-        this.mascota.raza=razaIngresada
-    }
-
 
 }

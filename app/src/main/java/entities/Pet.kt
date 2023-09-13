@@ -11,5 +11,6 @@ class Pet(): Parcelable {
     var peso: String = ""
     var edad: String = ""
     var raza: String = ""
+
 }
 
