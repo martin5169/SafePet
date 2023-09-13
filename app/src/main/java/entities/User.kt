@@ -36,4 +36,5 @@ class User(): Parcelable {
         return this.mascota.raza
     }
 
+
 }

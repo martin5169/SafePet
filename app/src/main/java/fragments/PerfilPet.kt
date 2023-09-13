@@ -61,6 +61,7 @@ class PerfilPet : Fragment() {
         val petAgeNotEmpty = user.getPetAge().isNotEmpty()
         val petBreedNotEmpty = user.getPetBreed().isNotEmpty()
 
+
         if (petNameNotEmpty && petWeightNotEmpty && petAgeNotEmpty && petBreedNotEmpty) {
             btnRegister.text = "Editar datos"
             inputPetName.setText(user.getPetName())
@@ -79,10 +80,14 @@ class PerfilPet : Fragment() {
             val enteredAge = inputPetAge.text.toString()
             val enteredBreed = inputPetBreed.text.toString()
 
-            userRepository.updatePet(user.dni, enteredName, enteredWeight, enteredAge, enteredBreed)
 
-            btnRegister.visibility = View.GONE
-            Snackbar.make(v, "Datos registrados con éxito", Snackbar.LENGTH_SHORT).show()
+            if (enteredName.isNotEmpty() && enteredWeight.isNotEmpty() && enteredAge.isNotEmpty() && enteredBreed.isNotEmpty()) {
+                userRepository.updatePet(user.dni, enteredName, enteredWeight, enteredAge, enteredBreed)
+                btnRegister.visibility = View.GONE
+                Snackbar.make(v, "Datos registrados con éxito", Snackbar.LENGTH_SHORT).show()
+            } else {
+                Snackbar.make(v, "Todos los campos son requeridos", Snackbar.LENGTH_SHORT).show()
+            }
         }
     }
 }
