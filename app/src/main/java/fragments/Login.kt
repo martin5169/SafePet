@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
 import com.google.android.material.snackbar.Snackbar
+import entities.PaseadorRepository
 import entities.UserRepository
 
 class Login : Fragment() {

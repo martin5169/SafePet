@@ -2,6 +2,6 @@ package fragments
 
 import androidx.lifecycle.ViewModel
 
-class PerfilViewModel : ViewModel() {
+class MapaViewModel : ViewModel() {
     // TODO: Implement the ViewModel
 }

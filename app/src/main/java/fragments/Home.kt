@@ -8,7 +8,9 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.example.myapplication.R
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class Home : Fragment() {
 
@@ -17,6 +19,7 @@ class Home : Fragment() {
     lateinit var btnPedidos: Button
     lateinit var btnPerfilUser: Button
     lateinit var btnPerfilPet: Button
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,6 +31,7 @@ class Home : Fragment() {
         text = v.findViewById(R.id.welcomeText)
         btnPerfilUser = v.findViewById(R.id.btnPerfil)
         btnPerfilPet = v.findViewById(R.id.btnPerfilPet)
+
 
         return v
     }
@@ -44,12 +48,12 @@ class Home : Fragment() {
         }
 
         btnPerfilUser.setOnClickListener {
-            val action = HomeDirections.actionHome2ToPerfil(user)
+            val action = HomeDirections.actionHomeToPerfilUser(user)
             findNavController().navigate(action)
         }
 
         btnPerfilPet.setOnClickListener {
-            val action = HomeDirections.actionHome2ToPerfilPet()
+            val action = HomeDirections.actionHome2ToPerfilPet(user)
             findNavController().navigate(action)
         }
 

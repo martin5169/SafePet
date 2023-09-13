@@ -11,13 +11,11 @@ import com.example.myapplication.R
 
 class PaseadorDetail : Fragment() {
 
-
     lateinit var v : View
     lateinit var paseadorLastname : TextView
     lateinit var paseadorName : TextView
     lateinit var paseadorDni : TextView
     lateinit var paseadorMail : TextView
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,10 +27,8 @@ class PaseadorDetail : Fragment() {
         paseadorDni = v.findViewById(R.id.paseadorDni)
         paseadorMail = v.findViewById(R.id.paseadorMail)
 
-
         return v
     }
-
     override fun onStart() {
         super.onStart()
         val paseador = PaseadorDetailArgs.fromBundle(requireArguments()).paseador

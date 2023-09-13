@@ -28,15 +28,17 @@ class RegisterOptions : Fragment() {
     
     override fun onStart() {
         super.onStart()
-        
-        btnRegisterDueño.setOnClickListener{
-            val action = RegisterOptionsDirections.actionRegisterOptionsToRegisterForm()
-            findNavController().navigate(action)
+
+        btnRegisterDueño.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString("opcion", "dueño")
+            findNavController().navigate(R.id.action_registerOptions_to_registerForm, bundle)
         }
 
-        btnRegisterPaseador.setOnClickListener{
-            val action = RegisterOptionsDirections.actionRegisterOptionsToRegisterForm()
-            findNavController().navigate(action)
+        btnRegisterPaseador.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString("opcion", "paseador")
+            findNavController().navigate(R.id.action_registerOptions_to_registerForm, bundle)
         }
        
 

@@ -8,11 +8,11 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
-import entities.User
+import entities.Paseador
 
-class UserAdapter(var users : MutableList<User>,
-    var onClick : (Int) -> Unit
-) : RecyclerView.Adapter<UserAdapter.UserHolder>() {
+class PaseadorAdapter(var paseadores : MutableList<Paseador>,
+                      var onClick : (Int) -> Unit
+) : RecyclerView.Adapter<PaseadorAdapter.UserHolder>() {
 
     lateinit var perfil : Button
 
@@ -38,7 +38,7 @@ class UserAdapter(var users : MutableList<User>,
         }
 
         fun getCard() : CardView {
-            return view.findViewById(R.id.cardUser)
+            return view.findViewById(R.id.cardPaseador)
         }
     }
 
@@ -48,13 +48,13 @@ class UserAdapter(var users : MutableList<User>,
     }
 
     override fun getItemCount(): Int {
-        return users.size
+        return paseadores.size
     }
 
     override fun onBindViewHolder(holder: UserHolder, position: Int) {
-        holder.setUserLastName(users[position].lastName)
-        holder.setUserName(users[position].name)
-        holder.setUserMail(users[position].mail)
+        holder.setUserLastName(paseadores[position].lastName)
+        holder.setUserName(paseadores[position].name)
+        holder.setUserMail(paseadores[position].mail)
         holder.getCard().setOnClickListener{
             onClick(position)
         }

@@ -10,20 +10,25 @@ import android.widget.TextView
 import android.util.TypedValue
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.firebase.FirebaseApp
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var bottomNavView: BottomNavigationView
+    private lateinit var navHostFragment: NavHostFragment
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        class MyApplication : Application() {
-            override fun onCreate() {
-                super.onCreate()
-                FirebaseApp.initializeApp(this)
-            }
-        }
+        navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView3) as NavHostFragment
+        bottomNavView = findViewById(R.id.bottom_bar)
+        NavigationUI.setupWithNavController(bottomNavView,navHostFragment.navController)
 
     }
+
+
 }

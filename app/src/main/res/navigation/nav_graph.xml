@@ -25,14 +25,17 @@
             android:id="@+id/action_home2_to_userList"
             app:destination="@id/paseadoresList" />
         <action
-            android:id="@+id/action_home2_to_perfil"
-            app:destination="@id/perfilUser" />
-        <action
             android:id="@+id/action_home2_to_perfilPet"
             app:destination="@id/perfilPet" />
         <argument
             android:name="user"
             app:argType="entities.User" />
+        <action
+            android:id="@+id/action_home_to_mapa"
+            app:destination="@id/mapa" />
+        <action
+            android:id="@+id/action_home_to_perfilUser"
+            app:destination="@id/perfilUser" />
     </fragment>
     <fragment
         android:id="@+id/registerOptions"
@@ -53,19 +56,14 @@
             app:destination="@id/paseadorDetail" />
     </fragment>
     <fragment
-        android:id="@+id/perfilUser"
-        android:name="fragments.Perfil"
-        android:label="fragment_perfil"
-        tools:layout="@layout/fragment_perfil" >
+        android:id="@+id/perfilPet"
+        android:name="fragments.PerfilPet"
+        android:label="fragment_perfil_pet"
+        tools:layout="@layout/fragment_perfil_pet" >
         <argument
             android:name="user"
             app:argType="entities.User" />
     </fragment>
-    <fragment
-        android:id="@+id/perfilPet"
-        android:name="fragments.PerfilPet"
-        android:label="fragment_perfil_pet"
-        tools:layout="@layout/fragment_perfil_pet" />
     <fragment
         android:id="@+id/registerForm"
         android:name="fragments.RegisterForm"
@@ -78,6 +76,20 @@
         tools:layout="@layout/fragment_paseador_detail" >
         <argument
             android:name="paseador"
+            app:argType="entities.Paseador" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapa"
+        android:name="fragments.Mapa"
+        android:label="fragment_mapa"
+        tools:layout="@layout/fragment_mapa" />
+    <fragment
+        android:id="@+id/perfilUser"
+        android:name="fragments.PerfilUser"
+        android:label="fragment_perfil_user"
+        tools:layout="@layout/fragment_perfil_user" >
+        <argument
+            android:name="user"
             app:argType="entities.User" />
     </fragment>
 </navigation>
