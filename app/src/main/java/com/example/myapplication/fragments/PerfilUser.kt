@@ -18,11 +18,11 @@ class PerfilUser : Fragment() {
     lateinit var mail: TextView
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        v = inflater.inflate(R.layout.fragment_perfil_user
-            , container, false)
+        v = inflater.inflate(
+            R.layout.fragment_perfil_user, container, false
+        )
 
         name = v.findViewById(R.id.name)
         lastName = v.findViewById(R.id.lastName)
@@ -35,7 +35,7 @@ class PerfilUser : Fragment() {
         super.onStart()
         try {
             val user = UserSession.user
-                if (user != null) {
+            if (user != null) {
                 name.text = "Nombre: ${user.name}"
                 lastName.text = "Apellido: ${user.lastName}"
                 mail.text = "Email: ${user.mail}"

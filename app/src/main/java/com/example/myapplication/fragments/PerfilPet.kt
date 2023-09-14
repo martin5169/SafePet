@@ -12,6 +12,7 @@ import com.example.myapplication.R
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.FirebaseDatabase
 import com.example.myapplication.entities.User
+import com.example.myapplication.entities.UserAbstract
 import com.example.myapplication.entities.UserSession
 import com.example.myapplication.repository.UserRepository
 
@@ -27,7 +28,7 @@ class PerfilPet : Fragment() {
     lateinit var inputPetBreed: EditText
     lateinit var alert : TextView
 
-    lateinit var user: User
+    lateinit var user: UserAbstract
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,21 +49,21 @@ class PerfilPet : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        user = UserSession.user
+        user = UserSession.user as User
         val userRepository = UserRepository.getInstance()
 
-        val petNameNotEmpty = user.getPetName().isNotEmpty()
-        val petWeightNotEmpty = user.getPetWeight().isNotEmpty()
-        val petAgeNotEmpty = user.getPetAge().isNotEmpty()
-        val petBreedNotEmpty = user.getPetBreed().isNotEmpty()
+        val petNameNotEmpty = (user as User).getPetName().isNotEmpty()
+        val petWeightNotEmpty = (user as User).getPetWeight().isNotEmpty()
+        val petAgeNotEmpty = (user as User).getPetAge().isNotEmpty()
+        val petBreedNotEmpty = (user as User).getPetBreed().isNotEmpty()
 
 
         if (petNameNotEmpty && petWeightNotEmpty && petAgeNotEmpty && petBreedNotEmpty) {
             btnRegister.text = "Editar datos"
-            inputPetName.setText(user.getPetName())
-            inputPetWeight.setText(user.getPetWeight())
-            inputPetAge.setText(user.getPetAge())
-            inputPetBreed.setText(user.getPetBreed())
+            inputPetName.setText((user as User).getPetName())
+            inputPetWeight.setText((user as User).getPetWeight())
+            inputPetAge.setText((user as User).getPetAge())
+            inputPetBreed.setText((user as User).getPetBreed())
 
         } else {
             btnRegister.visibility = View.VISIBLE

@@ -49,12 +49,12 @@ class Home : Fragment() {
         }
 
         btnPerfilUser.setOnClickListener {
-            val action = HomeDirections.actionHomeToPerfilUser(user)
+            val action = HomeDirections.actionHomeToPerfilUser()
             findNavController().navigate(action)
         }
 
         btnPerfilPet.setOnClickListener {
-            val action = HomeDirections.actionHome2ToPerfilPet(user)
+            val action = HomeDirections.actionHome2ToPerfilPet()
             findNavController().navigate(action)
         }
 

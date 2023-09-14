@@ -1,5 +1,5 @@
 package com.example.myapplication.entities
 
 object UserSession {
-    var user: User = User()
+    var user: UserAbstract = User()
 }
