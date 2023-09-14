@@ -18,18 +18,8 @@ class User(): Parcelable, UserAbstract() {
         this.mascota = Pet()
 
     }
-    fun getPetName(): String {
-        return this.mascota.nombre
-    }
-    fun getPetWeight(): String {
-        return this.mascota.peso
-    }
-    fun getPetAge(): String {
-        return this.mascota.edad
-    }
-    fun getPetBreed(): String {
-        return this.mascota.raza
-    }
+
+
 
 
 }

@@ -51,19 +51,21 @@ class PerfilPet : Fragment() {
         super.onStart()
         user = UserSession.user as User
         val userRepository = UserRepository.getInstance()
+        val pet = (user as User).mascota
 
-        val petNameNotEmpty = (user as User).getPetName().isNotEmpty()
-        val petWeightNotEmpty = (user as User).getPetWeight().isNotEmpty()
-        val petAgeNotEmpty = (user as User).getPetAge().isNotEmpty()
-        val petBreedNotEmpty = (user as User).getPetBreed().isNotEmpty()
+        val petNameNotEmpty = pet.nombre.isNotEmpty()
+        val petWeightNotEmpty = pet.peso.isNotEmpty()
+        val petAgeNotEmpty = pet.edad.isNotEmpty()
+        val petBreedNotEmpty = pet.raza.isNotEmpty()
 
 
         if (petNameNotEmpty && petWeightNotEmpty && petAgeNotEmpty && petBreedNotEmpty) {
             btnRegister.text = "Editar datos"
-            inputPetName.setText((user as User).getPetName())
-            inputPetWeight.setText((user as User).getPetWeight())
-            inputPetAge.setText((user as User).getPetAge())
-            inputPetBreed.setText((user as User).getPetBreed())
+
+            inputPetName.setText(pet.nombre)
+            inputPetWeight.setText(pet.peso)
+            inputPetAge.setText(pet.edad)
+            inputPetBreed.setText(pet.raza)
 
         } else {
             btnRegister.visibility = View.VISIBLE
@@ -79,10 +81,10 @@ class PerfilPet : Fragment() {
             if (enteredName.isNotEmpty() && enteredWeight.isNotEmpty() && enteredAge.isNotEmpty() && enteredBreed.isNotEmpty()) {
                 userRepository.updatePet(user.dni, enteredName, enteredWeight, enteredAge, enteredBreed)
                 btnRegister.visibility = View.GONE
-                (user as User).mascota.nombre=enteredName
-                (user as User).mascota.peso=enteredWeight
-                (user as User).mascota.edad=enteredAge
-                (user as User).mascota.raza=enteredBreed
+                pet.nombre=enteredName
+                pet.peso=enteredWeight
+                pet.edad=enteredAge
+                pet.raza=enteredBreed
 
                 Snackbar.make(v, "Datos registrados con éxito", Snackbar.LENGTH_SHORT).show()
             } else {

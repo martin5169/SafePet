@@ -56,14 +56,20 @@ class RegisterForm : Fragment() {
             val enteredMail = mail.text.toString()
             val enteredPass = pass.text.toString()
 
-
             if (seleccion == "paseador") {
                 paseadoresRepository.getPaseadores { paseadoresList ->
-                    val paseador = paseadoresList.find { it.dni == enteredDni }
-                    if (paseador != null) {
+                    val paseadorByDni = paseadoresList.find { it.dni == enteredDni }
+                    val paseadorByMail = paseadoresList.find { it.mail == enteredMail }
+                    if (paseadorByDni != null) {
                         Snackbar.make(
                             v,
-                            "El DNI ingresado, ya está registrado.",
+                            "El DNI ingresado ya está registrado.",
+                            Snackbar.LENGTH_SHORT
+                        ).show()
+                    } else if (paseadorByMail != null) {
+                        Snackbar.make(
+                            v,
+                            "El correo electrónico ingresado ya está registrado.",
                             Snackbar.LENGTH_SHORT
                         ).show()
                     } else {
@@ -81,14 +87,20 @@ class RegisterForm : Fragment() {
                         findNavController().navigate(action)
                     }
                 }
-
             } else {
                 usersRepository.getUsers { userList ->
-                    val user = userList.find { it.dni == enteredDni }
-                    if (user != null) {
+                    val userByDni = userList.find { it.dni == enteredDni }
+                    val userByMail = userList.find { it.mail == enteredMail }
+                    if (userByDni != null) {
                         Snackbar.make(
                             v,
-                            "El DNI ingresado, ya está registrado.",
+                            "El DNI ingresado ya está registrado.",
+                            Snackbar.LENGTH_SHORT
+                        ).show()
+                    } else if (userByMail != null) {
+                        Snackbar.make(
+                            v,
+                            "El correo electrónico ingresado ya está registrado.",
                             Snackbar.LENGTH_SHORT
                         ).show()
                     } else {
@@ -101,10 +113,10 @@ class RegisterForm : Fragment() {
                         findNavController().navigate(action)
                     }
                 }
-
             }
         }
     }
+
 }
 
 
