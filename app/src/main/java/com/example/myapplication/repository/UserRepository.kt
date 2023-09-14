@@ -66,7 +66,31 @@ class UserRepository() {
 
       }
     })
+
+
   }
+
+  fun updateUser(userDni: String, newMail: String, newPassword: String) {
+    val usersQuery = usersReference.orderByChild("dni").equalTo(userDni)
+
+    usersQuery.addListenerForSingleValueEvent(object : ValueEventListener {
+      override fun onDataChange(snapshot: DataSnapshot) {
+        if (snapshot.exists()) {
+          for (userSnapshot in snapshot.children) {
+
+            userSnapshot.ref.child("mail").setValue(newMail)
+            userSnapshot.ref.child("password").setValue(newPassword)
+          }
+        }
+      }
+
+      override fun onCancelled(error: DatabaseError) {
+
+      }
+    })
+  }
+
+
 
 }
 

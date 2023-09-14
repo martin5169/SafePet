@@ -37,7 +37,7 @@ class RegisterForm : Fragment() {
         name = v.findViewById(R.id.name)
         lastName = v.findViewById(R.id.lastName)
         dni = v.findViewById(R.id.dni)
-        mail = v.findViewById(R.id.mail)
+        mail = v.findViewById(R.id.dniUser)
         pass = v.findViewById(R.id.pass)
 
         paseadoresRepository = PaseadorRepository.getInstance()

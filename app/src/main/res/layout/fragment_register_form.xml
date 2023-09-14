@@ -68,7 +68,7 @@
         app:layout_constraintVertical_bias="0.368" />
 
     <EditText
-        android:id="@+id/mail"
+        android:id="@+id/dniUser"
         android:layout_width="304dp"
         android:layout_height="43dp"
         android:layout_marginStart="44dp"
