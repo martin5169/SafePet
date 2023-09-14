@@ -5,7 +5,7 @@
     android:id="@+id/frameLayout3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="fragments.Mapa">
+    tools:context=".fragments.Mapa">
 
     <TextView
         android:id="@+id/textView6"

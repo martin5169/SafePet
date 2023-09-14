@@ -5,7 +5,7 @@
     android:id="@+id/perfil_pet"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="fragments.PerfilPet" >
+    tools:context=".fragments.PerfilPet" >
 
     <Button
         android:id="@+id/btnPerfilPetRegister"

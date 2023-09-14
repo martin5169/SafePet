@@ -1,4 +1,4 @@
-package entities
+package com.example.myapplication.entities
 
 import android.os.Parcelable
 import android.widget.EditText

@@ -1,5 +1,6 @@
-package entities
+package com.example.myapplication.repository
 
+import com.example.myapplication.entities.Pet
 import com.google.firebase.database.*
 
 class PetRepository() {
@@ -18,7 +19,7 @@ class PetRepository() {
   }
 
   // Agregar un paseador a la base de datos
-  fun addPet(pet: Pet ) {
+  fun addPet(pet: Pet) {
     val petKey = petsReference.push().key // Generar una clave única para la mascota
     petKey?.let {
       petsReference.child(it).setValue(pet)

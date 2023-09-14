@@ -1,4 +1,4 @@
-package fragments
+package com.example.myapplication.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.example.myapplication.R
+import com.example.myapplication.entities.UserSession
 import com.google.android.material.snackbar.Snackbar
 
 class PerfilUser : Fragment() {
@@ -33,7 +34,7 @@ class PerfilUser : Fragment() {
     override fun onStart() {
         super.onStart()
         try {
-            val user = HomeArgs.fromBundle(requireArguments()).user
+            val user = UserSession.user
                 if (user != null) {
                 name.text = "Nombre: ${user.name}"
                 lastName.text = "Apellido: ${user.lastName}"

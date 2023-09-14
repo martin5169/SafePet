@@ -5,7 +5,7 @@
     android:id="@+id/registerOptions"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="fragments.RegisterOptions">
+    tools:context=".fragments.RegisterOptions">
 
     <ImageView
         android:id="@+id/imageView"

@@ -1,4 +1,4 @@
-package fragments
+package com.example.myapplication.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,9 +9,9 @@ import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
+import com.example.myapplication.entities.UserSession
 import com.google.android.material.snackbar.Snackbar
-import entities.PaseadorRepository
-import entities.UserRepository
+import com.example.myapplication.repository.UserRepository
 
 class Login : Fragment() {
 
@@ -48,7 +48,8 @@ class Login : Fragment() {
                     val user = userList.find { it.mail == enteredMail }
                     if (user != null) {
                         if (user.password == enteredPass) {
-                            val action = LoginDirections.actionLoginToHome2(user)
+                            UserSession.user = user
+                            val action = LoginDirections.actionLogin2ToMainActivity()
                             findNavController().navigate(action)
                         } else {
                             Snackbar.make(v, "Contraseña incorrecta", Snackbar.LENGTH_SHORT).show()
@@ -65,7 +66,7 @@ class Login : Fragment() {
 
 
         btnRegister.setOnClickListener {
-            val action = LoginDirections.actionLoginToRegisterOptions2()
+            val action = LoginDirections.actionLogin2ToRegisterOptions2()
             findNavController().navigate(action)
         }
     }

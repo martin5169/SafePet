@@ -1,7 +1,6 @@
-package fragments
+package com.example.myapplication.fragments
 
 import android.os.Bundle
-import android.text.Editable
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,16 +8,12 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import androidx.core.text.set
 import com.example.myapplication.R
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import entities.Pet
-import entities.User
-import entities.UserRepository
-import kotlin.math.log
+import com.example.myapplication.entities.User
+import com.example.myapplication.entities.UserSession
+import com.example.myapplication.repository.UserRepository
 
 class PerfilPet : Fragment() {
     private val database: FirebaseDatabase = FirebaseDatabase.getInstance()
@@ -53,7 +48,7 @@ class PerfilPet : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        user = HomeArgs.fromBundle(requireArguments()).user
+        user = UserSession.user
         val userRepository = UserRepository.getInstance()
 
         val petNameNotEmpty = user.getPetName().isNotEmpty()

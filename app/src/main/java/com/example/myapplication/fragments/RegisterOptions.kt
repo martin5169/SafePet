@@ -1,4 +1,4 @@
-package fragments
+package com.example.myapplication.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -32,13 +32,13 @@ class RegisterOptions : Fragment() {
         btnRegisterDueño.setOnClickListener {
             val bundle = Bundle()
             bundle.putString("opcion", "dueño")
-            findNavController().navigate(R.id.action_registerOptions_to_registerForm, bundle)
+            findNavController().navigate(R.id.action_registerOptions2_to_registerForm2, bundle)
         }
 
         btnRegisterPaseador.setOnClickListener {
             val bundle = Bundle()
             bundle.putString("opcion", "paseador")
-            findNavController().navigate(R.id.action_registerOptions_to_registerForm, bundle)
+            findNavController().navigate(R.id.action_registerOptions2_to_registerForm2, bundle)
         }
        
 

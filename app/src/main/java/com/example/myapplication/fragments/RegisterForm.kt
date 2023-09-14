@@ -1,4 +1,4 @@
-package fragments
+package com.example.myapplication.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,10 +10,10 @@ import android.widget.EditText
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
 import com.google.android.material.snackbar.Snackbar
-import entities.Paseador
-import entities.PaseadorRepository
-import entities.User
-import entities.UserRepository
+import com.example.myapplication.entities.Paseador
+import com.example.myapplication.repository.PaseadorRepository
+import com.example.myapplication.entities.User
+import com.example.myapplication.repository.UserRepository
 
 class RegisterForm : Fragment() {
 
@@ -77,6 +77,8 @@ class RegisterForm : Fragment() {
                         paseadoresRepository.addUser(newPaseador)
                         Snackbar.make(v, "Paseador registrado con éxito", Snackbar.LENGTH_SHORT)
                             .show()
+                        val action = RegisterFormDirections.actionRegisterForm2ToLogin22()
+                        findNavController().navigate(action)
                     }
                 }
 
@@ -95,6 +97,8 @@ class RegisterForm : Fragment() {
                         usersRepository.addUser(newUser)
                         Snackbar.make(v, "Usuario registrado con éxito", Snackbar.LENGTH_SHORT)
                             .show()
+                        val action = RegisterFormDirections.actionRegisterForm2ToLogin22()
+                        findNavController().navigate(action)
                     }
                 }
 

@@ -1,4 +1,4 @@
-package adapters
+package com.example.myapplication.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
-import entities.Paseador
+import com.example.myapplication.entities.Paseador
 
 class PaseadorAdapter(var paseadores : MutableList<Paseador>,
                       var onClick : (Int) -> Unit

@@ -1,5 +1,6 @@
-package entities
+package com.example.myapplication.repository
 
+import com.example.myapplication.entities.Paseador
 import com.google.firebase.database.*
 
 class PaseadorRepository() {
@@ -18,7 +19,7 @@ class PaseadorRepository() {
   }
 
   // Agregar un paseador a la base de datos
-  fun addUser(paseador: Paseador ) {
+  fun addUser(paseador: Paseador) {
     val paseadorKey = paseadoresReference.push().key // Generar una clave única para el paseador
     paseadorKey?.let {
       paseadoresReference.child(it).setValue(paseador)

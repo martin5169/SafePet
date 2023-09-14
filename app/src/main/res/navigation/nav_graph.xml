@@ -3,22 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/login">
-    <fragment
-        android:id="@+id/login"
-        android:name="fragments.Login"
-        android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
-        <action
-            android:id="@+id/action_login_to_home2"
-            app:destination="@id/home" />
-        <action
-            android:id="@+id/action_login_to_registerOptions2"
-            app:destination="@id/registerOptions" />
-    </fragment>
+    app:startDestination="@id/home">
     <fragment
         android:id="@+id/home"
-        android:name="fragments.Home"
+        android:name="com.example.myapplication.fragments.Home"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -27,9 +15,6 @@
         <action
             android:id="@+id/action_home2_to_perfilPet"
             app:destination="@id/perfilPet" />
-        <argument
-            android:name="user"
-            app:argType="entities.User" />
         <action
             android:id="@+id/action_home_to_mapa"
             app:destination="@id/mapa" />
@@ -38,17 +23,8 @@
             app:destination="@id/perfilUser" />
     </fragment>
     <fragment
-        android:id="@+id/registerOptions"
-        android:name="fragments.RegisterOptions"
-        android:label="fragment_register_options"
-        tools:layout="@layout/fragment_register_options" >
-        <action
-            android:id="@+id/action_registerOptions_to_registerForm"
-            app:destination="@id/registerForm" />
-    </fragment>
-    <fragment
         android:id="@+id/paseadoresList"
-        android:name="fragments.PaseadoresList"
+        android:name="com.example.myapplication.fragments.PaseadoresList"
         android:label="fragment_user_list"
         tools:layout="@layout/fragment_paseadores_list" >
         <action
@@ -57,39 +33,34 @@
     </fragment>
     <fragment
         android:id="@+id/perfilPet"
-        android:name="fragments.PerfilPet"
+        android:name="com.example.myapplication.fragments.PerfilPet"
         android:label="fragment_perfil_pet"
         tools:layout="@layout/fragment_perfil_pet" >
         <argument
             android:name="user"
-            app:argType="entities.User" />
+            app:argType="com.example.myapplication.entities.User" />
     </fragment>
     <fragment
-        android:id="@+id/registerForm"
-        android:name="fragments.RegisterForm"
-        android:label="fragment_register_form"
-        tools:layout="@layout/fragment_register_form" />
-    <fragment
         android:id="@+id/paseadorDetail"
-        android:name="fragments.PaseadorDetail"
+        android:name="com.example.myapplication.fragments.PaseadorDetail"
         android:label="fragment_paseador_detail"
         tools:layout="@layout/fragment_paseador_detail" >
         <argument
             android:name="paseador"
-            app:argType="entities.Paseador" />
+            app:argType="com.example.myapplication.entities.Paseador" />
     </fragment>
     <fragment
         android:id="@+id/mapa"
-        android:name="fragments.Mapa"
+        android:name="com.example.myapplication.fragments.Mapa"
         android:label="fragment_mapa"
         tools:layout="@layout/fragment_mapa" />
     <fragment
         android:id="@+id/perfilUser"
-        android:name="fragments.PerfilUser"
+        android:name="com.example.myapplication.fragments.PerfilUser"
         android:label="fragment_perfil_user"
         tools:layout="@layout/fragment_perfil_user" >
         <argument
             android:name="user"
-            app:argType="entities.User" />
+            app:argType="com.example.myapplication.entities.User" />
     </fragment>
 </navigation>

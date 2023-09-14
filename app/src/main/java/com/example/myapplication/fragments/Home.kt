@@ -1,4 +1,4 @@
-package fragments
+package com.example.myapplication.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.myapplication.R
+import com.example.myapplication.entities.UserSession
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class Home : Fragment() {
@@ -39,7 +40,7 @@ class Home : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        val user = HomeArgs.fromBundle(requireArguments()).user
+        val user = UserSession.user
         text.text= "Bienvenido, ${user.name}"
 
         btnPedidos.setOnClickListener {

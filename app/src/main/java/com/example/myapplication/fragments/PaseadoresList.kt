@@ -1,6 +1,6 @@
-package fragments
+package com.example.myapplication.fragments
 
-import adapters.PaseadorAdapter
+import com.example.myapplication.adapters.PaseadorAdapter
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
-import entities.PaseadorRepository
+import com.example.myapplication.repository.PaseadorRepository
 
 class PaseadoresList : Fragment() {
 
