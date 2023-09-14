@@ -68,6 +68,7 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
     implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
     implementation ("com.google.firebase:firebase-database:20.0.0")
+    implementation("com.google.android.gms:play-services-location:21.0.1")
     implementation(platform("com.google.firebase:firebase-bom:32.2.3"))
 
 }
