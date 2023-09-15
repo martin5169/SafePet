@@ -11,7 +11,7 @@
 
        <item
         android:icon="@drawable/icons8map50"
-        android:id="@+id/mapa"
+        android:id="@+id/mapaUser"
         android:title="Mapa"
 
         />

@@ -16,11 +16,11 @@
             android:id="@+id/action_home2_to_perfilPet"
             app:destination="@id/perfilPet" />
         <action
-            android:id="@+id/action_home_to_mapa"
-            app:destination="@id/mapa" />
-        <action
             android:id="@+id/action_home_to_perfilUser"
             app:destination="@id/perfilUser" />
+        <action
+            android:id="@+id/action_home_to_mapaUser"
+            app:destination="@id/mapaUser" />
     </fragment>
     <fragment
         android:id="@+id/paseadoresList"
@@ -46,13 +46,13 @@
             app:argType="com.example.myapplication.entities.Paseador" />
     </fragment>
     <fragment
-        android:id="@+id/mapa"
-        android:name="com.example.myapplication.fragments.Mapa"
-        android:label="fragment_mapa"
-        tools:layout="@layout/fragment_mapa" />
-    <fragment
         android:id="@+id/perfilUser"
         android:name="com.example.myapplication.fragments.PerfilUser"
         android:label="fragment_perfil_user"
         tools:layout="@layout/fragment_perfil_user" />
+    <fragment
+        android:id="@+id/mapaUser"
+        android:name="com.example.myapplication.fragments.MapaUser"
+        android:label="fragment_mapa"
+        tools:layout="@layout/fragment_mapa" />
 </navigation>
