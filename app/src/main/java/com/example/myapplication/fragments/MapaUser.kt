@@ -16,9 +16,12 @@ import android.widget.EditText
 import androidx.core.app.ActivityCompat
 import com.example.myapplication.R
 import com.example.myapplication.entities.Paseador
+import com.example.myapplication.entities.Paseo
+import com.example.myapplication.entities.User
 import com.example.myapplication.entities.UserAbstract
 import com.example.myapplication.entities.UserSession
 import com.example.myapplication.repository.PaseadorRepository
+import com.example.myapplication.repository.PaseoRepository
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
@@ -31,6 +34,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -45,15 +49,10 @@ class MapaUser : Fragment() {
     lateinit var gMap: GoogleMap
     lateinit var database: FirebaseDatabase
     val paseadorRepository = PaseadorRepository.getInstance()
+    val paseoRepository = PaseoRepository.getInstance()
     val mapaViewModel = MapaViewModel()
     lateinit var userSession: UserAbstract
-    private val handler = Handler(Looper.getMainLooper())
-    private val runnable = object : Runnable {
-        override fun run() {
-            getLocation()
-            handler.postDelayed(this, 1000)
-        }
-    }
+    lateinit var v: View
 
     @SuppressLint("MissingPermission")
     override fun onCreateView(
@@ -63,9 +62,9 @@ class MapaUser : Fragment() {
     ): View? {
         database = FirebaseDatabase.getInstance()
 
-
         createLocationCallback()
-        return inflater.inflate(R.layout.fragment_mapa, container, false)
+        v = inflater.inflate(R.layout.fragment_mapa, container, false)
+        return v
     }
 
     @SuppressLint("MissingPermission")
@@ -89,29 +88,32 @@ class MapaUser : Fragment() {
             )
         }
 
-        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
-        mapFragment?.getMapAsync() { p0 ->
+        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync() { p0 ->
             gMap = p0
             gMap.isMyLocationEnabled = true
             startLocationUpdates()
         }
+
         location = LocationServices.getFusedLocationProviderClient(requireContext())
         userSession = UserSession.user
 
-        handler.postDelayed(runnable, 1000)
-        handler.
+        paseoRepository.getPaseo(userSession.dni).addOnCompleteListener {
+            val paseo = it.result?.getValue(Paseo::class.java)
+            if (paseo == null) {
+                getLocation()
+            }else{
+                mapaViewModel.addMarcador(gMap, LatLng(paseo.paseador.location.latitude, paseo.paseador.location.longitude), paseo.paseador.dni)
+                Snackbar.make(v, "Ya tiene un paseo asignado", Snackbar.LENGTH_SHORT).show()
+            }
+        }
 
-    }
-    override fun onDestroy() {
-        super.onDestroy()
-
-        // Detiene el loop cuando la actividad se destruye para evitar fugas de memoria
-        handler.removeCallbacks(runnable)
+        //paseoRepository.addPaseo(Paseo(Paseador(), userSession as User))
     }
 
     private fun getLocation() {
-        gMap.clear()
         paseadorRepository.getPaseadores { paseadores ->
+            gMap.clear()
             val paseando = paseadores.filter { it.estaPaseando }
             paseando.forEach {
                 mapaViewModel.getPaseadoresLocation(gMap, it);

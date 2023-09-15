@@ -8,7 +8,7 @@ import kotlinx.parcelize.Parcelize
 class User(): Parcelable, UserAbstract() {
 
 
-    lateinit var mascota: Pet
+    var mascota: Pet = Pet()
     constructor(name: String, lastName: String, password: String, dni: String, mail:String) : this() {
         this.name = name
         this.password = password
