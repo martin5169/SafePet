@@ -4,8 +4,8 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.location.Location
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -36,7 +36,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class Mapa : Fragment() {
+class MapaUser : Fragment() {
 
 
     lateinit var locationCallback: LocationCallback
@@ -45,7 +45,15 @@ class Mapa : Fragment() {
     lateinit var gMap: GoogleMap
     lateinit var database: FirebaseDatabase
     val paseadorRepository = PaseadorRepository.getInstance()
+    val mapaViewModel = MapaViewModel()
     lateinit var userSession: UserAbstract
+    private val handler = Handler(Looper.getMainLooper())
+    private val runnable = object : Runnable {
+        override fun run() {
+            getLocation()
+            handler.postDelayed(this, 1000)
+        }
+    }
 
     @SuppressLint("MissingPermission")
     override fun onCreateView(
@@ -64,6 +72,8 @@ class Mapa : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
         if (ActivityCompat.checkSelfPermission(
                 requireActivity(),
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -78,56 +88,36 @@ class Mapa : Fragment() {
                 1
             )
         }
+
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
-        location = LocationServices.getFusedLocationProviderClient(requireContext())
-        userSession = UserSession.user
-        paseadorRepository.getPaseadores { paseadores ->
-            val paseador = paseadores.filter { it.dni == userSession.dni }
-            if (!paseador.isNullOrEmpty()) {
-                getPaseadoresLocation()
-            }
-        }
-
-
         mapFragment?.getMapAsync() { p0 ->
             gMap = p0
             gMap.isMyLocationEnabled = true
             startLocationUpdates()
         }
+        location = LocationServices.getFusedLocationProviderClient(requireContext())
+        userSession = UserSession.user
 
+        handler.postDelayed(runnable, 1000)
+        handler.
 
     }
+    override fun onDestroy() {
+        super.onDestroy()
 
-    private fun getPaseadoresLocation() {
-        val locationRef = database.getReference("paseadores")
-        Log.d("DNI", userSession.dni)
-        locationRef.orderByChild("dni").equalTo(userSession.dni)
-        locationRef.orderByChild("dni").equalTo(userSession.dni).addValueEventListener(object :
-            ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                Log.d("UBICACION", (snapshot.children.first().child("password").value.toString()))
-                val userLatitude = snapshot.children.first().child("location").child("latitude").value
-                val userLongitude = snapshot.children.first().child("location").child("longitude").value
-                Log.d("UBICACION", userLongitude.toString() + " " + userLatitude.toString())
-                gMap.clear()
-                if (userLatitude != null && userLongitude != null) {
-                    val userLatLng = LatLng(userLatitude as Double, userLongitude as Double)
-                    gMap.addMarker(
-                        MarkerOptions()
-                            .position(userLatLng)
-                            .title("Mi Ubicación")
-                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA))
-                    )
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                Log.d("UBICACION", "NO SE ENCONTRO AL USUARIO")
-            }
-
-        })
+        // Detiene el loop cuando la actividad se destruye para evitar fugas de memoria
+        handler.removeCallbacks(runnable)
     }
 
+    private fun getLocation() {
+        gMap.clear()
+        paseadorRepository.getPaseadores { paseadores ->
+            val paseando = paseadores.filter { it.estaPaseando }
+            paseando.forEach {
+                mapaViewModel.getPaseadoresLocation(gMap, it);
+            }
+        }
+    }
     @SuppressLint("MissingPermission")
     private fun startLocationUpdates() {
         val locationRequest = LocationRequest.Builder(5000)
@@ -161,7 +151,6 @@ class Mapa : Fragment() {
         // Si ya existe un marcador en el mapa, quítalo antes de agregar uno nuevo.
 
         // Mover la cámara al nuevo marcador.
-        gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 0f), 2000, null)
     }
 
 }

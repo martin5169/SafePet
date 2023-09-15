@@ -8,6 +8,7 @@ import kotlinx.parcelize.Parcelize
 class Paseador(): Parcelable, UserAbstract() {
 
     lateinit var location: Location
+    var estaPaseando: Boolean = false
     constructor(name: String, lastName: String, password: String, dni: String, mail:String) : this() {
         this.name = name
         this.password = password
@@ -15,6 +16,7 @@ class Paseador(): Parcelable, UserAbstract() {
         this.dni=dni
         this.mail=mail
         this.location = Location()
+        this.estaPaseando = false
     }
 
 
