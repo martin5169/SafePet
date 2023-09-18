@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.location.Location
+import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.os.Looper
 import androidx.fragment.app.Fragment
@@ -30,7 +31,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.FirebaseDatabase
 
-class MapaUser : Fragment() {
+class MapaPaseador : Fragment() {
 
 
     lateinit var locationCallback: LocationCallback
@@ -53,15 +54,13 @@ class MapaUser : Fragment() {
         database = FirebaseDatabase.getInstance()
 
         createLocationCallback()
-        v = inflater.inflate(R.layout.fragment_mapa_duenio, container, false)
+        v = inflater.inflate(R.layout.fragment_mapa_paseador, container, false)
         return v
     }
 
     @SuppressLint("MissingPermission")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
 
         if (ActivityCompat.checkSelfPermission(
                 requireActivity(),
@@ -94,8 +93,7 @@ class MapaUser : Fragment() {
                 getLocation()
             }else{
                 mapaViewModel.addMarcador(gMap, LatLng(paseo.paseador.location.latitude, paseo.paseador.location.longitude), paseo.paseador.dni)
-                Snackbar.make(v, "Ya tiene un paseo asignado", Snackbar.LENGTH_SHORT).show()
-            }
+                      }
         }
 
         //paseoRepository.addPaseo(Paseo(Paseador(), userSession as User))

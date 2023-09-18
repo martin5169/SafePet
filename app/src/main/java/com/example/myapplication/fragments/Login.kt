@@ -62,7 +62,7 @@ class Login : Fragment() {
                     if (paseador != null) {
                         if (paseador.password == enteredPass) {
                             UserSession.user = paseador
-                            val action = LoginDirections.actionLogin2ToMainActivity()
+                            val action = LoginDirections.actionLogin2ToMainActivityPaseador()
                             findNavController().navigate(action)
                         } else {
                             Snackbar.make(v, "Contraseña incorrecta", Snackbar.LENGTH_SHORT).show()

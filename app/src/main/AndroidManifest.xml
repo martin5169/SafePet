@@ -16,9 +16,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
+        <activity
+            android:name=".MainActivityPaseador"
+            android:exported="false" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBe2CSIzBrjy5LnVnGUB6KyV1Dqi9yr0ow" />
+
         <activity
             android:name=".MainActivityLogin"
             android:exported="true">
@@ -29,7 +34,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".MainActivityDuenio"
             android:exported="false" />
     </application>
 

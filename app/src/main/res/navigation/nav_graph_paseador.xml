@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_paseador"
+    app:startDestination="@id/homePaseador">
+
+    <fragment
+        android:id="@+id/homePaseador"
+        android:name="com.example.myapplication.fragments.HomePaseador"
+        android:label="fragment_home_paseador"
+        tools:layout="@layout/fragment_home_paseador" >
+        <action
+            android:id="@+id/action_homePaseador_to_cuentaPaseador"
+            app:destination="@id/cuentaPaseador" />
+        <action
+            android:id="@+id/action_homePaseador_to_mapaPaseador"
+            app:destination="@id/mapaPaseador" />
+        <action
+            android:id="@+id/action_homePaseador_to_mediosDeCobroPaseador"
+            app:destination="@id/mediosDeCobroPaseador" />
+        <action
+            android:id="@+id/action_homePaseador_to_perfilPaseador2"
+            app:destination="@id/perfilPaseador2" />
+    </fragment>
+    <fragment
+        android:id="@+id/cuentaPaseador"
+        android:name="com.example.myapplication.fragments.CuentaPaseador"
+        android:label="fragment_cuenta_paseador"
+        tools:layout="@layout/fragment_cuenta_paseador" />
+    <fragment
+        android:id="@+id/mapaPaseador"
+        android:name="com.example.myapplication.fragments.MapaPaseador"
+        android:label="fragment_mapa_paseador"
+        tools:layout="@layout/fragment_mapa_paseador" />
+    <fragment
+        android:id="@+id/mediosDeCobroPaseador"
+        android:name="com.example.myapplication.fragments.MediosDeCobroPaseador"
+        android:label="fragment_medios_de_cobro_paseador"
+        tools:layout="@layout/fragment_medios_de_cobro_paseador" />
+    <fragment
+        android:id="@+id/perfilPaseador2"
+        android:name="com.example.myapplication.fragments.PerfilPaseador"
+        android:label="fragment_perfil_paseador"
+        tools:layout="@layout/fragment_perfil_paseador" />
+</navigation>

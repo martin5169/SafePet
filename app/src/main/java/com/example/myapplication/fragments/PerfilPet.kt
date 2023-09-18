@@ -1,5 +1,6 @@
 package com.example.myapplication.fragments
 
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -50,14 +51,12 @@ class PerfilPet : Fragment() {
     override fun onStart() {
         super.onStart()
         user = UserSession.user as User
-        val userRepository = UserRepository.getInstance()
         val pet = (user as User).mascota
 
         val petNameNotEmpty = pet.nombre.isNotEmpty()
         val petWeightNotEmpty = pet.peso.isNotEmpty()
         val petAgeNotEmpty = pet.edad.isNotEmpty()
         val petBreedNotEmpty = pet.raza.isNotEmpty()
-
 
         if (petNameNotEmpty && petWeightNotEmpty && petAgeNotEmpty && petBreedNotEmpty) {
             btnRegister.text = "Editar datos"
@@ -79,18 +78,37 @@ class PerfilPet : Fragment() {
             val enteredBreed = inputPetBreed.text.toString()
 
             if (enteredName.isNotEmpty() && enteredWeight.isNotEmpty() && enteredAge.isNotEmpty() && enteredBreed.isNotEmpty()) {
-                userRepository.updatePet(user.dni, enteredName, enteredWeight, enteredAge, enteredBreed)
-                btnRegister.visibility = View.GONE
-                pet.nombre=enteredName
-                pet.peso=enteredWeight
-                pet.edad=enteredAge
-                pet.raza=enteredBreed
-
-                Snackbar.make(v, "Datos registrados con éxito", Snackbar.LENGTH_SHORT).show()
+                showConfirmationDialog(user, enteredName, enteredWeight, enteredAge, enteredBreed)
             } else {
                 Snackbar.make(v, "Todos los campos son requeridos", Snackbar.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun showConfirmationDialog(user: UserAbstract, enteredName: String, enteredWeight: String, enteredAge: String, enteredBreed: String) {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Confirmación")
+        builder.setMessage("¿Estás seguro de actualizar los datos de la mascota?")
+
+        builder.setPositiveButton("Sí") { _, _ ->
+            // Usuario confirmó, realizar la actualización de datos aquí
+            val userRepository = UserRepository.getInstance()
+            userRepository.updatePet(user.dni, enteredName, enteredWeight, enteredAge, enteredBreed)
+            btnRegister.visibility = View.GONE
+            (user as User).mascota.nombre = enteredName
+            (user as User).mascota.peso = enteredWeight
+            (user as User).mascota.edad = enteredAge
+            (user as User).mascota.raza = enteredBreed
+
+            Snackbar.make(v, "Datos de la mascota actualizados con éxito", Snackbar.LENGTH_SHORT).show()
+        }
+
+        builder.setNegativeButton("No") { _, _ ->
+            // Usuario canceló, no se realiza la actualización
+        }
+
+        val dialog = builder.create()
+        dialog.show()
     }
 }
 

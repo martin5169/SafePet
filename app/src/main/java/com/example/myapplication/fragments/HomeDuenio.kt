@@ -8,12 +8,10 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.NavigationUI
 import com.example.myapplication.R
 import com.example.myapplication.entities.UserSession
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class Home : Fragment() {
+class HomeDuenio : Fragment() {
 
     lateinit var v: View
     lateinit var text: TextView
@@ -27,9 +25,9 @@ class Home : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        v = inflater.inflate(R.layout.fragment_home, container, false)
+        v = inflater.inflate(R.layout.fragment_home_duenio, container, false)
         btnPedidos = v.findViewById(R.id.btnPaseadores)
-        text = v.findViewById(R.id.welcomeText)
+        text = v.findViewById(R.id.welcomeTextDuenio)
         btnPerfilUser = v.findViewById(R.id.btnPerfil)
         btnPerfilPet = v.findViewById(R.id.btnPerfilPet)
 
@@ -44,17 +42,17 @@ class Home : Fragment() {
         text.text= "Bienvenido, ${user.name}"
 
         btnPedidos.setOnClickListener {
-            val action = HomeDirections.actionHome2ToUserList()
+            val action = HomeDuenioDirections.actionHome2ToUserList()
             findNavController().navigate(action)
         }
 
         btnPerfilUser.setOnClickListener {
-            val action = HomeDirections.actionHomeToPerfilUser()
+            val action = HomeDuenioDirections.actionHomeToPerfilUser()
             findNavController().navigate(action)
         }
 
         btnPerfilPet.setOnClickListener {
-            val action = HomeDirections.actionHome2ToPerfilPet()
+            val action = HomeDuenioDirections.actionHome2ToPerfilPet()
             findNavController().navigate(action)
         }
 

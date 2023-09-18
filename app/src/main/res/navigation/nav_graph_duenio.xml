@@ -6,9 +6,9 @@
     app:startDestination="@id/home">
     <fragment
         android:id="@+id/home"
-        android:name="com.example.myapplication.fragments.Home"
+        android:name="com.example.myapplication.fragments.HomeDuenio"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home_duenio" >
         <action
             android:id="@+id/action_home2_to_userList"
             app:destination="@id/paseadoresList" />
@@ -54,5 +54,5 @@
         android:id="@+id/mapaUser"
         android:name="com.example.myapplication.fragments.MapaUser"
         android:label="fragment_mapa"
-        tools:layout="@layout/fragment_mapa" />
+        tools:layout="@layout/fragment_mapa_duenio" />
 </navigation>

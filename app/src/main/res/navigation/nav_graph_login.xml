@@ -15,7 +15,10 @@
             app:destination="@id/registerOptions2" />
         <action
             android:id="@+id/action_login2_to_mainActivity"
-            app:destination="@id/mainActivity" />
+            app:destination="@id/mainActivityDuenio" />
+        <action
+            android:id="@+id/action_login2_to_mainActivityPaseador"
+            app:destination="@id/mainActivityPaseador" />
     </fragment>
     <fragment
         android:id="@+id/registerForm2"
@@ -36,8 +39,13 @@
             app:destination="@id/registerForm2" />
     </fragment>
     <activity
-        android:id="@+id/mainActivity"
-        android:name="com.example.myapplication.MainActivity"
+        android:id="@+id/mainActivityDuenio"
+        android:name="com.example.myapplication.MainActivityDuenio"
         android:label="activity_main"
-        tools:layout="@layout/activity_main" />
+        tools:layout="@layout/activity_main_duenio" />
+    <activity
+        android:id="@+id/mainActivityPaseador"
+        android:name="com.example.myapplication.MainActivityPaseador"
+        android:label="activity_main_duenio"
+        tools:layout="@layout/activity_main_paseador" />
 </navigation>

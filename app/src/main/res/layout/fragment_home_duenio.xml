@@ -5,14 +5,14 @@
     android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.Home">
+    tools:context=".fragments.HomeDuenio">
 
     <Button
         android:id="@+id/btnPerfil"
         android:layout_width="252dp"
         android:layout_height="76dp"
         android:backgroundTint="#009688"
-        android:text="Ver mi perfil"
+        android:text="Pasear ahora"
         android:textColorHighlight="#009688"
         android:textColorLink="#009688"
         android:textSize="20sp"
@@ -49,7 +49,7 @@
         android:layout_width="252dp"
         android:layout_height="76dp"
         android:backgroundTint="#009688"
-        android:text="Historial"
+        android:text="Ver paseadores"
         android:textColorHighlight="#009688"
         android:textColorLink="#009688"
         android:textSize="20sp"
@@ -69,7 +69,7 @@
         android:layout_width="252dp"
         android:layout_height="76dp"
         android:backgroundTint="#009688"
-        android:text="Mi mascota"
+        android:text="Cargar mascota"
         android:textColorHighlight="#009688"
         android:textColorLink="#009688"
         android:textSize="20sp"
@@ -85,7 +85,7 @@
         app:rippleColor="#009688" />
 
     <TextView
-        android:id="@+id/welcomeText"
+        android:id="@+id/welcomeTextDuenio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#000000"
