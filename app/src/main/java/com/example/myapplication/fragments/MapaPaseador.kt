@@ -77,7 +77,7 @@ class MapaPaseador : Fragment() {
             )
         }
 
-        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+        val mapFragment = childFragmentManager.findFragmentById(R.id.map2) as SupportMapFragment
         mapFragment.getMapAsync() { p0 ->
             gMap = p0
             gMap.isMyLocationEnabled = true
