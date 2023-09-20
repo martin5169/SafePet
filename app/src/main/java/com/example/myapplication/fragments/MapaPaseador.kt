@@ -7,6 +7,7 @@ import android.location.Location
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.os.Looper
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +15,9 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.core.app.ActivityCompat
 import com.example.myapplication.R
+import com.example.myapplication.entities.Paseador
 import com.example.myapplication.entities.Paseo
+import com.example.myapplication.entities.User
 import com.example.myapplication.entities.UserAbstract
 import com.example.myapplication.entities.UserSession
 import com.example.myapplication.repository.PaseadorRepository
@@ -30,18 +33,19 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.GenericTypeIndicator
+import java.util.Objects
 
 class MapaPaseador : Fragment() {
 
 
     lateinit var locationCallback: LocationCallback
-    lateinit var editText: EditText
     lateinit var location: FusedLocationProviderClient
     lateinit var gMap: GoogleMap
     lateinit var database: FirebaseDatabase
     val paseadorRepository = PaseadorRepository.getInstance()
     val paseoRepository = PaseoRepository.getInstance()
-    val mapaViewModel = MapaViewModel()
+    val mapaViewModel = MapaPaseadorViewModel()
     lateinit var userSession: UserAbstract
     lateinit var v: View
 
@@ -53,7 +57,7 @@ class MapaPaseador : Fragment() {
     ): View? {
         database = FirebaseDatabase.getInstance()
 
-        createLocationCallback()
+        mapaViewModel.createLocationCallback()
         v = inflater.inflate(R.layout.fragment_mapa_paseador, container, false)
         return v
     }
@@ -76,71 +80,34 @@ class MapaPaseador : Fragment() {
                 1
             )
         }
+        location = LocationServices.getFusedLocationProviderClient(requireContext())
+        userSession = UserSession.user
 
         val mapFragment = childFragmentManager.findFragmentById(R.id.map2) as SupportMapFragment
         mapFragment.getMapAsync() { p0 ->
             gMap = p0
             gMap.isMyLocationEnabled = true
-            startLocationUpdates()
+            mapaViewModel.startLocationUpdates(location)
         }
 
-        location = LocationServices.getFusedLocationProviderClient(requireContext())
-        userSession = UserSession.user
 
-        paseoRepository.getPaseo(userSession.dni).addOnCompleteListener {
-            val paseo = it.result?.getValue(Paseo::class.java)
-            if (paseo == null) {
-                getLocation()
-            }else{
-                mapaViewModel.addMarcador(gMap, LatLng(paseo.paseador.location.latitude, paseo.paseador.location.longitude), paseo.paseador.dni)
-                      }
+
+        paseoRepository.getPaseosPaseador(userSession.dni) {
+            if (it.isNullOrEmpty()) {
+                Snackbar.make(v, "No tiene un paseo asignado", Snackbar.LENGTH_SHORT).show()
+            } else {
+                getUsersLocation(it)
+            }
         }
 
         //paseoRepository.addPaseo(Paseo(Paseador(), userSession as User))
     }
 
-    private fun getLocation() {
-        paseadorRepository.getPaseadores { paseadores ->
-            gMap.clear()
-            val paseando = paseadores.filter { it.estaPaseando }
-            paseando.forEach {
-                mapaViewModel.getPaseadoresLocation(gMap, it);
-            }
+    private fun getUsersLocation(paseos: List<Paseo>) {
+        paseos.forEach {
+            Log.d("USER 123", it.user.toString())
+            mapaViewModel.getUsersLocation(gMap, it.user);
         }
-    }
-    @SuppressLint("MissingPermission")
-    private fun startLocationUpdates() {
-        val locationRequest = LocationRequest.Builder(5000)
-            .setPriority(Priority.PRIORITY_HIGH_ACCURACY)
-            .build()
-
-        location.requestLocationUpdates(
-            locationRequest,
-            locationCallback,
-            Looper.getMainLooper()
-        )
-    }
-
-    private fun createLocationCallback() {
-        locationCallback = object : LocationCallback() {
-            override fun onLocationResult(locationResult: LocationResult) {
-                super.onLocationResult(locationResult)
-                locationResult.lastLocation?.let { location ->
-                    // Actualizar el marcador en el mapa con la nueva ubicación.
-                    val locationRef = database.reference.child("users").child("1").child("location")
-
-                    locationRef.setValue(com.example.myapplication.entities.Location(location.latitude, location.longitude))
-                    updateMarker(location)
-                }
-            }
-        }
-    }
-
-    private fun updateMarker(location: Location) {
-        val currentLatLng = LatLng(location.latitude, location.longitude)
-        // Si ya existe un marcador en el mapa, quítalo antes de agregar uno nuevo.
-
-        // Mover la cámara al nuevo marcador.
     }
 
 }

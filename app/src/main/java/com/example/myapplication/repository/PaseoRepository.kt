@@ -1,7 +1,9 @@
 package com.example.myapplication.repository
 
 import android.util.Log
+import com.example.myapplication.entities.Paseador
 import com.example.myapplication.entities.Paseo
+import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.tasks.Task
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -25,8 +27,19 @@ class PaseoRepository {
         }
     }
 
-    fun getPaseo(dniUser: String): Task<DataSnapshot?> {
+    fun getPaseoUser(dniUser: String): Task<DataSnapshot?> {
        return paseosReference.orderByChild("user/dni").equalTo(dniUser).get()
+    }
+
+    fun getPaseosPaseador(dniPaseador: String, callback: (List<Paseo>) -> Unit) {
+        paseosReference.orderByChild("paseador/dni").equalTo(dniPaseador).get().addOnCompleteListener {
+            val paseosList = mutableListOf<Paseo>()
+            for (childSnapshot in it.result.children) {
+                val paseo = childSnapshot.getValue(Paseo::class.java)
+                paseosList.add(paseo!!)
+            }
+            callback(paseosList)
+        }
     }
 
     fun addPaseo(paseo: Paseo) {

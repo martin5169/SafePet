@@ -88,7 +88,7 @@ class MapaUser : Fragment() {
         location = LocationServices.getFusedLocationProviderClient(requireContext())
         userSession = UserSession.user
 
-        paseoRepository.getPaseo(userSession.dni).addOnCompleteListener {
+        paseoRepository.getPaseoUser(userSession.dni).addOnCompleteListener {
             val paseo = it.result?.getValue(Paseo::class.java)
             if (paseo == null) {
                 getLocation()
