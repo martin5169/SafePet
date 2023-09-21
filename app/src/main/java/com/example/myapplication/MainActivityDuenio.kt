@@ -15,7 +15,7 @@ class MainActivityDuenio : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_duenio)
         navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView3) as NavHostFragment
-        bottomNavView = findViewById(R.id.bottom_bar_paseador)
+        bottomNavView = findViewById(R.id.bottom_bar_duenio)
         NavigationUI.setupWithNavController(bottomNavView,navHostFragment.navController)
 
     }

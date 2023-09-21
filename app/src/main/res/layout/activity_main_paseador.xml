@@ -21,11 +21,15 @@
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView5"
         android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="409dp"
-        android:layout_height="591dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
         app:defaultNavHost="true"
-        app:navGraph="@navigation/nav_graph_paseador"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp" />
+        app:layout_constraintBottom_toTopOf="@+id/bottom_bar_paseador"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navGraph="@navigation/nav_graph_paseador" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
