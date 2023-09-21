@@ -67,6 +67,27 @@ class PaseadorRepository() {
     })
   }
 
+
+  fun updateTarifa(userDni: String, newTarifa: String) {
+    val usersQuery = paseadoresReference.orderByChild("dni").equalTo(userDni)
+
+    usersQuery.addListenerForSingleValueEvent(object : ValueEventListener {
+      override fun onDataChange(snapshot: DataSnapshot) {
+        if (snapshot.exists()) {
+          for (userSnapshot in snapshot.children) {
+
+            userSnapshot.ref.child("tarifa").setValue(newTarifa)
+
+          }
+        }
+      }
+
+      override fun onCancelled(error: DatabaseError) {
+
+      }
+    })
+  }
+
   fun getDuenios(callback: (List<User>) -> Unit) {
     paseadoresReference.addListenerForSingleValueEvent(object : ValueEventListener {
       override fun onDataChange(snapshot: DataSnapshot) {

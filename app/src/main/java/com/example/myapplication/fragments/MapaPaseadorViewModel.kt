@@ -106,7 +106,7 @@ class MapaPaseadorViewModel : ViewModel() {
             MarkerOptions()
                 .position(latLng)
                 .title(dni)
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA))
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.icons8person30))
         )
         marcadores.add(marker)
     }

@@ -27,7 +27,7 @@
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/name"
         android:layout_width="304dp"
-        android:layout_height="43dp"
+        android:layout_height="wrap_content"
         android:hint="Nombre"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,7 +39,7 @@
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/lastName"
         android:layout_width="304dp"
-        android:layout_height="43dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="44dp"
         android:hint="Apellido"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -53,7 +53,7 @@
     <EditText
         android:id="@+id/dni"
         android:layout_width="304dp"
-        android:layout_height="43dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="44dp"
         android:layout_marginEnd="1dp"
         android:ems="10"
@@ -70,7 +70,7 @@
     <EditText
         android:id="@+id/dniUser"
         android:layout_width="304dp"
-        android:layout_height="43dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="44dp"
         android:ems="10"
         android:hint="Ingresa tu email"
@@ -86,7 +86,7 @@
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/pass"
         android:layout_width="304dp"
-        android:layout_height="43dp"
+        android:layout_height="wrap_content"
         android:hint="Contraseña"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"

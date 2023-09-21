@@ -13,6 +13,7 @@ import com.example.myapplication.entities.UserSession
 import com.example.myapplication.repository.UserRepository
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AlertDialog
+import androidx.navigation.fragment.findNavController
 import com.example.myapplication.entities.User
 
 
@@ -47,9 +48,9 @@ class PerfilUser : Fragment() {
         super.onStart()
         val user = UserSession.user
         if (user != null) {
-            name.text = "Nombre: ${user.name}"
-            lastName.text = "Apellido: ${user.lastName}"
-            dni.text = "DNI: ${user.dni}"
+            name.text = user.name
+            lastName.text = user.lastName
+            dni.text = user.dni
             contraseña.setText(user.password)
             mail.setText(user.mail)
         }
@@ -78,6 +79,8 @@ class PerfilUser : Fragment() {
             Snackbar.make(v, "Datos actualizados con éxito", Snackbar.LENGTH_SHORT).show()
             user.mail = enteredMail
             user.password = enteredPassword
+            val action = PerfilUserDirections.actionPerfilUserToHome()
+            findNavController().navigate(action)
         }
 
         builder.setNegativeButton("No") { _, _ ->

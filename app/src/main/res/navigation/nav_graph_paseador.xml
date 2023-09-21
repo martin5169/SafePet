@@ -37,10 +37,18 @@
         android:id="@+id/mediosDeCobroPaseador"
         android:name="com.example.myapplication.fragments.MediosDeCobroPaseador"
         android:label="fragment_medios_de_cobro_paseador"
-        tools:layout="@layout/fragment_medios_de_cobro_paseador" />
+        tools:layout="@layout/fragment_medios_de_cobro_paseador" >
+        <action
+            android:id="@+id/action_mediosDeCobroPaseador_to_homePaseador"
+            app:destination="@id/homePaseador" />
+    </fragment>
     <fragment
         android:id="@+id/perfilPaseador2"
         android:name="com.example.myapplication.fragments.PerfilPaseador"
         android:label="fragment_perfil_paseador"
-        tools:layout="@layout/fragment_perfil_paseador" />
+        tools:layout="@layout/fragment_perfil_paseador" >
+        <action
+            android:id="@+id/action_perfilPaseador2_to_homePaseador"
+            app:destination="@id/homePaseador" />
+    </fragment>
 </navigation>

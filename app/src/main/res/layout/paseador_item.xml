@@ -2,16 +2,16 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardPaseador"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/cardPaseador"
     android:layout_margin="8dp"
     app:cardCornerRadius="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
 
         android:layout_width="match_parent"
-        android:layout_height="182dp"
+        android:layout_height="217dp"
         android:background="#818080"
         android:backgroundTint="#807A7A"
         android:elevation="8dp">
@@ -22,42 +22,60 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="52dp"
             android:text="name"
+            android:textAlignment="center"
             android:textColor="#FDFCFC"
-            android:textSize="24sp"
+            android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintHorizontal_bias="0.737"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/txtLastname"
-            app:layout_constraintVertical_bias="0.271" />
-
-        <TextView
-            android:id="@+id/txtMail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:text="mail"
-            android:textColor="#FDFCFC"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/txtUserName"
-            app:layout_constraintVertical_bias="0.684" />
+            app:layout_constraintVertical_bias="0.094" />
 
         <TextView
             android:id="@+id/txtLastname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="lastName"
+            android:textAlignment="center"
             android:textColor="#EEF1F1"
-            android:textSize="34sp"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.789"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.104" />
+
+        <Button
+            android:id="@+id/btnSolicitarPaseo"
+            android:layout_width="341dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#009688"
+            android:text="Programar paseo"
+            android:textColorHighlight="#009688"
+            android:textColorLink="#009688"
+            android:textSize="20sp"
+            app:iconPadding="0dp"
+            app:iconSize="44dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.095" />
+            app:layout_constraintVertical_bias="0.889"
+            app:rippleColor="#009688" />
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="88dp"
+            android:layout_height="87dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.166"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.192"
+            app:srcCompat="@drawable/icons8dog51paseadorperfil" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

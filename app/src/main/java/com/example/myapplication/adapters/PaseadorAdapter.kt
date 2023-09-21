@@ -9,14 +9,13 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.example.myapplication.entities.Paseador
+import com.google.android.material.snackbar.Snackbar
 
 class PaseadorAdapter(var paseadores : MutableList<Paseador>,
                       var onClick : (Int) -> Unit
 ) : RecyclerView.Adapter<PaseadorAdapter.UserHolder>() {
 
-    lateinit var perfil : Button
-
-    class UserHolder(v: View): RecyclerView.ViewHolder(v)
+       class UserHolder(v: View): RecyclerView.ViewHolder(v)
     {
         private var view : View
         init {
@@ -32,9 +31,13 @@ class PaseadorAdapter(var paseadores : MutableList<Paseador>,
             textName.text = name
         }
 
-        fun setUserMail (mail : String){
-            val textDescription : TextView = view.findViewById(R.id.txtMail)
-            textDescription.text = mail
+
+
+        fun solicitarPaseo (boolean: Boolean){
+            val btnSolicitarPaseo : Button = view.findViewById(R.id.btnSolicitarPaseo)
+            btnSolicitarPaseo.setOnClickListener {
+                Snackbar.make(btnSolicitarPaseo, "Paseo solicitado", Snackbar.LENGTH_SHORT).show()
+            }
         }
 
         fun getCard() : CardView {
@@ -54,7 +57,8 @@ class PaseadorAdapter(var paseadores : MutableList<Paseador>,
     override fun onBindViewHolder(holder: UserHolder, position: Int) {
         holder.setUserLastName(paseadores[position].lastName)
         holder.setUserName(paseadores[position].name)
-        holder.setUserMail(paseadores[position].mail)
+
+        holder.solicitarPaseo(paseadores[position].estaPaseando)
         holder.getCard().setOnClickListener{
             onClick(position)
         }

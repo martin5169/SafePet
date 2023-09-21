@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.FirebaseDatabase
@@ -37,7 +38,6 @@ class PerfilPet : Fragment() {
     ): View? {
         v = inflater.inflate(R.layout.fragment_perfil_pet, container, false)
         btnRegister = v.findViewById(R.id.btnPerfilPetRegister)
-
         inputPetName = v.findViewById(R.id.petName)
         inputPetWeight = v.findViewById(R.id.petWeight)
         inputPetAge = v.findViewById(R.id.petAge)
@@ -79,7 +79,7 @@ class PerfilPet : Fragment() {
 
             if (enteredName.isNotEmpty() && enteredWeight.isNotEmpty() && enteredAge.isNotEmpty() && enteredBreed.isNotEmpty()) {
                 showConfirmationDialog(user, enteredName, enteredWeight, enteredAge, enteredBreed)
-            } else {
+                            } else {
                 Snackbar.make(v, "Todos los campos son requeridos", Snackbar.LENGTH_SHORT).show()
             }
         }
@@ -91,16 +91,18 @@ class PerfilPet : Fragment() {
         builder.setMessage("¿Estás seguro de actualizar los datos de la mascota?")
 
         builder.setPositiveButton("Sí") { _, _ ->
-            // Usuario confirmó, realizar la actualización de datos aquí
+            // Usuario confirma, realiza la actualización de datos
             val userRepository = UserRepository.getInstance()
             userRepository.updatePet(user.dni, enteredName, enteredWeight, enteredAge, enteredBreed)
             btnRegister.visibility = View.GONE
             (user as User).mascota.nombre = enteredName
-            (user as User).mascota.peso = enteredWeight
-            (user as User).mascota.edad = enteredAge
-            (user as User).mascota.raza = enteredBreed
+            user.mascota.peso = enteredWeight
+            user.mascota.edad = enteredAge
+            user.mascota.raza = enteredBreed
 
             Snackbar.make(v, "Datos de la mascota actualizados con éxito", Snackbar.LENGTH_SHORT).show()
+            val action = PerfilPetDirections.actionPerfilPetToHome()
+            findNavController().navigate(action)
         }
 
         builder.setNegativeButton("No") { _, _ ->

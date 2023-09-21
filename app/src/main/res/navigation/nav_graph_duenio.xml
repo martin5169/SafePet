@@ -35,7 +35,11 @@
         android:id="@+id/perfilPet"
         android:name="com.example.myapplication.fragments.PerfilPet"
         android:label="fragment_perfil_pet"
-        tools:layout="@layout/fragment_perfil_pet" />
+        tools:layout="@layout/fragment_perfil_pet" >
+        <action
+            android:id="@+id/action_perfilPet_to_home"
+            app:destination="@id/home" />
+    </fragment>
     <fragment
         android:id="@+id/paseadorDetail"
         android:name="com.example.myapplication.fragments.PaseadorDetail"
@@ -49,7 +53,11 @@
         android:id="@+id/perfilUser"
         android:name="com.example.myapplication.fragments.PerfilUser"
         android:label="fragment_perfil_user"
-        tools:layout="@layout/fragment_perfil_user" />
+        tools:layout="@layout/fragment_perfil_user" >
+        <action
+            android:id="@+id/action_perfilUser_to_home"
+            app:destination="@id/home" />
+    </fragment>
     <fragment
         android:id="@+id/mapaUser"
         android:name="com.example.myapplication.fragments.MapaUser"

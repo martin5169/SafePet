@@ -73,7 +73,7 @@
         android:textColorHighlight="#009688"
         android:textColorLink="#009688"
         android:textSize="20sp"
-        app:icon="@drawable/icons8pet50"
+        app:icon="@drawable/pets"
         app:iconPadding="0dp"
         app:iconSize="44dp"
         app:layout_constraintBottom_toBottomOf="parent"

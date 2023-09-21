@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
 import com.example.myapplication.entities.UserAbstract
 import com.example.myapplication.entities.UserSession
@@ -48,9 +49,9 @@ class PerfilPaseador : Fragment() {
         super.onStart()
         val user = UserSession.user
         if (user != null) {
-            name.text = "Nombre: ${user.name}"
-            lastName.text = "Apellido: ${user.lastName}"
-            dni.text = "DNI: ${user.dni}"
+            name.text = user.name
+            lastName.text = user.lastName
+            dni.text = user.dni
             contraseña.setText(user.password)
             mail.setText(user.mail)
         }
@@ -60,6 +61,7 @@ class PerfilPaseador : Fragment() {
 
             if (enteredMail.isNotEmpty() && enteredPassword.isNotEmpty()) {
                 showConfirmationDialog(user, enteredMail, enteredPassword)
+
             } else {
                 Snackbar.make(v, "Todos los campos son requeridos", Snackbar.LENGTH_SHORT).show()
             }
@@ -72,16 +74,18 @@ class PerfilPaseador : Fragment() {
         builder.setMessage("¿Estás seguro de actualizar tus datos de perfil?")
 
         builder.setPositiveButton("Sí") { _, _ ->
-            // Usuario confirmó, realizar la actualización de datos aquí
+            // Usuario confirma, realiza la actualización
             val paseadorRepository = PaseadorRepository.getInstance()
             paseadorRepository.updatePaseador(user.dni, enteredMail, enteredPassword)
             Snackbar.make(v, "Datos actualizados con éxito", Snackbar.LENGTH_SHORT).show()
             user.mail = enteredMail
             user.password = enteredPassword
+            val action = PerfilPaseadorDirections.actionPerfilPaseador2ToHomePaseador()
+            findNavController().navigate(action)
         }
 
         builder.setNegativeButton("No") { _, _ ->
-            // Usuario canceló, no se realiza la actualización
+            // Usuario cancela, no se realiza la actualizacion
         }
 
         val dialog = builder.create()
