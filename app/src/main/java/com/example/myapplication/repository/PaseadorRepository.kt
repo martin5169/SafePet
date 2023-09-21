@@ -1,6 +1,7 @@
 package com.example.myapplication.repository
 
 import com.example.myapplication.entities.Paseador
+import com.example.myapplication.entities.User
 import com.google.firebase.database.*
 
 class PaseadorRepository() {
@@ -58,6 +59,25 @@ class PaseadorRepository() {
             userSnapshot.ref.child("password").setValue(newPassword)
           }
         }
+      }
+
+      override fun onCancelled(error: DatabaseError) {
+
+      }
+    })
+  }
+
+  fun getDuenios(callback: (List<User>) -> Unit) {
+    paseadoresReference.addListenerForSingleValueEvent(object : ValueEventListener {
+      override fun onDataChange(snapshot: DataSnapshot) {
+        val usersList = mutableListOf<User>()
+        for (childSnapshot in snapshot.children) {
+          val paseador = childSnapshot.getValue(User::class.java)
+          paseador?.let {
+            usersList.add(it)
+          }
+        }
+        callback(usersList)
       }
 
       override fun onCancelled(error: DatabaseError) {
