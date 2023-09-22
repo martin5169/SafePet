@@ -20,6 +20,7 @@ class PaseadorDetail : Fragment() {
     lateinit var paseadorDni : TextView
     lateinit var paseadorMail : TextView
     lateinit var paseadorTarifa : TextView
+    lateinit var btnSolicitarPaseo : Button
 
 
     override fun onCreateView(
@@ -32,6 +33,7 @@ class PaseadorDetail : Fragment() {
         paseadorDni = v.findViewById(R.id.paseadorDni)
         paseadorMail = v.findViewById(R.id.paseadorMail)
         paseadorTarifa = v.findViewById(R.id.paseadorTarifa)
+        btnSolicitarPaseo = v.findViewById(R.id.btnSolicitarPaseo)
 
         return v
     }
@@ -46,6 +48,11 @@ class PaseadorDetail : Fragment() {
             paseador.tarifa.toString()
         } else {
             "$0"
+        }
+
+        btnSolicitarPaseo.setOnClickListener{
+            val action = PaseadorDetailDirections.actionPaseadorDetailToCalendarioPaseador()
+            findNavController().navigate(action)
         }
 
 

@@ -11,7 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
 
         android:layout_width="match_parent"
-        android:layout_height="217dp"
+        android:layout_height="167dp"
         android:background="#818080"
         android:backgroundTint="#807A7A"
         android:elevation="8dp">
@@ -30,7 +30,7 @@
             app:layout_constraintHorizontal_bias="0.737"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/txtLastname"
-            app:layout_constraintVertical_bias="0.094" />
+            app:layout_constraintVertical_bias="0.354" />
 
         <TextView
             android:id="@+id/txtLastname"
@@ -42,28 +42,10 @@
             android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.789"
+            app:layout_constraintHorizontal_bias="0.785"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.104" />
-
-        <Button
-            android:id="@+id/btnSolicitarPaseo"
-            android:layout_width="341dp"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#009688"
-            android:text="Programar paseo"
-            android:textColorHighlight="#009688"
-            android:textColorLink="#009688"
-            android:textSize="20sp"
-            app:iconPadding="0dp"
-            app:iconSize="44dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.889"
-            app:rippleColor="#009688" />
+            app:layout_constraintVertical_bias="0.236" />
 
         <ImageView
             android:id="@+id/imageView6"
@@ -74,7 +56,6 @@
             app:layout_constraintHorizontal_bias="0.166"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.192"
             app:srcCompat="@drawable/icons8dog51paseadorperfil" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

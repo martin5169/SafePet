@@ -31,15 +31,6 @@ class PaseadorAdapter(var paseadores : MutableList<Paseador>,
             textName.text = name
         }
 
-
-
-        fun solicitarPaseo (boolean: Boolean){
-            val btnSolicitarPaseo : Button = view.findViewById(R.id.btnSolicitarPaseo)
-            btnSolicitarPaseo.setOnClickListener {
-                Snackbar.make(btnSolicitarPaseo, "Paseo solicitado", Snackbar.LENGTH_SHORT).show()
-            }
-        }
-
         fun getCard() : CardView {
             return view.findViewById(R.id.cardPaseador)
         }
@@ -58,7 +49,6 @@ class PaseadorAdapter(var paseadores : MutableList<Paseador>,
         holder.setUserLastName(paseadores[position].lastName)
         holder.setUserName(paseadores[position].name)
 
-        holder.solicitarPaseo(paseadores[position].estaPaseando)
         holder.getCard().setOnClickListener{
             onClick(position)
         }

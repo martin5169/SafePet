@@ -16,8 +16,8 @@ class HomeDuenio : Fragment() {
     lateinit var v: View
     lateinit var text: TextView
     lateinit var btnPedidos: Button
-    lateinit var btnPerfilUser: Button
     lateinit var btnPerfilPet: Button
+    lateinit var btnHistorial: Button
 
 
     override fun onCreateView(
@@ -28,7 +28,7 @@ class HomeDuenio : Fragment() {
         v = inflater.inflate(R.layout.fragment_home_duenio, container, false)
         btnPedidos = v.findViewById(R.id.btnPaseadores)
         text = v.findViewById(R.id.welcomeTextDuenio)
-        btnPerfilUser = v.findViewById(R.id.btnPerfil)
+        btnHistorial = v.findViewById(R.id.btnHistorial)
         btnPerfilPet = v.findViewById(R.id.btnPerfilPet)
 
 
@@ -46,8 +46,8 @@ class HomeDuenio : Fragment() {
             findNavController().navigate(action)
         }
 
-        btnPerfilUser.setOnClickListener {
-            val action = HomeDuenioDirections.actionHomeToPerfilUser()
+        btnHistorial.setOnClickListener {
+            val action = HomeDuenioDirections.actionHomeToUserHistorial()
             findNavController().navigate(action)
         }
 

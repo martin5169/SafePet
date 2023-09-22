@@ -7,6 +7,25 @@
     android:layout_height="match_parent"
     tools:context=".fragments.PaseadorDetail">
 
+    <Button
+        android:id="@+id/btnSolicitarPaseo"
+        android:layout_width="277dp"
+        android:layout_height="77dp"
+        android:backgroundTint="#009688"
+        android:text="Programar paseo"
+        android:textColorHighlight="#009688"
+        android:textColorLink="#009688"
+        android:textSize="20sp"
+        app:icon="@drawable/icons8dog51paseadorperfil"
+        app:iconPadding="0dp"
+        app:iconSize="44dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.941"
+        app:rippleColor="#009688" />
+
     <TextView
         android:id="@+id/password19"
         android:layout_width="wrap_content"

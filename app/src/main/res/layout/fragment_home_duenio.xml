@@ -8,15 +8,15 @@
     tools:context=".fragments.HomeDuenio">
 
     <Button
-        android:id="@+id/btnPerfil"
+        android:id="@+id/btnHistorial"
         android:layout_width="252dp"
         android:layout_height="76dp"
         android:backgroundTint="#009688"
-        android:text="Pasear ahora"
+        android:text="Historial"
         android:textColorHighlight="#009688"
         android:textColorLink="#009688"
         android:textSize="20sp"
-        app:icon="@drawable/icons8user50"
+        app:icon="@drawable/icons8list50"
         app:iconPadding="0dp"
         app:iconSize="44dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -53,7 +53,7 @@
         android:textColorHighlight="#009688"
         android:textColorLink="#009688"
         android:textSize="20sp"
-        app:icon="@drawable/icons8list50"
+        app:icon="@drawable/icons8dog51paseadorperfil"
         app:iconPadding="0dp"
         app:iconSize="44dp"
         app:layout_constraintBottom_toBottomOf="parent"
