@@ -46,13 +46,25 @@ class CalendarioPaseador : Fragment() {
         super.onStart()
         user = UserSession.user as User
 
+        val currentDateCalendar = Calendar.getInstance()
+        val maxSelectableDateCalendar = Calendar.getInstance()
+
+        maxSelectableDateCalendar.add(Calendar.DAY_OF_MONTH, 7)
+
+
+        val maxSelectableDateInMillis = maxSelectableDateCalendar.timeInMillis
+
+        calendar.minDate = currentDateCalendar.timeInMillis
+        calendar.maxDate = maxSelectableDateInMillis
+
         calendar.setOnDateChangeListener { view, year, month, dayOfMonth ->
 
-            val selectedDateCalendar =
-                "$dayOfMonth/${month + 1}/$year" // Suma 1 al mes ya que los meses comienzan en 0
 
-            selectedDate.text = selectedDateCalendar
-        }
+                val selectedDateCalendar =
+                    "$dayOfMonth/${month + 1}/$year" // Suma 1 al mes ya que los meses comienzan en 0
+
+                selectedDate.text = selectedDateCalendar
+            }
 
         btnConfirm.setOnClickListener {
             val updateSelectedDate = selectedDate.text.toString()
