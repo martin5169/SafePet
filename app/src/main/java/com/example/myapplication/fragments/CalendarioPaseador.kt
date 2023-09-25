@@ -59,7 +59,6 @@ class CalendarioPaseador : Fragment() {
 
         calendar.setOnDateChangeListener { view, year, month, dayOfMonth ->
 
-
                 val selectedDateCalendar =
                     "$dayOfMonth/${month + 1}/$year" // Suma 1 al mes ya que los meses comienzan en 0
 
@@ -71,7 +70,7 @@ class CalendarioPaseador : Fragment() {
             if (updateSelectedDate.isNotEmpty()) {
                 showConfirmationDialog(user, updateSelectedDate)
             } else {
-                Snackbar.make(v, "Todos los campos son requeridos", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(v, "Debe seleccionar una fecha válida", Snackbar.LENGTH_SHORT).show()
             }
         }
     }
