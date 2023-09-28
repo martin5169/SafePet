@@ -21,63 +21,6 @@
         app:layout_constraintVertical_bias="0.083" />
 
     <Button
-        android:id="@+id/btnPerfilPaseador"
-        android:layout_width="252dp"
-        android:layout_height="76dp"
-        android:backgroundTint="#009688"
-        android:text="Ver mi perfil"
-        android:textColorHighlight="#009688"
-        android:textColorLink="#009688"
-        android:textSize="20sp"
-        app:icon="@drawable/icons8dog51paseadorperfil"
-        app:iconPadding="0dp"
-        app:iconSize="44dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.221"
-        app:rippleColor="#009688" />
-
-    <Button
-        android:id="@+id/mediosDeCobroPaseador2"
-        android:layout_width="252dp"
-        android:layout_height="76dp"
-        android:backgroundTint="#009688"
-        android:text="Ver mis medios de cobro"
-        android:textColorHighlight="#009688"
-        android:textColorLink="#009688"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.888"
-        app:rippleColor="#009688" />
-
-    <Button
-        android:id="@+id/btnHistorialPaseador"
-        android:layout_width="252dp"
-        android:layout_height="76dp"
-        android:backgroundTint="#009688"
-        android:text="Historial"
-        android:textColorHighlight="#009688"
-        android:textColorLink="#009688"
-        android:textSize="20sp"
-        app:icon="@drawable/icons8list50"
-        app:iconPadding="0dp"
-        app:iconSize="44dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.663"
-        app:rippleColor="#009688" />
-
-    <Button
         android:id="@+id/mapaPaseador2"
         android:layout_width="252dp"
         android:layout_height="76dp"

@@ -28,12 +28,10 @@ class HomePaseador : Fragment() {
 
         v = inflater.inflate(R.layout.fragment_home_paseador, container, false)
 
-        btnPerfilPaseador = v.findViewById(R.id.btnPerfilPaseador)
         btnPasearAhora = v.findViewById(R.id.mapaPaseador2)
-        btnHistorial = v.findViewById(R.id.btnHistorialPaseador)
+
         text = v.findViewById(R.id.welcomeTextPaseador)
 
-        btnMediosCobro = v.findViewById(R.id.mediosDeCobroPaseador2)
 
 
         return v
@@ -44,15 +42,6 @@ class HomePaseador : Fragment() {
         val user = UserSession.user
         text.text= "Bienvenido, ${user.name}"
 
-        btnMediosCobro.setOnClickListener {
-            val action = HomePaseadorDirections.actionHomePaseadorToMediosDeCobroPaseador()
-            findNavController().navigate(action)
-        }
-
-        btnPerfilPaseador.setOnClickListener {
-            val action = HomePaseadorDirections.actionHomePaseadorToPerfilPaseador2()
-            findNavController().navigate(action)
-        }
 
 
 

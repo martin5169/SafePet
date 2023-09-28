@@ -6,6 +6,7 @@ import android.os.Looper
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.myapplication.R
+import com.example.myapplication.entities.Paseo
 import com.example.myapplication.entities.User
 import com.example.myapplication.repository.PaseadorRepository
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -59,20 +60,19 @@ class MapaPaseadorViewModel : ViewModel() {
     }
 
     fun getUsersLocation(gMap: GoogleMap, user: User) {
-        val locationRef = database.getReference("users")
+        val locationRef = database.getReference("paseos")
         Log.d("USER", user.dni)
-        locationRef.orderByChild("dni").equalTo(user.dni).get().addOnCompleteListener {
+        locationRef.orderByChild("user/dni").equalTo(user.dni).get().addOnCompleteListener {
             Log.d("PASEOS USERS", it.result.toString())
         }
-        locationRef.orderByChild("dni").equalTo(user.dni).addValueEventListener(object :
+        locationRef.orderByChild("user/dni").equalTo(user.dni).addValueEventListener(object :
             ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                Log.d("PASEOS USER", snapshot.value.toString())
-                val userLatitude =
-                    snapshot.children.first().child("location").child("latitude").value
-                val userLongitude =
-                    snapshot.children.first().child("location").child("longitude").value
-                Log.d("UBICACION", userLongitude.toString() + " " + userLatitude.toString())
+                val values =  snapshot.value as HashMap<*, *>
+                val paseo = values.get(values.keys.first()) as HashMap<*, *>
+                val userLatitude = ((paseo.get("user") as HashMap<*, *>).get("location") as HashMap<*, *>).get("latitude")
+                val userLongitude = ((paseo.get("user") as HashMap<*, *>).get("location") as HashMap<*, *>).get("latitude")
+                Log.d("UBICACION", snapshot.getValue(Paseo::class.java)!!.user.location.toString())
                 if (userLatitude != null && userLongitude != null) {
                     val userLatLng = LatLng(userLatitude as Double, userLongitude as Double)
 

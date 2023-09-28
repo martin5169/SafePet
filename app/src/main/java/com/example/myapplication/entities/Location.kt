@@ -15,5 +15,9 @@ class Location {
         this.latitude = latitude
     }
 
+    override fun toString(): String {
+        return "Location(latitude=$latitude, longitude=$longitude)"
+    }
+
 
 }
