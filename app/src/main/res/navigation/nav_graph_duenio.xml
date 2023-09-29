@@ -77,10 +77,26 @@
         <action
             android:id="@+id/action_calendarioPaseador_to_paseadoresList"
             app:destination="@id/paseadoresList" />
+        <argument
+            android:name="Paseador"
+            app:argType="com.example.myapplication.entities.Paseador" />
     </fragment>
     <fragment
         android:id="@+id/userHistorial"
         android:name="com.example.myapplication.fragments.UserHistorial"
         android:label="fragment_user_historial"
-        tools:layout="@layout/fragment_user_historial" />
+        tools:layout="@layout/fragment_user_historial" >
+        <action
+            android:id="@+id/action_userHistorial_to_paseoProgramadoDetail"
+            app:destination="@id/paseoProgramadoDetail" />
+    </fragment>
+    <fragment
+        android:id="@+id/paseoProgramadoDetail"
+        android:name="com.example.myapplication.fragments.PaseoProgramadoDetail"
+        android:label="fragment_paseo_programado_detail"
+        tools:layout="@layout/fragment_paseo_programado_detail" >
+        <argument
+            android:name="paseoProgramado"
+            app:argType="com.example.myapplication.entities.PaseoProgramado" />
+    </fragment>
 </navigation>

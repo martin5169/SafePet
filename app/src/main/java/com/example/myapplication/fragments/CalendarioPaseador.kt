@@ -2,7 +2,6 @@ package com.example.myapplication.fragments
 
 import android.app.AlertDialog
 import android.icu.util.Calendar
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,10 +13,12 @@ import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
 import com.example.myapplication.R.id.calendarPaseador
+import com.example.myapplication.entities.PaseoProgramado
 import com.example.myapplication.entities.User
 import com.example.myapplication.entities.UserAbstract
 import com.example.myapplication.entities.UserSession
 import com.example.myapplication.entities.UserSession.user
+import com.example.myapplication.repository.PaseoProgramadoRepository
 import com.example.myapplication.repository.UserRepository
 import com.google.android.material.snackbar.Snackbar
 
@@ -33,7 +34,6 @@ class CalendarioPaseador : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         v = inflater.inflate(R.layout.fragment_calendario_paseador, container, false)
-
         calendar = v.findViewById(calendarPaseador)
         selectedDate = v.findViewById(R.id.selectedDate)
         btnConfirm = v.findViewById(R.id.btnConfirm)
@@ -44,7 +44,7 @@ class CalendarioPaseador : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        user = UserSession.user as User
+        user = user as User
 
         val currentDateCalendar = Calendar.getInstance()
         val maxSelectableDateCalendar = Calendar.getInstance()
@@ -77,12 +77,15 @@ class CalendarioPaseador : Fragment() {
 
     private fun showConfirmationDialog(user: UserAbstract, selectedDate: String) {
         val builder = AlertDialog.Builder(requireContext())
+        val paseador = CalendarioPaseadorArgs.fromBundle(requireArguments()).Paseador
+        val paseoProgramadoRepository = PaseoProgramadoRepository.getInstance()
         builder.setTitle("Confirmación")
         builder.setMessage("¿Confirma la fecha seleccionada?" )
         builder.setPositiveButton("Sí") { _, _ ->
             // USUARIO CONFIRMA, HACER VALIDACION DE FECHA DISPONIBLE
-            //TODO
-                       Snackbar.make(v, "Fecha asignada con éxito", Snackbar.LENGTH_SHORT).show()
+            val paseoProgramado = PaseoProgramado(paseador,user,selectedDate)
+            paseoProgramadoRepository.addPaseo(paseoProgramado)
+            Snackbar.make(v, "Fecha asignada con éxito", Snackbar.LENGTH_SHORT).show()
             val action = CalendarioPaseadorDirections.actionCalendarioPaseadorToPaseadoresList()
             findNavController().navigate(action)
         }

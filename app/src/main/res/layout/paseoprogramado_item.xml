@@ -11,7 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
 
         android:layout_width="match_parent"
-        android:layout_height="167dp"
+        android:layout_height="293dp"
         android:background="#818080"
         android:backgroundTint="#807A7A"
         android:elevation="8dp">
@@ -27,25 +27,37 @@
             android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.737"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/txtDetailsUser"
-            app:layout_constraintVertical_bias="0.354" />
+            app:layout_constraintVertical_bias="0.065" />
+
+        <TextView
+            android:id="@+id/txtFecha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="52dp"
+            android:text="name"
+            android:textAlignment="center"
+            android:textColor="#FDFCFC"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/txtDetailsUser"
+            app:layout_constraintVertical_bias="0.789" />
 
         <TextView
             android:id="@+id/txtDetailsUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="lastName"
             android:textAlignment="center"
             android:textColor="#EEF1F1"
             android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.785"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.236" />
+            app:layout_constraintVertical_bias="0.498" />
 
         <ImageView
             android:id="@+id/imageView6"
@@ -53,11 +65,11 @@
             android:layout_height="87dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.166"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.077"
             app:srcCompat="@drawable/icons8dog51paseadorperfil" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.cardview.widget.CardView>

@@ -1,5 +1,6 @@
 package com.example.myapplication.repository
 
+import com.example.myapplication.entities.PaseoProgramado
 import com.example.myapplication.entities.User
 import com.google.firebase.database.*
 
@@ -89,7 +90,7 @@ class UserRepository() {
       }
     })
   }
-
+  // Agregar un paseo pogramado al usuario
 
 
 }

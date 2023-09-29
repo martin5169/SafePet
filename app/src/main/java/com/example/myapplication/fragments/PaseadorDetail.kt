@@ -51,7 +51,7 @@ class PaseadorDetail : Fragment() {
         }
 
         btnSolicitarPaseo.setOnClickListener{
-            val action = PaseadorDetailDirections.actionPaseadorDetailToCalendarioPaseador()
+            val action = PaseadorDetailDirections.actionPaseadorDetailToCalendarioPaseador(paseador)
             findNavController().navigate(action)
         }
 
