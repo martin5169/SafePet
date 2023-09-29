@@ -28,6 +28,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.FirebaseDatabase
 
 class MapaUser : Fragment() {
@@ -93,13 +94,14 @@ class MapaUser : Fragment() {
             if (paseo == null) {
                 getLocation()
             }else{
-                mapaViewModel.addMarcador(gMap, LatLng(paseo.paseador.location.latitude, paseo.paseador.location.longitude), paseo.paseador.dni)
-                Snackbar.make(v, "Ya tiene un paseo asignado", Snackbar.LENGTH_SHORT).show()
+                mapaViewModel.getPaseoUser(gMap, it.result!!)
             }
         }
 
         //paseoRepository.addPaseo(Paseo(Paseador(), userSession as User))
     }
+
+
 
     private fun getLocation() {
         paseadorRepository.getPaseadores { paseadores ->
