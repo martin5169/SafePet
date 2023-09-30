@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_homePaseador_to_perfilPaseador2"
             app:destination="@id/perfilPaseador2" />
+        <action
+            android:id="@+id/action_homePaseador_to_paseadorHistorial"
+            app:destination="@id/paseadorHistorial" />
     </fragment>
     <fragment
         android:id="@+id/cuentaPaseador"
@@ -50,5 +53,23 @@
         <action
             android:id="@+id/action_perfilPaseador2_to_homePaseador"
             app:destination="@id/homePaseador" />
+    </fragment>
+    <fragment
+        android:id="@+id/paseadorHistorial"
+        android:name="com.example.myapplication.fragments.PaseadorHistorial"
+        android:label="fragment_paseador_historial"
+        tools:layout="@layout/fragment_paseador_historial" >
+        <action
+            android:id="@+id/action_paseadorHistorial_to_paseoProgramadoDetail2"
+            app:destination="@id/paseoProgramadoDetail2" />
+    </fragment>
+    <fragment
+        android:id="@+id/paseoProgramadoDetail2"
+        android:name="com.example.myapplication.fragments.PaseoProgramadoDetail"
+        android:label="fragment_paseo_programado_detail"
+        tools:layout="@layout/fragment_paseo_programado_detail" >
+        <argument
+            android:name="paseoProgramadoPaseador"
+            app:argType="com.example.myapplication.entities.PaseoProgramado" />
     </fragment>
 </navigation>

@@ -55,8 +55,8 @@ class HomePaseador : Fragment() {
         }
 
         btnHistorial.setOnClickListener {
-           // val action = HomePaseadorDirections.actionHomePaseadorToUserHistorial2()
-            //findNavController().navigate(action)
+           val action = HomePaseadorDirections.actionHomePaseadorToPaseadorHistorial()
+            findNavController().navigate(action)
         }
 
 

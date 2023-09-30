@@ -2,14 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/recyclerPaseos"
+    android:id="@+id/recyclerPaseosPaseador"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.UserHistorial"
-    tools:layout_editor_absoluteY="25dp" >
+    tools:context=".fragments.PaseadorHistorial">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerPaseo"
+        android:id="@+id/recyclerList"
         android:layout_width="match_parent"
         android:layout_height="657dp"
         android:layout_marginStart="1dp"

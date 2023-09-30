@@ -24,17 +24,19 @@ class PaseosProgramadosAdapter(var paseos : MutableList<PaseoProgramado>,
 
         val user = UserSession.user
 
-        fun setUserDetails (detailsUser : String){
-            val textDetailUser : TextView = view.findViewById(R.id.txtDetailsUser)
-            textDetailUser.text = "Dueño: $detailsUser"
+        fun setDetails (detailsUser : String){
+            val textDetail : TextView = view.findViewById(R.id.textDetail)
+            textDetail.text = detailsUser
         }
-        fun setPaseadorDetails (detailsPaseador : String){
-            val textDetailPaseador : TextView = view.findViewById(R.id.txtMascotaName)
-            textDetailPaseador.text = "Paseador: $detailsPaseador"
+
+        fun setMascota (detailMascota : String){
+            val textMascota : TextView = view.findViewById(R.id.txtMascotaName)
+            textMascota.text = detailMascota
         }
+
         fun setFechaPaseo (fecha : String){
             val fechaPaseo : TextView = view.findViewById(R.id.txtFecha)
-            fechaPaseo.text = "Fecha: $fecha"
+            fechaPaseo.text = fecha
         }
 
         fun getCard() : CardView {
@@ -54,15 +56,17 @@ class PaseosProgramadosAdapter(var paseos : MutableList<PaseoProgramado>,
     override fun onBindViewHolder(holder: UserHolder, position: Int) {
         val paseo = paseos[position]
         if (UserSession.user is Paseador) {
-            holder.setUserDetails(paseo.user.lastName)
+            holder.setDetails("Dueño: ${paseo.user.lastName}")
+            holder.setMascota("Mascota: ${paseo.user.mascota.nombre}")
             holder.setFechaPaseo(paseo.fecha)
         } else {
             // Mostrar solo la fecha si el usuario es un User
             holder.setFechaPaseo(paseo.fecha)
-            holder.setPaseadorDetails(paseo.paseador.name)
+
+            holder.setDetails("Paseador: ${paseo.paseador.lastName}")
         }
 
-        holder.setPaseadorDetails(paseo.paseador.lastName)
+
 
 
         holder.getCard().setOnClickListener{

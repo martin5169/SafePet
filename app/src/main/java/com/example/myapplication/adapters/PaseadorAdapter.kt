@@ -21,7 +21,7 @@ class PaseadorAdapter(var paseadores : MutableList<Paseador>,
         }
 
         fun setUserLastName (lastName : String){
-            val textLastName : TextView = view.findViewById(R.id.txtDetailsUser)
+            val textLastName : TextView = view.findViewById(R.id.textDetail)
             textLastName.text = lastName
         }
         fun setUserName (name : String){

@@ -29,11 +29,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.737"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/txtDetailsUser"
+            app:layout_constraintTop_toTopOf="@+id/textDetail"
             app:layout_constraintVertical_bias="0.354" />
 
         <TextView
-            android:id="@+id/txtDetailsUser"
+            android:id="@+id/textDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="lastName"
