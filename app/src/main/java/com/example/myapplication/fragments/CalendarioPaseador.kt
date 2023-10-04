@@ -34,6 +34,10 @@ class CalendarioPaseador : Fragment() {
     lateinit var adaptador: ArrayAdapter<String>
     val programadoRepository = PaseoProgramadoRepository.getInstance()
     val horarios = mutableListOf("10:00hs", "11:00hs", "12:00hs")
+    private val originalHorarios = mutableListOf("10:00hs", "11:00hs", "12:00hs")
+
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -85,8 +89,15 @@ class CalendarioPaseador : Fragment() {
                     adaptadorActual.clear()
                     adaptadorActual.addAll(horariosFiltrados)
                     adaptadorActual.notifyDataSetChanged()
+                } else {
+                    // Si no hay elementos filtrados, restablece la lista original
+                    val adaptadorActual = spinner.adapter as ArrayAdapter<String>
+                    adaptadorActual.clear()
+                    adaptadorActual.addAll(originalHorarios)
+                    adaptadorActual.notifyDataSetChanged()
                 }
             }
+
         }
 
         btnConfirm.setOnClickListener {
@@ -95,6 +106,7 @@ class CalendarioPaseador : Fragment() {
             if (selectedDateString.isNotEmpty() && selectedTime.isNotEmpty()) {
                 val dateTimeString = "$selectedDateString $selectedTime"
                 showConfirmationDialog(user, dateTimeString)
+
             } else {
                 Snackbar.make(v, "Debe seleccionar una fecha válida", Snackbar.LENGTH_SHORT).show()
             }
