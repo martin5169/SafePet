@@ -24,7 +24,7 @@ class PerfilUser : Fragment() {
     lateinit var lastName: TextView
     lateinit var dni: TextView
     lateinit var contraseña : EditText
-    lateinit var mail : EditText
+    lateinit var mail : TextView
     lateinit var btnEdit: Button
 
     override fun onCreateView(
@@ -52,7 +52,7 @@ class PerfilUser : Fragment() {
             lastName.text = user.lastName
             dni.text = user.dni
             contraseña.setText(user.password)
-            mail.setText(user.mail)
+            mail.text = user.mail
         }
 
         btnEdit.setOnClickListener {

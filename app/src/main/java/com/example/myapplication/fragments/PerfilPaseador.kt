@@ -23,7 +23,7 @@ class PerfilPaseador : Fragment() {
     lateinit var lastName: TextView
     lateinit var dni: TextView
     lateinit var contraseña : EditText
-    lateinit var mail : EditText
+    lateinit var mail : TextView
     lateinit var btnEdit: Button
 
     private lateinit var viewModel: PerfilPaseadorViewModel
@@ -37,7 +37,7 @@ class PerfilPaseador : Fragment() {
 
         name = v.findViewById(R.id.namePaseador)
         lastName = v.findViewById(R.id.lastNamePaseador)
-        dni = v.findViewById(R.id.dniPaseador)
+        dni = v.findViewById(R.id.paseadorMail2)
         contraseña = v.findViewById(R.id.paseadorContraseña)
         mail = v.findViewById(R.id.paseadorMail2)
         btnEdit = v.findViewById(R.id.editPerfil2)
@@ -53,7 +53,7 @@ class PerfilPaseador : Fragment() {
             lastName.text = user.lastName
             dni.text = user.dni
             contraseña.setText(user.password)
-            mail.setText(user.mail)
+            mail.text = user.mail
         }
         btnEdit.setOnClickListener {
             val enteredMail = mail.text.toString()
