@@ -53,7 +53,8 @@
             app:argType="com.example.myapplication.entities.Paseador" />
         <action
             android:id="@+id/action_paseadorDetail_to_calendarioPaseador"
-            app:destination="@id/calendarioPaseador" />
+            app:destination="@id/calendarioPaseador"
+            app:popUpTo="@id/paseadoresList" />
     </fragment>
     <fragment
         android:id="@+id/perfilUser"
