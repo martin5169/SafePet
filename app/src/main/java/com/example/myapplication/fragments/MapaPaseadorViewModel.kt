@@ -64,7 +64,7 @@ class MapaPaseadorViewModel : ViewModel() {
         locationRef.orderByChild("dni").equalTo(user.dni).get().addOnCompleteListener {
             Log.d("PASEOS USERS", it.result.toString())
         }
-        locationRef.orderByChild("dni").equalTo(user.dni).addValueEventListener(object :
+        locationRef.orderByChild("dni").equalTo(user.dni).addListenerForSingleValueEvent(object :
             ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 Log.d("PASEOS USER", snapshot.value.toString())
