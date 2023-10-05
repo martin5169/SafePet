@@ -54,4 +54,23 @@ class PaseoRepository {
         }
     }
 
+    fun updateLocationPaseador(paseadorDni: String, latitude: Double, longitude: Double) {
+        val usersQuery = paseosReference.orderByChild("paseador/dni").equalTo(paseadorDni)
+
+        usersQuery.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    for (userSnapshot in snapshot.children) {
+                        userSnapshot.ref.child("paseador").child("location").child("latitude").setValue(latitude)
+                        userSnapshot.ref.child("paseador").child("location").child("longitude").setValue(longitude)
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
+    }
+
 }
