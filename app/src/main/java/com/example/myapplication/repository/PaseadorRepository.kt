@@ -67,6 +67,26 @@ class PaseadorRepository() {
     })
   }
 
+  fun updateLocationPaseador(paseadorDni: String, latitude: Double, longitude: Double) {
+    val usersQuery = paseadoresReference.orderByChild("dni").equalTo(paseadorDni)
+
+    usersQuery.addValueEventListener(object : ValueEventListener {
+      override fun onDataChange(snapshot: DataSnapshot) {
+        if (snapshot.exists()) {
+          for (userSnapshot in snapshot.children) {
+            userSnapshot.ref.child("estaPaseando").setValue(true)
+            userSnapshot.ref.child("location").child("latitude").setValue(latitude)
+            userSnapshot.ref.child("location").child("longitude").setValue(longitude)
+          }
+        }
+      }
+
+      override fun onCancelled(error: DatabaseError) {
+
+      }
+    })
+  }
+
 
   fun updateTarifa(userDni: String, newTarifa: String) {
     val usersQuery = paseadoresReference.orderByChild("dni").equalTo(userDni)
@@ -80,25 +100,6 @@ class PaseadorRepository() {
 
           }
         }
-      }
-
-      override fun onCancelled(error: DatabaseError) {
-
-      }
-    })
-  }
-
-  fun getDuenios(callback: (List<User>) -> Unit) {
-    paseadoresReference.addListenerForSingleValueEvent(object : ValueEventListener {
-      override fun onDataChange(snapshot: DataSnapshot) {
-        val usersList = mutableListOf<User>()
-        for (childSnapshot in snapshot.children) {
-          val paseador = childSnapshot.getValue(User::class.java)
-          paseador?.let {
-            usersList.add(it)
-          }
-        }
-        callback(usersList)
       }
 
       override fun onCancelled(error: DatabaseError) {
