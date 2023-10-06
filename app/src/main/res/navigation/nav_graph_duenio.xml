@@ -96,7 +96,10 @@
         android:label="fragment_paseo_programado_detail"
         tools:layout="@layout/fragment_paseo_programado_detail" >
         <argument
-            android:name="paseoProgramado"
+            android:name="paseoProgramadoDetalle"
             app:argType="com.example.myapplication.entities.PaseoProgramado" />
+        <action
+            android:id="@+id/action_paseoProgramadoDetail_to_home"
+            app:destination="@id/home" />
     </fragment>
 </navigation>

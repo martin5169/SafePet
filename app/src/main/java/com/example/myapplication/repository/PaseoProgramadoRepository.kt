@@ -30,11 +30,15 @@ class PaseoProgramadoRepository() {
     }
 
 
-    fun addPaseo(user: PaseoProgramado) {
+    fun addPaseo(paseo: PaseoProgramado) {
         val userKey = paseosReference.push().key // Generar una clave única para el paseo
         userKey?.let {
-            paseosReference.child(it).setValue(user)
+            paseo.id = it // Asignar la clave única al atributo "id" del paseo programado
+            paseosReference.child(it).setValue(paseo)
         }
+    }
+    fun deletePaseo(paseo: PaseoProgramado) {
+        paseosReference.child(paseo.id).removeValue()
     }
 
     fun getPaseos(callback: (List<PaseoProgramado>) -> Unit) {

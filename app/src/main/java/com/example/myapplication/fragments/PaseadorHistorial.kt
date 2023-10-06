@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,6 +21,7 @@ class PaseadorHistorial : Fragment() {
     lateinit var recyclerPaseosPaseador: RecyclerView
     lateinit var paseosRepository: PaseoProgramadoRepository
     lateinit var adapter: PaseosProgramadosAdapter
+    lateinit var textoSinPaseos : TextView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -27,6 +29,7 @@ class PaseadorHistorial : Fragment() {
         v = inflater.inflate(R.layout.fragment_paseador_historial, container, false)
 
         recyclerPaseosPaseador = v.findViewById(R.id.recyclerList)
+        textoSinPaseos = v.findViewById(R.id.notificacionVacio)
         paseosRepository = PaseoProgramadoRepository.getInstance()
 
         return v
@@ -36,11 +39,18 @@ class PaseadorHistorial : Fragment() {
     override fun onStart() {
         super.onStart()
 
+
         val userDNI = UserSession.user.dni
         paseosRepository.getPaseos { paseosList ->
             val paseosFiltrados = paseosList.filter { paseo ->
                 paseo.paseador.dni == userDNI
             }
+            if (paseosFiltrados.isEmpty()) {
+                textoSinPaseos.text = "Aun no tenes paseos programados"
+            } else {
+                textoSinPaseos.text = "Estos son tus paseos programados"
+            }
+
             adapter = PaseosProgramadosAdapter(paseosFiltrados.toMutableList()) { position ->
 
                 val action =
@@ -53,6 +63,7 @@ class PaseadorHistorial : Fragment() {
             recyclerPaseosPaseador.layoutManager = LinearLayoutManager(context)
             recyclerPaseosPaseador.adapter = adapter
         }
+
 
     }
 

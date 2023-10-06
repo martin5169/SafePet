@@ -36,9 +36,6 @@ class CalendarioPaseador : Fragment() {
     val horarios = mutableListOf("10:00hs", "11:00hs", "12:00hs")
     private val originalHorarios = mutableListOf("10:00hs", "11:00hs", "12:00hs")
 
-
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

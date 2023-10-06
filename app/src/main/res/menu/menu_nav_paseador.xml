@@ -2,6 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/homePaseador"
+        android:icon="@drawable/icons8home50"
+        android:title="Home"
+        />
+
+    <item
         android:icon="@drawable/icons8dolar64"
         android:id="@+id/cuentaPaseador"
         android:title="Mi cuenta"

@@ -29,10 +29,6 @@ class PaseosProgramadosAdapter(var paseos : MutableList<PaseoProgramado>,
             textDetail.text = detailsUser
         }
 
-        fun setMascota (detailMascota : String){
-            val textMascota : TextView = view.findViewById(R.id.txtMascotaName)
-            textMascota.text = detailMascota
-        }
 
         fun setFechaPaseo (fecha : String){
             val fechaPaseo : TextView = view.findViewById(R.id.txtFecha)
@@ -57,7 +53,7 @@ class PaseosProgramadosAdapter(var paseos : MutableList<PaseoProgramado>,
         val paseo = paseos[position]
         if (UserSession.user is Paseador) {
             holder.setDetails("Dueño: ${paseo.user.lastName}")
-            holder.setMascota("Mascota: ${paseo.user.mascota.nombre}")
+
             holder.setFechaPaseo(paseo.fecha)
         } else {
             // Mostrar solo la fecha si el usuario es un User

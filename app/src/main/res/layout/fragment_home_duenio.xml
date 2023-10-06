@@ -69,7 +69,7 @@
         android:layout_width="252dp"
         android:layout_height="76dp"
         android:backgroundTint="#009688"
-        android:text="Cargar mascota"
+        android:text="Mi mascota"
         android:textColorHighlight="#009688"
         android:textColorLink="#009688"
         android:textSize="20sp"

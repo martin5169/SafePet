@@ -1,26 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+
     <item
-        android:icon="@drawable/pets"
-        android:id="@+id/perfilPet"
+        android:id="@+id/home"
+        android:icon="@drawable/icons8home50"
+        android:title="Home"
+       />
 
-        android:title="Mi mascota"
-
-        />
-
-       <item
-        android:icon="@drawable/icons8map50"
+    <item
         android:id="@+id/mapaUser"
+        android:icon="@drawable/icons8map50"
         android:title="Mapa"
-
-        />
+         />
 
     <item
-        android:icon="@drawable/icons8user50"
         android:id="@+id/perfilUser"
+        android:icon="@drawable/icons8user50"
         android:title="Perfil"
-
         />
+
 
 </menu>
