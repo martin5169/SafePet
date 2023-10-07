@@ -11,31 +11,24 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
-//<<<<<<< HEAD
 import com.example.myapplication.entities.PaseoProgramado
 import com.example.myapplication.entities.User
 import com.example.myapplication.entities.UserAbstract
 import com.example.myapplication.entities.UserSession
 import com.example.myapplication.repository.PaseoProgramadoRepository
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.material.snackbar.Snackbar
 
 class PaseoProgramadoDetail : Fragment() {
 
-//======
-//import com.example.myapplication.entities.UserAbstract
-//import com.example.myapplication.entities.UserSession
-//import com.google.android.gms.location.FusedLocationProviderClient
-//import com.google.android.gms.location.LocationServices
-
     class PaseoProgramadoDetail : Fragment() {
 
-        //lateinit var location: FusedLocationProviderClient
         lateinit var userSession: UserAbstract
 
         companion object {
             fun newInstance() = PaseoProgramadoDetail()
         }
-//>>>>>>> 7891575ee226584d484c911c4725becb1af17fa2
 
         private lateinit var v: View
         private lateinit var fechaPaseo: TextView
@@ -44,28 +37,24 @@ class PaseoProgramadoDetail : Fragment() {
         private lateinit var btnIniciarPaseo: Button
         private lateinit var btnCancelarPaseo: Button
         lateinit var paseosRepository: PaseoProgramadoRepository
-
+        lateinit var location: FusedLocationProviderClient
+        lateinit var viewModel: PaseoProgramadoDetailViewModel
 
         override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
         ): View? {
-//<<<<<<< HEAD
             v = inflater.inflate(R.layout.fragment_paseo_programado_detail, container, false)
-
             fechaPaseo = v.findViewById(R.id.fechaPaseo)
             duenioPaseo = v.findViewById(R.id.dueño)
             mascota = v.findViewById(R.id.mascota)
             btnIniciarPaseo = v.findViewById(R.id.btnIniciarPaseo)
             btnCancelarPaseo = v.findViewById(R.id.btnCancelarPaseo)
             paseosRepository = PaseoProgramadoRepository.getInstance()
-
+            location = LocationServices.getFusedLocationProviderClient(requireContext())
+            userSession = UserSession.user
+            viewModel = ViewModelProvider(this).get(PaseoProgramadoDetailViewModel::class.java)
             return v
-//=======
-            //       userSession = UserSession.user
-            //       location = LocationServices.getFusedLocationProviderClient(requireContext())
-            //      return inflater.inflate(R.layout.fragment_paseo_programado_detail, container, false)
-//>>>>>>> 7891575ee226584d484c911c4725becb1af17fa2
         }
 
         override fun onStart() {
@@ -83,9 +72,7 @@ class PaseoProgramadoDetail : Fragment() {
             }
 
             btnCancelarPaseo.setOnClickListener {
-
                 showConfirmationDialog(paseo)
-
             }
 
 
@@ -112,10 +99,10 @@ class PaseoProgramadoDetail : Fragment() {
             dialog.show()
         }
 
-        //fun comenzarPaseo() {
-        //    viewModel.createLocationCallback(userSession.dni)
-        //    viewModel.startLocationUpdates()
-        // }
+        fun comenzarPaseo() {
+           viewModel.createLocationCallback(userSession.dni)
+           viewModel.startLocationUpdates()
+        }
 
     }
 }
