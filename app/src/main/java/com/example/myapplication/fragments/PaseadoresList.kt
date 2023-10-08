@@ -1,5 +1,6 @@
 package com.example.myapplication.fragments
 
+import android.annotation.SuppressLint
 import com.example.myapplication.adapters.PaseadorAdapter
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -32,6 +33,7 @@ class PaseadoresList : Fragment() {
     }
 
 
+    @SuppressLint("SuspiciousIndentation")
     override fun onStart() {
         super.onStart()
         paseadoresRepository.getPaseadores { paseadoresList ->

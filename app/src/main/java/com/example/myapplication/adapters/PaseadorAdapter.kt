@@ -30,7 +30,7 @@ class PaseadorAdapter(var paseadores : MutableList<Paseador>,
         }
 
         fun getCard() : CardView {
-            return view.findViewById(R.id.cardPaseoProgramado)
+            return view.findViewById(R.id.cardPaseador)
         }
     }
 
