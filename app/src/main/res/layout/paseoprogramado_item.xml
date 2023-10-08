@@ -6,14 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    android:backgroundTint="#807A7A"
-    app:cardCornerRadius="8dp"
-    >
+    app:cardCornerRadius="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
 
         android:layout_width="match_parent"
-        android:layout_height="167dp"
+        android:layout_height="194dp"
         android:background="#818080"
         android:backgroundTint="#807A7A"
         android:elevation="8dp">
@@ -22,45 +20,39 @@
             android:id="@+id/txtFecha"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="lastName"
             android:textAlignment="center"
-            android:textColor="#EEF1F1"
-            android:textSize="26dp"
+            android:textColor="@color/white"
+            android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.781"
+            app:layout_constraintHorizontal_bias="0.62"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.168" />
+            app:layout_constraintVertical_bias="0.314" />
 
         <ImageView
             android:id="@+id/imageView7"
-            android:layout_width="67dp"
-            android:layout_height="68dp"
+            android:layout_width="68dp"
+            android:layout_height="62dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.05"
+            app:layout_constraintHorizontal_bias="0.048"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.583"
             app:srcCompat="@drawable/icons8date50" />
 
         <TextView
-            android:id="@+id/txtDetalle"
+            android:id="@+id/textDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="52dp"
-            android:layout_marginBottom="32dp"
-            android:text="name"
-            android:textAlignment="center"
-            android:textColor="#FDFCFC"
-            android:textSize="26dp"
+            android:textColor="@color/white"
+            android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.713"
+            app:layout_constraintHorizontal_bias="0.581"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.731" />
 
-            app:layout_constraintVertical_bias="0.354" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.cardview.widget.CardView>
