@@ -55,7 +55,7 @@ import com.google.android.material.snackbar.Snackbar
 
         override fun onStart() {
             super.onStart()
-            UserSession.user = UserSession.user as User
+           // UserSession.user = UserSession.user as User
             val paseo =
                 PaseoProgramadoDetailArgs.fromBundle(requireArguments()).paseoProgramadodetalle
             fechaPaseo.text = paseo.fecha
@@ -83,8 +83,7 @@ import com.google.android.material.snackbar.Snackbar
                 // USUARIO CONFIRMA, HACER VALIDACIÓN DE FECHA DISPONIBLE
                 paseosRepository.deletePaseo(paseo)
                 Snackbar.make(v, "Paseo eliminado con éxito", Snackbar.LENGTH_SHORT).show()
-                val action = PaseoProgramadoDetailDirections.actionPaseoProgramadoDetailToHome()
-                findNavController().navigate(action)
+                findNavController().popBackStack()
             }
 
             builder.setNegativeButton("No") { _, _ ->

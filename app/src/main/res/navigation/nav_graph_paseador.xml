@@ -69,7 +69,7 @@
         android:label="fragment_paseo_programado_detail"
         tools:layout="@layout/fragment_paseo_programado_detail" >
         <argument
-            android:name="paseoProgramadoPaseador"
+            android:name="paseoProgramadodetalle"
             app:argType="com.example.myapplication.entities.PaseoProgramado" />
     </fragment>
 </navigation>
