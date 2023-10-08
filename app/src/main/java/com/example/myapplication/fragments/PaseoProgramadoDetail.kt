@@ -19,7 +19,6 @@ import com.example.myapplication.entities.UserSession
 import com.example.myapplication.repository.PaseoProgramadoRepository
 import com.google.android.material.snackbar.Snackbar
 
-class PaseoProgramadoDetail : Fragment() {
 
 //======
 //import com.example.myapplication.entities.UserAbstract
@@ -32,9 +31,7 @@ class PaseoProgramadoDetail : Fragment() {
         //lateinit var location: FusedLocationProviderClient
         lateinit var userSession: UserAbstract
 
-        companion object {
-            fun newInstance() = PaseoProgramadoDetail()
-        }
+
 //>>>>>>> 7891575ee226584d484c911c4725becb1af17fa2
 
         private lateinit var v: View
@@ -72,7 +69,7 @@ class PaseoProgramadoDetail : Fragment() {
             super.onStart()
             UserSession.user = UserSession.user as User
             val paseo =
-                PaseoProgramadoDetailArgs.fromBundle(requireArguments()).paseoProgramadoDetalle
+                PaseoProgramadoDetailArgs.fromBundle(requireArguments()).paseoProgramadodetalle
             fechaPaseo.text = paseo.fecha
             duenioPaseo.text = "${paseo.user.lastName}, ${paseo.user.name} "
             mascota.text = paseo.user.mascota.nombre
@@ -118,4 +115,3 @@ class PaseoProgramadoDetail : Fragment() {
         // }
 
     }
-}
