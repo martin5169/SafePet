@@ -1,9 +1,6 @@
 package com.example.myapplication.repository
 
-import android.util.Log
-import com.example.myapplication.entities.Paseador
 import com.example.myapplication.entities.Paseo
-import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.tasks.Task
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError

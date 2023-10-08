@@ -1,8 +1,11 @@
 package com.example.myapplication.repository
 
 import com.example.myapplication.entities.Paseador
-import com.example.myapplication.entities.User
-import com.google.firebase.database.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class PaseadorRepository() {
   private val database: FirebaseDatabase = FirebaseDatabase.getInstance()
