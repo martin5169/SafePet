@@ -8,7 +8,7 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_bar_paseador"
-        android:layout_width="410dp"
+        android:layout_width="wrap_content"
         android:layout_height="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
