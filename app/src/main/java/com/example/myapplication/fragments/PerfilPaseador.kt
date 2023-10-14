@@ -34,10 +34,9 @@ class PerfilPaseador : Fragment() {
     ): View? {
         v =  inflater.inflate(R.layout.fragment_perfil_paseador, container, false)
 
-
         name = v.findViewById(R.id.namePaseador)
         lastName = v.findViewById(R.id.lastNamePaseador)
-        dni = v.findViewById(R.id.paseadorMail2)
+        dni = v.findViewById(R.id.dniPaseador2)
         contraseña = v.findViewById(R.id.paseadorContraseña)
         mail = v.findViewById(R.id.paseadorMail2)
         btnEdit = v.findViewById(R.id.editPerfil2)
