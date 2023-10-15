@@ -64,7 +64,9 @@ import com.google.android.material.snackbar.Snackbar
 
 
             btnIniciarPaseo.setOnClickListener {
-
+                comenzarPaseo(location, paseo)
+                val action = PaseoProgramadoDetailDirections.actionPaseoProgramadoDetailToHome()
+                findNavController().popBackStack(action.actionId, true)
             }
 
             btnCancelarPaseo.setOnClickListener {
@@ -94,9 +96,8 @@ import com.google.android.material.snackbar.Snackbar
             dialog.show()
         }
 
-        fun comenzarPaseo() {
-           viewModel.createLocationCallback(userSession.dni)
-           viewModel.startLocationUpdates()
+        fun comenzarPaseo(location: FusedLocationProviderClient, paseo: PaseoProgramado) {
+           viewModel.createPaseoActivo(location, paseo, userSession)
         }
 
     }

@@ -44,11 +44,10 @@ class PaseoRepository {
         }
     }
 
-    fun addPaseo(paseo: Paseo) {
+    fun addPaseo(paseo: Paseo): Task<Void> {
         val paseadorKey = paseosReference.push().key // erar una clave única para el paseador
-        paseadorKey?.let {
-            paseosReference.child(it).setValue(paseo)
-        }
+
+        return paseosReference.child(paseadorKey!!).setValue(paseo)
     }
 
     fun updateLocationPaseador(paseadorDni: String, latitude: Double, longitude: Double) {
