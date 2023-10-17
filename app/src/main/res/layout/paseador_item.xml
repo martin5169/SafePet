@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="167dp"
         android:background="#818080"
-        android:backgroundTint="#807A7A"
+        android:backgroundTint="#5F5E61"
         android:elevation="8dp">
 
         <TextView

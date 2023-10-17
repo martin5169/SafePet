@@ -99,7 +99,7 @@ class PaseadorRepository() {
         if (snapshot.exists()) {
           for (userSnapshot in snapshot.children) {
 
-            userSnapshot.ref.child("tarifa").setValue(newTarifa)
+            userSnapshot.ref.child("tarifa").setValue(newTarifa.toInt())
 
           }
         }

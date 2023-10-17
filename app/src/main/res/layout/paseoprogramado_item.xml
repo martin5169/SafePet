@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="194dp"
         android:background="#818080"
-        android:backgroundTint="#807A7A"
+        android:backgroundTint="#5F5E61"
         android:elevation="8dp">
 
         <TextView
@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:textColor="@color/white"
+            android:textColor="?android:attr/detailsElementBackground"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -45,7 +45,7 @@
             android:id="@+id/textDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:textColor="?android:attr/detailsElementBackground"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

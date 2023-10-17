@@ -8,13 +8,6 @@
         />
 
     <item
-        android:icon="@drawable/icons8dolar64"
-        android:id="@+id/cuentaPaseador"
-        android:title="Mi cuenta"
-
-        />
-
-    <item
         android:icon="@drawable/icons8map50"
         android:id="@+id/mapaPaseador"
         android:title="Mapa"

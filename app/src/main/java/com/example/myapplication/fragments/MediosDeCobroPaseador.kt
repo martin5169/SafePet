@@ -11,6 +11,7 @@ import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
+import com.example.myapplication.entities.Paseador
 import com.example.myapplication.entities.UserAbstract
 import com.example.myapplication.entities.UserSession
 import com.example.myapplication.repository.PaseadorRepository
@@ -37,14 +38,16 @@ class MediosDeCobroPaseador : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        val user = UserSession.user
+        val user = UserSession.user as Paseador
 
-        // INICIALIZAR EL EDITTEXT CON LA TARIFA !!!
+        tarifa.setText(user.tarifa.toString())
 
         btnEdit.setOnClickListener {
             val enteredTarifa = tarifa.text.toString()
+
             if (enteredTarifa.isNotEmpty()) {
                 showConfirmationDialog(user, enteredTarifa)
+                user.tarifa = enteredTarifa.toInt()
             } else {
                 Snackbar.make(v, "Todos los campos son requeridos", Snackbar.LENGTH_SHORT).show()
             }

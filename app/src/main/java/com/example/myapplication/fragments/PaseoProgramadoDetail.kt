@@ -30,6 +30,7 @@ import com.google.android.material.snackbar.Snackbar
         private lateinit var fechaPaseo: TextView
         private lateinit var duenioPaseo: TextView
         private lateinit var mascota: TextView
+        private lateinit var valorPaseo: TextView
         private lateinit var btnIniciarPaseo: Button
         private lateinit var btnCancelarPaseo: Button
         lateinit var paseosRepository: PaseoProgramadoRepository
@@ -44,6 +45,7 @@ import com.google.android.material.snackbar.Snackbar
             fechaPaseo = v.findViewById(R.id.fechaPaseo)
             duenioPaseo = v.findViewById(R.id.dueño)
             mascota = v.findViewById(R.id.mascota)
+            valorPaseo = v.findViewById(R.id.valorPaseo)
             btnIniciarPaseo = v.findViewById(R.id.btnIniciarPaseo)
             btnCancelarPaseo = v.findViewById(R.id.btnCancelarPaseo)
             paseosRepository = PaseoProgramadoRepository.getInstance()
@@ -61,6 +63,7 @@ import com.google.android.material.snackbar.Snackbar
             fechaPaseo.text = paseo.fecha
             duenioPaseo.text = "${paseo.user.lastName}, ${paseo.user.name} "
             mascota.text = paseo.user.mascota.nombre
+            valorPaseo.text = paseo.paseador.tarifa.toString()
 
 
             btnIniciarPaseo.setOnClickListener {
