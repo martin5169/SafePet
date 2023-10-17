@@ -17,6 +17,7 @@ import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
 import com.example.myapplication.R.id.calendarPaseador
+import com.example.myapplication.entities.EstadoEnum
 import com.example.myapplication.entities.PaseoProgramado
 import com.example.myapplication.entities.User
 import com.example.myapplication.entities.UserAbstract
@@ -118,7 +119,7 @@ class CalendarioPaseador : Fragment() {
         builder.setMessage("¿Confirma la fecha y hora seleccionadas?")
         builder.setPositiveButton("Sí") { _, _ ->
             // USUARIO CONFIRMA, HACER VALIDACIÓN DE FECHA DISPONIBLE
-            val paseoProgramado = PaseoProgramado(paseador, user, dateTimeString)
+            val paseoProgramado = PaseoProgramado(paseador, user, dateTimeString, EstadoEnum.NO_ACTIVO)
             paseoProgramadoRepository.addPaseo(paseoProgramado)
             Snackbar.make(v, "Fecha y hora asignadas con éxito", Snackbar.LENGTH_SHORT).show()
             val action = CalendarioPaseadorDirections.actionCalendarioPaseadorToPaseadoresList()

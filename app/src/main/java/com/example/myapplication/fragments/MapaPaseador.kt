@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import com.example.myapplication.R
-import com.example.myapplication.entities.Paseo
+import com.example.myapplication.entities.PaseoProgramado
 import com.example.myapplication.entities.UserAbstract
 import com.example.myapplication.entities.UserSession
 import com.example.myapplication.repository.PaseadorRepository
@@ -92,7 +92,7 @@ class MapaPaseador : Fragment() {
         //paseoRepository.addPaseo(Paseo(Paseador(), userSession as User))
     }
 
-    private fun getUsersLocation(paseos: List<Paseo>) {
+    private fun getUsersLocation(paseos: List<PaseoProgramado>) {
         paseos.forEach {
             Log.d("USER 123", it.user.toString())
             mapaViewModel.getUsersLocation(gMap, it.user);

@@ -10,12 +10,13 @@ class PaseoProgramado(): Parcelable {
     var user: User = User()
     var fecha : String = ""
     var id : String=""
+    var estado: EstadoEnum = EstadoEnum.NO_ACTIVO
 
-    constructor(paseador: Paseador, user: UserAbstract, fecha: String) : this() {
+    constructor(paseador: Paseador, user: UserAbstract, fecha: String, estadoEnum: EstadoEnum) : this() {
         this.paseador = paseador
         this.user = user as User
         this.fecha = fecha
-        this.id = id
+        this.estado = estadoEnum
     }
 
     override fun toString(): String {

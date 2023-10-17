@@ -1,6 +1,7 @@
 package com.example.myapplication.adapters
 
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,7 @@ import com.example.myapplication.entities.UserSession
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import kotlin.math.absoluteValue
 
 class PaseosProgramadosAdapter(var paseos : MutableList<PaseoProgramado>,
                     var onClick : (Int) -> Unit
@@ -53,8 +55,9 @@ class PaseosProgramadosAdapter(var paseos : MutableList<PaseoProgramado>,
     fun isPaseoAnterior(paseo: PaseoProgramado): Boolean {
         val currentDate = Date()
         val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
+        Log.d("FECHA HOY ADAPTER", dateFormat.format(currentDate))
         val paseoDate = dateFormat.parse(paseo.fecha)
-        return paseoDate != null && paseoDate.before(currentDate)
+        return ((currentDate.time - 10800000) - paseoDate.time).absoluteValue >= 300000
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserHolder {
@@ -74,13 +77,7 @@ class PaseosProgramadosAdapter(var paseos : MutableList<PaseoProgramado>,
        // val colorPaseoAnterior = ContextCompat.getColor(holder.getCard().context, R.color.colorPaseoAnterior)
        // val colorPaseoNormal = ContextCompat.getColor(holder.getCard().context, R.color.colorPaseoNormal)
 
-        if (isPaseoAnterior(paseo)) {
-            //cardLayout.setBackgroundColor(ContextCompat.getColor(holder.getCard().context, R.color.colorPaseoAnterior))
-            holder.getCard().isEnabled = false
-        } else {
-         //   holder.getCard().setCardBackgroundColor(colorPaseoNormal)
-            holder.getCard().isEnabled = true
-        }
+        holder.getCard().isEnabled = !isPaseoAnterior(paseo)
 
         if (UserSession.user is Paseador) {
             holder.setDetails("Dueño: ${paseo.user.lastName}")

@@ -13,7 +13,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.core.app.ActivityCompat
 import com.example.myapplication.R
-import com.example.myapplication.entities.Paseo
+import com.example.myapplication.entities.PaseoProgramado
 import com.example.myapplication.entities.UserAbstract
 import com.example.myapplication.entities.UserSession
 import com.example.myapplication.repository.PaseadorRepository
@@ -27,8 +27,6 @@ import com.google.android.gms.location.Priority
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.FirebaseDatabase
 
 class MapaUser : Fragment() {
@@ -52,8 +50,6 @@ class MapaUser : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         database = FirebaseDatabase.getInstance()
-
-        createLocationCallback()
         v = inflater.inflate(R.layout.fragment_mapa_duenio, container, false)
         return v
     }
@@ -83,22 +79,19 @@ class MapaUser : Fragment() {
         mapFragment.getMapAsync() { p0 ->
             gMap = p0
             gMap.isMyLocationEnabled = true
-            startLocationUpdates()
         }
 
         location = LocationServices.getFusedLocationProviderClient(requireContext())
         userSession = UserSession.user
 
         paseoRepository.getPaseoUser(userSession.dni).addOnCompleteListener {
-            val paseo = it.result?.getValue(Paseo::class.java)
+            val paseo = it.result?.getValue(PaseoProgramado::class.java)
             if (paseo == null) {
                 getLocation()
             }else{
                 mapaViewModel.getPaseoUser(gMap, it.result!!)
             }
         }
-
-        //paseoRepository.addPaseo(Paseo(Paseador(), userSession as User))
     }
 
 
@@ -112,39 +105,4 @@ class MapaUser : Fragment() {
             }
         }
     }
-    @SuppressLint("MissingPermission")
-    private fun startLocationUpdates() {
-        val locationRequest = LocationRequest.Builder(5000)
-            .setPriority(Priority.PRIORITY_HIGH_ACCURACY)
-            .build()
-
-        location.requestLocationUpdates(
-            locationRequest,
-            locationCallback,
-            Looper.getMainLooper()
-        )
-    }
-
-    private fun createLocationCallback() {
-        locationCallback = object : LocationCallback() {
-            override fun onLocationResult(locationResult: LocationResult) {
-                super.onLocationResult(locationResult)
-                locationResult.lastLocation?.let { location ->
-                    // Actualizar el marcador en el mapa con la nueva ubicación.
-                    val locationRef = database.reference.child("users").child("1").child("location")
-
-                    locationRef.setValue(com.example.myapplication.entities.Location(location.latitude, location.longitude))
-                    updateMarker(location)
-                }
-            }
-        }
-    }
-
-    private fun updateMarker(location: Location) {
-        val currentLatLng = LatLng(location.latitude, location.longitude)
-        // Si ya existe un marcador en el mapa, quítalo antes de agregar uno nuevo.
-
-        // Mover la cámara al nuevo marcador.
-    }
-
 }

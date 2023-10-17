@@ -3,6 +3,7 @@ package com.example.myapplication.fragments
 import android.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
+import com.example.myapplication.entities.EstadoEnum
 import com.example.myapplication.entities.PaseoProgramado
 import com.example.myapplication.entities.User
 import com.example.myapplication.entities.UserAbstract
@@ -19,9 +21,12 @@ import com.example.myapplication.repository.PaseoProgramadoRepository
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.snackbar.Snackbar
+import java.text.SimpleDateFormat
+import java.util.Date
+import kotlin.math.absoluteValue
 
 
-    class PaseoProgramadoDetail : Fragment() {
+class PaseoProgramadoDetail : Fragment() {
 
         lateinit var userSession: UserAbstract
 
@@ -56,25 +61,37 @@ import com.google.android.material.snackbar.Snackbar
         }
 
         override fun onStart() {
-            super.onStart()
-           // UserSession.user = UserSession.user as User
-            val paseo =
-                PaseoProgramadoDetailArgs.fromBundle(requireArguments()).paseoProgramadodetalle
-            fechaPaseo.text = paseo.fecha
-            duenioPaseo.text = "${paseo.user.lastName}, ${paseo.user.name} "
-            mascota.text = paseo.user.mascota.nombre
-            valorPaseo.text = paseo.paseador.tarifa.toString()
+                super.onStart()
+               // UserSession.user = UserSession.user as User
+                val paseo =
+                    PaseoProgramadoDetailArgs.fromBundle(requireArguments()).paseoProgramadodetalle
+                fechaPaseo.text = paseo.fecha
+                duenioPaseo.text = "${paseo.user.lastName}, ${paseo.user.name} "
+                mascota.text = paseo.user.mascota.nombre
+                valorPaseo.text = paseo.paseador.tarifa.toString()
 
+                val format = SimpleDateFormat("dd/MM/yyyy HH:mm")
+                val fecha = format.parse(paseo.fecha)
+                val fechaHoy = Date()
+                if( ((fechaHoy.time - 10800000) - fecha.time).absoluteValue >= 300000 || userSession is User){
+                    btnIniciarPaseo.visibility = View.GONE
+                } else if(paseo.estado == EstadoEnum.ACTIVO) {
+                    btnIniciarPaseo.text = "El paseo ya inicio"
+                    btnIniciarPaseo.isEnabled = false
+                } else if(paseo.estado == EstadoEnum.FINALIZADO) {
+                    btnIniciarPaseo.text = "El paseo ya finalizo"
+                    btnIniciarPaseo.isEnabled = false
+                }
 
-            btnIniciarPaseo.setOnClickListener {
-                comenzarPaseo(location, paseo)
-                val action = PaseoProgramadoDetailDirections.actionPaseoProgramadoDetailToHome()
-                findNavController().popBackStack(action.actionId, true)
-            }
+                btnIniciarPaseo.setOnClickListener {
+                    comenzarPaseo(location, paseo)
+                    val action = PaseoProgramadoDetailDirections.actionPaseoProgramadoDetailToHome()
+                    findNavController().navigate(action)
+                }
 
-            btnCancelarPaseo.setOnClickListener {
-                showConfirmationDialog(paseo)
-            }
+                btnCancelarPaseo.setOnClickListener {
+                    showConfirmationDialog(paseo)
+                }
 
 
         }
@@ -100,7 +117,7 @@ import com.google.android.material.snackbar.Snackbar
         }
 
         fun comenzarPaseo(location: FusedLocationProviderClient, paseo: PaseoProgramado) {
-           viewModel.createPaseoActivo(location, paseo, userSession)
+           viewModel.createPaseoActivo(location, userSession)
         }
 
     }

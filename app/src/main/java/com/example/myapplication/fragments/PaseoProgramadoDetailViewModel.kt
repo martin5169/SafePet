@@ -4,8 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Looper
 
 import androidx.lifecycle.ViewModel
-import com.example.myapplication.entities.Paseo
-import com.example.myapplication.entities.PaseoProgramado
+import com.example.myapplication.entities.EstadoEnum
 import com.example.myapplication.entities.UserAbstract
 import com.example.myapplication.repository.PaseadorRepository
 import com.example.myapplication.repository.PaseoRepository
@@ -13,9 +12,7 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
-import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
-import com.google.android.gms.maps.model.LatLng
 
 class PaseoProgramadoDetailViewModel : ViewModel() {
 
@@ -49,12 +46,11 @@ class PaseoProgramadoDetailViewModel : ViewModel() {
         }
     }
 
-    fun createPaseoActivo(location: FusedLocationProviderClient, paseo: PaseoProgramado, user: UserAbstract) {
+    fun createPaseoActivo(location: FusedLocationProviderClient, user: UserAbstract) {
         this.location = location
-        val paseoActivo = Paseo(paseo.paseador, paseo.user)
-        paseoRepository.addPaseo(paseoActivo).addOnCompleteListener() {
-            createLocationCallback(user.dni)
-            startLocationUpdates()
-        }
+        createLocationCallback(user.dni)
+        startLocationUpdates()
+        paseoRepository.updateEstadoPaseo(user.dni, EstadoEnum.ACTIVO)
+
     }
 }

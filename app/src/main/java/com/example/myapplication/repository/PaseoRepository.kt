@@ -1,6 +1,7 @@
 package com.example.myapplication.repository
 
-import com.example.myapplication.entities.Paseo
+import com.example.myapplication.entities.EstadoEnum
+import com.example.myapplication.entities.PaseoProgramado
 import com.google.android.gms.tasks.Task
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -12,7 +13,7 @@ import com.google.firebase.database.ValueEventListener
 class PaseoRepository {
 
     private val database: FirebaseDatabase = FirebaseDatabase.getInstance()
-    private val paseosReference: DatabaseReference = database.getReference("paseos")
+    private val paseosReference: DatabaseReference = database.getReference("paseosProgramados")
 
     companion object {
         @Volatile
@@ -33,18 +34,18 @@ class PaseoRepository {
         return paseosReference.orderByChild("user/dni").equalTo(dniUser)
     }
 
-    fun getPaseosPaseador(dniPaseador: String, callback: (List<Paseo>) -> Unit) {
+    fun getPaseosPaseador(dniPaseador: String, callback: (List<PaseoProgramado>) -> Unit) {
         paseosReference.orderByChild("paseador/dni").equalTo(dniPaseador).get().addOnCompleteListener {
-            val paseosList = mutableListOf<Paseo>()
+            val paseosList = mutableListOf<PaseoProgramado>()
             for (childSnapshot in it.result.children) {
-                val paseo = childSnapshot.getValue(Paseo::class.java)
+                val paseo = childSnapshot.getValue(PaseoProgramado::class.java)
                 paseosList.add(paseo!!)
             }
             callback(paseosList)
         }
     }
 
-    fun addPaseo(paseo: Paseo): Task<Void> {
+    fun addPaseo(paseo: PaseoProgramado): Task<Void> {
         val paseadorKey = paseosReference.push().key // erar una clave única para el paseador
 
         return paseosReference.child(paseadorKey!!).setValue(paseo)
@@ -59,6 +60,24 @@ class PaseoRepository {
                     for (userSnapshot in snapshot.children) {
                         userSnapshot.ref.child("paseador").child("location").child("latitude").setValue(latitude)
                         userSnapshot.ref.child("paseador").child("location").child("longitude").setValue(longitude)
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
+    }
+
+    fun updateEstadoPaseo(paseadorDni: String, estado: EstadoEnum) {
+        val usersQuery = paseosReference.orderByChild("paseador/dni").equalTo(paseadorDni)
+
+        usersQuery.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    for (userSnapshot in snapshot.children) {
+                        userSnapshot.ref.child("estado").setValue(estado)
                     }
                 }
             }
