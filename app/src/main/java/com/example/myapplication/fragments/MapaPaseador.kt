@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import com.example.myapplication.R
+import com.example.myapplication.entities.EstadoEnum
 import com.example.myapplication.entities.PaseoProgramado
 import com.example.myapplication.entities.UserAbstract
 import com.example.myapplication.entities.UserSession
@@ -75,7 +76,6 @@ class MapaPaseador : Fragment() {
         mapFragment.getMapAsync() { p0 ->
             gMap = p0
             gMap.isMyLocationEnabled = true
-            mapaViewModel.startLocationUpdates(location)
         }
 
 
@@ -94,8 +94,10 @@ class MapaPaseador : Fragment() {
 
     private fun getUsersLocation(paseos: List<PaseoProgramado>) {
         paseos.forEach {
-            Log.d("USER 123", it.user.toString())
-            mapaViewModel.getUsersLocation(gMap, it.user);
+            if(it.estado == EstadoEnum.ACTIVO) {
+                Log.d("USER 123", it.user.toString())
+                mapaViewModel.getUsersLocation(gMap, it.user);
+            }
         }
     }
 

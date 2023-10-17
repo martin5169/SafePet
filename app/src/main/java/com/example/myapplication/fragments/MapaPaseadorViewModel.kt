@@ -71,14 +71,12 @@ class MapaPaseadorViewModel : ViewModel() {
                     snapshot.children.first().child("location").child("longitude").value
                 Log.d("UBICACION", userLongitude.toString() + " " + userLatitude.toString())
                 if (userLatitude != null && userLongitude != null) {
-                    val userLatLng = LatLng(userLatitude as Double, userLongitude as Double)
-
                     val marcador = marcadores.find { it?.title.equals(user.dni) }
                     if (marcador != null) {
                         marcador.position =
-                            LatLng(userLatitude.toDouble(), userLongitude.toDouble())
+                            LatLng(userLatitude as Double, userLongitude as Double)
                     } else {
-                        addMarcador(gMap, LatLng(userLatitude, userLongitude), user.dni)
+                        addMarcador(gMap, LatLng(userLatitude as Double, userLongitude as Double), user.dni)
                     }
 
                     //gMap.setOnInfoWindowClickListener {}
