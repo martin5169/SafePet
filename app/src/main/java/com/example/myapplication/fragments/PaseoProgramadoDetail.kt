@@ -117,7 +117,7 @@ class PaseoProgramadoDetail : Fragment() {
         }
 
         fun comenzarPaseo(location: FusedLocationProviderClient, paseo: PaseoProgramado) {
-           viewModel.createPaseoActivo(location, userSession)
+           viewModel.createPaseoActivo(location, userSession, paseo.id)
         }
 
     }

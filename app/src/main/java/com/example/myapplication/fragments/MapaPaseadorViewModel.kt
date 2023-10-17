@@ -1,18 +1,19 @@
 package com.example.myapplication.fragments
 
-import android.annotation.SuppressLint
 import android.location.Location
-import android.os.Looper
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.widget.Button
+import android.widget.TextView
 import androidx.lifecycle.ViewModel
 import com.example.myapplication.R
+import com.example.myapplication.entities.EstadoEnum
 import com.example.myapplication.entities.User
 import com.example.myapplication.repository.PaseadorRepository
-import com.google.android.gms.location.FusedLocationProviderClient
+import com.example.myapplication.repository.PaseoRepository
 import com.google.android.gms.location.LocationCallback
-import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
-import com.google.android.gms.location.Priority
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
@@ -26,22 +27,10 @@ import com.google.firebase.database.ValueEventListener
 class MapaPaseadorViewModel : ViewModel() {
     // TODO: Implement the ViewModel
 
-    val paseadorRepository = PaseadorRepository.getInstance()
+    val paseoRepository = PaseoRepository.getInstance()
     lateinit var locationCallback: LocationCallback
     val database = FirebaseDatabase.getInstance()
     val marcadores: MutableList<Marker?> = mutableListOf()
-    @SuppressLint("MissingPermission")
-    fun startLocationUpdates(location: FusedLocationProviderClient) {
-        val locationRequest = LocationRequest.Builder(5000)
-            .setPriority(Priority.PRIORITY_HIGH_ACCURACY)
-            .build()
-
-        location.requestLocationUpdates(
-            locationRequest,
-            locationCallback,
-            Looper.getMainLooper()
-        )
-    }
 
     fun createLocationCallback() {
         locationCallback = object : LocationCallback() {
@@ -58,7 +47,7 @@ class MapaPaseadorViewModel : ViewModel() {
         }
     }
 
-    fun getUsersLocation(gMap: GoogleMap, user: User) {
+    fun getUsersLocation(gMap: GoogleMap, user: User, inflater: LayoutInflater) {
         val locationRef = database.getReference("users")
         Log.d("USER", user.dni)
         locationRef.orderByChild("dni").equalTo(user.dni).addListenerForSingleValueEvent(object :
@@ -79,7 +68,27 @@ class MapaPaseadorViewModel : ViewModel() {
                         addMarcador(gMap, LatLng(userLatitude as Double, userLongitude as Double), user.dni)
                     }
 
-                    //gMap.setOnInfoWindowClickListener {}
+                    gMap.setInfoWindowAdapter(object : GoogleMap.InfoWindowAdapter {
+                        override fun getInfoContents(p0: Marker): View? {
+                            return null
+                        }
+
+                        override fun getInfoWindow(p0: Marker): View? {
+                            val view = inflater.inflate(R.layout.custom_info_window, null)
+                            view.findViewById<TextView>(R.id.nombreUsuario).text =
+                                snapshot.children.first().child("name").value as String
+                            val button = view.findViewById<Button>(R.id.finalizarButton)
+                            Log.d("CLICK", button.text.toString())
+                            button.setOnClickListener {
+                                Log.d("CLICK", "CLICK")
+                                paseoRepository.updateEstadoPaseo(snapshot.key!!, EstadoEnum.FINALIZADO)
+                            }
+
+                            return view
+                        }
+
+                    })
+
                 }
             }
 

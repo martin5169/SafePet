@@ -1,5 +1,6 @@
 package com.example.myapplication.repository
 
+import android.util.Log
 import com.example.myapplication.entities.EstadoEnum
 import com.example.myapplication.entities.PaseoProgramado
 import com.google.android.gms.tasks.Task
@@ -70,9 +71,9 @@ class PaseoRepository {
         })
     }
 
-    fun updateEstadoPaseo(paseadorDni: String, estado: EstadoEnum) {
-        val usersQuery = paseosReference.orderByChild("paseador/dni").equalTo(paseadorDni)
-
+    fun updateEstadoPaseo(id: String, estado: EstadoEnum) {
+        val usersQuery = paseosReference.child(id)
+        Log.d("CLICK", "CLICK")
         usersQuery.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {

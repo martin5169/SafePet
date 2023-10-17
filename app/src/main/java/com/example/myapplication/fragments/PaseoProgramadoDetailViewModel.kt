@@ -46,11 +46,11 @@ class PaseoProgramadoDetailViewModel : ViewModel() {
         }
     }
 
-    fun createPaseoActivo(location: FusedLocationProviderClient, user: UserAbstract) {
+    fun createPaseoActivo(location: FusedLocationProviderClient, user: UserAbstract, id: String) {
         this.location = location
         createLocationCallback(user.dni)
         startLocationUpdates()
-        paseoRepository.updateEstadoPaseo(user.dni, EstadoEnum.ACTIVO)
+        paseoRepository.updateEstadoPaseo(id, EstadoEnum.ACTIVO)
 
     }
 }

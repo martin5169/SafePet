@@ -4,10 +4,10 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import com.example.myapplication.R
@@ -45,9 +45,8 @@ class MapaPaseador : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         database = FirebaseDatabase.getInstance()
-
-        mapaViewModel.createLocationCallback()
         v = inflater.inflate(R.layout.fragment_mapa_paseador, container, false)
+        mapaViewModel.createLocationCallback()
         return v
     }
 
@@ -79,24 +78,22 @@ class MapaPaseador : Fragment() {
         }
 
 
-
+        val inflater = LayoutInflater.from(requireContext())
         paseoRepository.getPaseosPaseador(userSession.dni) {
             if (it.isNullOrEmpty()) {
                 Snackbar.make(v, "No tiene un paseo asignado", Snackbar.LENGTH_SHORT).show()
             } else {
-                Snackbar.make(v, "Tiene un paseo asignado", Snackbar.LENGTH_SHORT).show()
-                getUsersLocation(it)
+                getUsersLocation(it, inflater)
             }
         }
-
         //paseoRepository.addPaseo(Paseo(Paseador(), userSession as User))
     }
 
-    private fun getUsersLocation(paseos: List<PaseoProgramado>) {
+    private fun getUsersLocation(paseos: List<PaseoProgramado>, inflater: LayoutInflater) {
         paseos.forEach {
             if(it.estado == EstadoEnum.ACTIVO) {
-                Log.d("USER 123", it.user.toString())
-                mapaViewModel.getUsersLocation(gMap, it.user);
+                Snackbar.make(v, "Tiene un paseo asignado", Snackbar.LENGTH_SHORT).show()
+                mapaViewModel.getUsersLocation(gMap, it.user, inflater);
             }
         }
     }
