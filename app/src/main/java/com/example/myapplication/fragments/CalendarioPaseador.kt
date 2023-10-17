@@ -73,22 +73,18 @@ class CalendarioPaseador : Fragment() {
             selectedDate.text = "$selectedDateCalendar"
 
             programadoRepository.getPaseos { paseos ->
-                val filtrados = paseos.filter {
-                    it.fecha.substring(0, 10).trim() == "$dayOfMonth/${(month + 1)}/${year}"
-                }
-                if (filtrados.isNotEmpty()) {
-                    val horariosAEliminar = filtrados.map { it.fecha.substring(it.fecha.length - 7)}
-                    val horariosFiltrados = horarios.filter { hora ->
-                        !horariosAEliminar.any { horaEliminar ->
-                            hora.equals(horaEliminar)
-                        }
-                    }
+                val fechasBuscadas = paseos.filter { it.fecha.substring(0, it.fecha.length - 7).trim() == selectedDateCalendar}
+                val fechas = fechasBuscadas.map { it.fecha.substring(it.fecha.length - 7) }
+                val fechasAgrupadas = fechas.groupingBy { it }.eachCount()
+                val fechasRepetidas5Veces = fechasAgrupadas.filter { it.value == 5 }.keys.toList()
+                if (fechasRepetidas5Veces.isNotEmpty()) {
+                    val fechasFiltradas = horarios.filter { it !in fechasRepetidas5Veces }
                     val adaptadorActual = spinner.adapter as ArrayAdapter<String>
                     adaptadorActual.clear()
-                    adaptadorActual.addAll(horariosFiltrados)
+                    adaptadorActual.addAll(fechasFiltradas)
                     adaptadorActual.notifyDataSetChanged()
                 } else {
-                    // Si no hay elementos filtrados, restablece la lista original
+                    Log.d("ASD", "isEmpty")
                     val adaptadorActual = spinner.adapter as ArrayAdapter<String>
                     adaptadorActual.clear()
                     adaptadorActual.addAll(originalHorarios)

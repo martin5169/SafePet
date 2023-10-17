@@ -61,9 +61,6 @@ class MapaPaseadorViewModel : ViewModel() {
     fun getUsersLocation(gMap: GoogleMap, user: User) {
         val locationRef = database.getReference("users")
         Log.d("USER", user.dni)
-        locationRef.orderByChild("dni").equalTo(user.dni).get().addOnCompleteListener {
-            Log.d("PASEOS USERS", it.result.toString())
-        }
         locationRef.orderByChild("dni").equalTo(user.dni).addListenerForSingleValueEvent(object :
             ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
