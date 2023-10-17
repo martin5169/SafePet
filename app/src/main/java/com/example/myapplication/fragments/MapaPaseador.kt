@@ -84,6 +84,7 @@ class MapaPaseador : Fragment() {
             if (it.isNullOrEmpty()) {
                 Snackbar.make(v, "No tiene un paseo asignado", Snackbar.LENGTH_SHORT).show()
             } else {
+                Snackbar.make(v, "Tiene un paseo asignado", Snackbar.LENGTH_SHORT).show()
                 getUsersLocation(it)
             }
         }

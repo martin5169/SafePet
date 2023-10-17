@@ -4,6 +4,9 @@ import android.annotation.SuppressLint
 import android.os.Looper
 
 import androidx.lifecycle.ViewModel
+import com.example.myapplication.entities.Paseo
+import com.example.myapplication.entities.PaseoProgramado
+import com.example.myapplication.entities.UserAbstract
 import com.example.myapplication.repository.PaseadorRepository
 import com.example.myapplication.repository.PaseoRepository
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -43,6 +46,15 @@ class PaseoProgramadoDetailViewModel : ViewModel() {
                     paseadorRepository.updateLocationPaseador(dniPaseador, location.latitude, location.longitude)
                 }
             }
+        }
+    }
+
+    fun createPaseoActivo(location: FusedLocationProviderClient, paseo: PaseoProgramado, user: UserAbstract) {
+        this.location = location
+        val paseoActivo = Paseo(paseo.paseador, paseo.user)
+        paseoRepository.addPaseo(paseoActivo).addOnCompleteListener() {
+            createLocationCallback(user.dni)
+            startLocationUpdates()
         }
     }
 }
