@@ -77,9 +77,7 @@ class PaseoRepository {
         usersQuery.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
-                    for (userSnapshot in snapshot.children) {
-                        userSnapshot.ref.child("estado").setValue(estado)
-                    }
+                    snapshot.ref.child("estado").setValue(estado)
                 }
             }
 

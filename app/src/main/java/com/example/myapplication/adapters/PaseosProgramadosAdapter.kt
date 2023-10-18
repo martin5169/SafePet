@@ -77,7 +77,7 @@ class PaseosProgramadosAdapter(var paseos : MutableList<PaseoProgramado>,
        // val colorPaseoAnterior = ContextCompat.getColor(holder.getCard().context, R.color.colorPaseoAnterior)
        // val colorPaseoNormal = ContextCompat.getColor(holder.getCard().context, R.color.colorPaseoNormal)
 
-        holder.getCard().isEnabled = !isPaseoAnterior(paseo)
+        holder.getCard().isEnabled = true
 
         if (UserSession.user is Paseador) {
             holder.setDetails("Dueño: ${paseo.user.lastName}")

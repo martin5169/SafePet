@@ -75,18 +75,24 @@ class PaseoProgramadoDetail : Fragment() {
                 val fechaHoy = Date()
                 if( ((fechaHoy.time - 10800000) - fecha.time).absoluteValue >= 300000 || userSession is User){
                     btnIniciarPaseo.visibility = View.GONE
+                    btnCancelarPaseo.visibility = View.GONE
                 } else if(paseo.estado == EstadoEnum.ACTIVO) {
                     btnIniciarPaseo.text = "El paseo ya inicio"
                     btnIniciarPaseo.isEnabled = false
+                    btnCancelarPaseo.visibility = View.GONE
                 } else if(paseo.estado == EstadoEnum.FINALIZADO) {
                     btnIniciarPaseo.text = "El paseo ya finalizo"
                     btnIniciarPaseo.isEnabled = false
+                    btnCancelarPaseo.visibility = View.GONE
                 }
 
+                if(userSession is User) {
+                    btnCancelarPaseo.visibility = View.VISIBLE
+                }
                 btnIniciarPaseo.setOnClickListener {
                     comenzarPaseo(location, paseo)
-                    val action = PaseoProgramadoDetailDirections.actionPaseoProgramadoDetailToHome()
-                    findNavController().navigate(action)
+                    //val action = PaseoProgramadoDetailDirections.actionPaseoProgramadoDetailToHome()
+                    //findNavController().navigate(action)
                 }
 
                 btnCancelarPaseo.setOnClickListener {
