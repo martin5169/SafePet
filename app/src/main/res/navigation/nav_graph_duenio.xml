@@ -102,5 +102,20 @@
         <action
             android:id="@+id/action_paseoProgramadoDetail_to_home"
             app:destination="@id/home" />
+        <action
+            android:id="@+id/action_paseoProgramadoDetail_to_calificarPaseo"
+            app:destination="@id/calificarPaseo" />
+    </fragment>
+    <fragment
+        android:id="@+id/calificarPaseo"
+        android:name="com.example.myapplication.fragments.CalificarPaseo"
+        android:label="fragment_calificar_paseo"
+        tools:layout="@layout/fragment_calificar_paseo" >
+        <argument
+            android:name="paseoProgramadoACalificar"
+            app:argType="com.example.myapplication.entities.PaseoProgramado" />
+        <action
+            android:id="@+id/action_calificarPaseo_to_userHistorial"
+            app:destination="@id/userHistorial" />
     </fragment>
 </navigation>

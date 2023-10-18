@@ -86,5 +86,19 @@ class PaseoRepository {
             }
         })
     }
+    fun updateCalificacion(id: String, calificacion: Int) {
+        val usersQuery = paseosReference.child(id)
+        usersQuery.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    snapshot.ref.child("calificacion").setValue(calificacion)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
+    }
 
 }

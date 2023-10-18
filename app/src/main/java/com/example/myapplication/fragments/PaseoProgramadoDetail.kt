@@ -36,8 +36,10 @@ class PaseoProgramadoDetail : Fragment() {
         private lateinit var duenioPaseo: TextView
         private lateinit var mascota: TextView
         private lateinit var valorPaseo: TextView
+        private lateinit var calificacion: TextView
         private lateinit var btnIniciarPaseo: Button
         private lateinit var btnCancelarPaseo: Button
+        private lateinit var btnCalificar: Button
         lateinit var paseosRepository: PaseoProgramadoRepository
         lateinit var location: FusedLocationProviderClient
         lateinit var viewModel: PaseoProgramadoDetailViewModel
@@ -51,8 +53,10 @@ class PaseoProgramadoDetail : Fragment() {
             duenioPaseo = v.findViewById(R.id.dueño)
             mascota = v.findViewById(R.id.mascota)
             valorPaseo = v.findViewById(R.id.valorPaseo)
+            calificacion = v.findViewById(R.id.calificacionPaseo)
             btnIniciarPaseo = v.findViewById(R.id.btnIniciarPaseo)
             btnCancelarPaseo = v.findViewById(R.id.btnCancelarPaseo)
+            btnCalificar = v.findViewById(R.id.btnCalificar)
             paseosRepository = PaseoProgramadoRepository.getInstance()
             location = LocationServices.getFusedLocationProviderClient(requireContext())
             userSession = UserSession.user
@@ -70,9 +74,20 @@ class PaseoProgramadoDetail : Fragment() {
                 mascota.text = paseo.user.mascota.nombre
                 valorPaseo.text = paseo.paseador.tarifa.toString()
 
+
                 val format = SimpleDateFormat("dd/MM/yyyy HH:mm")
                 val fecha = format.parse(paseo.fecha)
                 val fechaHoy = Date()
+
+                if(paseo.calificacion==0){
+                    calificacion.text = "Sin calificar"
+                    btnCalificar.visibility = View.VISIBLE
+                }
+                else{
+                    calificacion.text = "${paseo.calificacion.toString()} ESTRELLAS"
+                    btnCalificar.visibility = View.GONE
+                }
+
                 if( ((fechaHoy.time - 10800000) - fecha.time).absoluteValue >= 300000 || userSession is User){
                     btnIniciarPaseo.visibility = View.GONE
                     btnCancelarPaseo.visibility = View.GONE
@@ -91,12 +106,17 @@ class PaseoProgramadoDetail : Fragment() {
                 }
                 btnIniciarPaseo.setOnClickListener {
                     comenzarPaseo(location, paseo)
-                    //val action = PaseoProgramadoDetailDirections.actionPaseoProgramadoDetailToHome()
-                    //findNavController().navigate(action)
+                    val action = PaseoProgramadoDetailDirections.actionPaseoProgramadoDetailToHome()
+                    findNavController().navigate(action)
                 }
 
                 btnCancelarPaseo.setOnClickListener {
                     showConfirmationDialog(paseo)
+                }
+
+                btnCalificar.setOnClickListener(){
+                    val action = PaseoProgramadoDetailDirections.actionPaseoProgramadoDetailToCalificarPaseo(paseo)
+                    findNavController().navigate(action)
                 }
 
 
