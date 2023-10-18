@@ -10,6 +10,7 @@ class User(): Parcelable, UserAbstract() {
     var location: Location = Location()
     var mascota: Pet = Pet()
     var paseosProgramados: MutableList<PaseoProgramado> = mutableListOf()
+    var direccion: String = ""
     constructor(name: String, lastName: String, password: String, dni: String, mail:String) : this() {
         this.name = name
         this.password = password

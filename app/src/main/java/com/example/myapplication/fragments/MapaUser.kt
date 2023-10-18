@@ -3,9 +3,7 @@ package com.example.myapplication.fragments
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
-import android.location.Location
 import android.os.Bundle
-import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -20,13 +18,9 @@ import com.example.myapplication.repository.PaseadorRepository
 import com.example.myapplication.repository.PaseoRepository
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
-import com.google.android.gms.location.LocationRequest
-import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
-import com.google.android.gms.location.Priority
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.database.FirebaseDatabase
 
 class MapaUser : Fragment() {
@@ -75,7 +69,7 @@ class MapaUser : Fragment() {
             )
         }
 
-        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+        val mapFragment = childFragmentManager.findFragmentById(R.id.fragmentSeleccionarUbicacion) as SupportMapFragment
         mapFragment.getMapAsync() { p0 ->
             gMap = p0
             gMap.isMyLocationEnabled = true
