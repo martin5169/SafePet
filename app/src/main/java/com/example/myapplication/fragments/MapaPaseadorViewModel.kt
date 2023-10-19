@@ -29,6 +29,7 @@ class MapaPaseadorViewModel : ViewModel() {
 
     val paseoRepository = PaseoRepository.getInstance()
     lateinit var locationCallback: LocationCallback
+    lateinit var finalizar: Button
     val database = FirebaseDatabase.getInstance()
     val marcadores: MutableList<Marker?> = mutableListOf()
 
@@ -47,7 +48,7 @@ class MapaPaseadorViewModel : ViewModel() {
         }
     }
 
-    fun getUsersLocation(gMap: GoogleMap, user: User, inflater: LayoutInflater) {
+    fun getUsersLocation(gMap: GoogleMap, user: User) {
         val locationRef = database.getReference("users")
         Log.d("USER", user.dni)
         locationRef.orderByChild("dni").equalTo(user.dni).addListenerForSingleValueEvent(object :
@@ -65,29 +66,8 @@ class MapaPaseadorViewModel : ViewModel() {
                         marcador.position =
                             LatLng(userLatitude as Double, userLongitude as Double)
                     } else {
-                        addMarcador(gMap, LatLng(userLatitude as Double, userLongitude as Double), user.dni)
+                        addMarcador(gMap, LatLng(userLatitude as Double, userLongitude as Double), snapshot.key!!)
                     }
-
-                    gMap.setInfoWindowAdapter(object : GoogleMap.InfoWindowAdapter {
-                        override fun getInfoContents(p0: Marker): View? {
-                            return null
-                        }
-
-                        override fun getInfoWindow(p0: Marker): View? {
-                            val view = inflater.inflate(R.layout.custom_info_window, null)
-                            view.findViewById<TextView>(R.id.nombreUsuario).text =
-                                snapshot.children.first().child("name").value as String
-                            val button = view.findViewById<Button>(R.id.finalizarButton)
-                            Log.d("CLICK", button.text.toString())
-                            button.setOnClickListener {
-                                Log.d("CLICK", "CLICK")
-                                paseoRepository.updateEstadoPaseo(snapshot.key!!, EstadoEnum.FINALIZADO)
-                            }
-
-                            return view
-                        }
-
-                    })
 
                 }
             }
@@ -105,12 +85,13 @@ class MapaPaseadorViewModel : ViewModel() {
         // Mover la cámara al nuevo marcador.
     }
 
-    fun addMarcador(gMap: GoogleMap, latLng: LatLng, dni: String) {
+    fun addMarcador(gMap: GoogleMap, latLng: LatLng, key: String) {
         val marker = gMap.addMarker(
             MarkerOptions()
                 .position(latLng)
-                .title(dni)
+                .title(key)
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.icons8person30))
+
         )
         marcadores.add(marker)
     }

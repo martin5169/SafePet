@@ -4,10 +4,12 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import com.example.myapplication.R
@@ -22,6 +24,7 @@ import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.Marker
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.FirebaseDatabase
 
@@ -71,29 +74,23 @@ class MapaPaseador : Fragment() {
         location = LocationServices.getFusedLocationProviderClient(requireContext())
         userSession = UserSession.user
 
-        val mapFragment = childFragmentManager.findFragmentById(R.id.map2) as SupportMapFragment
-        mapFragment.getMapAsync() { p0 ->
-            gMap = p0
-            gMap.isMyLocationEnabled = true
-        }
-
-
-        val inflater = LayoutInflater.from(requireContext())
         paseoRepository.getPaseosPaseador(userSession.dni) {
             if (it.isNullOrEmpty()) {
                 Snackbar.make(v, "No tiene un paseo asignado", Snackbar.LENGTH_SHORT).show()
             } else {
-                getUsersLocation(it, inflater)
+                getUsersLocation(it)
             }
         }
+
+
         //paseoRepository.addPaseo(Paseo(Paseador(), userSession as User))
     }
 
-    private fun getUsersLocation(paseos: List<PaseoProgramado>, inflater: LayoutInflater) {
+    private fun getUsersLocation(paseos: List<PaseoProgramado>) {
         paseos.forEach {
             if(it.estado == EstadoEnum.ACTIVO) {
                 Snackbar.make(v, "Tiene un paseo asignado", Snackbar.LENGTH_SHORT).show()
-                mapaViewModel.getUsersLocation(gMap, it.user, inflater);
+                mapaViewModel.getUsersLocation(gMap, it.user);
             }
         }
     }

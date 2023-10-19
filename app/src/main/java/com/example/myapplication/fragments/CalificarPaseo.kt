@@ -1,7 +1,6 @@
 package com.example.myapplication.fragments
 
 import android.app.AlertDialog
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,11 +12,8 @@ import android.widget.Spinner
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
-import com.example.myapplication.entities.EstadoEnum
-import com.example.myapplication.entities.PaseoProgramado
 import com.example.myapplication.entities.UserAbstract
 import com.example.myapplication.entities.UserSession
-import com.example.myapplication.repository.PaseoProgramadoRepository
 import com.example.myapplication.repository.PaseoRepository
 import com.google.android.material.snackbar.Snackbar
 
@@ -38,7 +34,7 @@ class CalificarPaseo : Fragment() {
         v =  inflater.inflate(R.layout.fragment_calificar_paseo, container, false)
         nombrePaseador = v.findViewById(R.id.nombrePaseador)
         btnConfirm = v.findViewById(R.id.btnConfirmCalificacion)
-        spinner = v.findViewById(R.id.calificaciones)
+        spinner = v.findViewById(R.id.filtro)
         adaptador = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, calificaciones)
         adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adaptador
@@ -53,8 +49,6 @@ class CalificarPaseo : Fragment() {
         val paseo =
             CalificarPaseoArgs.fromBundle(requireArguments()).paseoProgramadoACalificar
         nombrePaseador.text = "${paseo.paseador.lastName},${paseo.paseador.name}"
-
-
 
         btnConfirm.setOnClickListener {
             val selectedCalif = spinner.selectedItem
