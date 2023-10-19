@@ -11,7 +11,8 @@
         tools:layout="@layout/fragment_home_duenio" >
         <action
             android:id="@+id/action_home2_to_userList"
-            app:destination="@id/paseadoresList" />
+            app:destination="@id/paseadoresList"
+            app:popUpTo="@id/home" />
         <action
             android:id="@+id/action_home2_to_perfilPet"
             app:destination="@id/perfilPet" />
@@ -57,7 +58,8 @@
         <action
             android:id="@+id/action_paseadorDetail_to_calendarioPaseador"
             app:destination="@id/calendarioPaseador"
-            app:popUpTo="@id/paseadoresList" />
+            app:popUpTo="@id/paseadoresList"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/perfilUser"
@@ -80,7 +82,8 @@
         tools:layout="@layout/fragment_calendario_paseador" >
         <action
             android:id="@+id/action_calendarioPaseador_to_paseadoresList"
-            app:destination="@id/paseadoresList" />
+            app:destination="@id/paseadoresList"
+            app:popUpTo="@id/paseadoresList" />
         <argument
             android:name="Paseador"
             app:argType="com.example.myapplication.entities.Paseador" />

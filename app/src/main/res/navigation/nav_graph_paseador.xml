@@ -15,16 +15,19 @@
             app:destination="@id/cuentaPaseador" />
         <action
             android:id="@+id/action_homePaseador_to_mapaPaseador"
-            app:destination="@id/mapaPaseador" />
+            app:destination="@id/mapaPaseador"
+            app:popUpTo="@id/homePaseador" />
         <action
             android:id="@+id/action_homePaseador_to_mediosDeCobroPaseador"
             app:destination="@id/mediosDeCobroPaseador" />
         <action
             android:id="@+id/action_homePaseador_to_perfilPaseador2"
-            app:destination="@id/perfilPaseador2" />
+            app:destination="@id/perfilPaseador2"
+            app:popUpTo="@id/homePaseador" />
         <action
             android:id="@+id/action_homePaseador_to_paseadorHistorial"
-            app:destination="@id/paseadorHistorial" />
+            app:destination="@id/paseadorHistorial"
+            app:popUpTo="@id/homePaseador" />
     </fragment>
     <fragment
         android:id="@+id/cuentaPaseador"
