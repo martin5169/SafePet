@@ -113,8 +113,9 @@ class PaseoProgramadoDetail : Fragment() {
         }
         btnIniciarPaseo.setOnClickListener {
             comenzarPaseo(location, paseo)
-            val action = PaseoProgramadoDetailDirections.actionPaseoProgramadoDetailToHome()
-            findNavController().navigate(action)
+            //val action = PaseoProgramadoDetailDirections.actionPaseoProgramadoDetailToHome()
+            //findNavController().navigate(action)
+            Snackbar.make(v, "Paseo iniciado exitosamente", Snackbar.LENGTH_SHORT)
         }
 
         btnCancelarPaseo.setOnClickListener {

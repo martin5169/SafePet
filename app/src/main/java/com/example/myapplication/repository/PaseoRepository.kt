@@ -55,7 +55,7 @@ class PaseoRepository {
     fun updateLocationPaseador(paseadorDni: String, latitude: Double, longitude: Double) {
         val usersQuery = paseosReference.orderByChild("paseador/dni").equalTo(paseadorDni)
 
-        usersQuery.addValueEventListener(object : ValueEventListener {
+        usersQuery.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     for (userSnapshot in snapshot.children) {

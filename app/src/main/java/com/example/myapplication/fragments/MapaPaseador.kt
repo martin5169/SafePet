@@ -74,6 +74,12 @@ class MapaPaseador : Fragment() {
         location = LocationServices.getFusedLocationProviderClient(requireContext())
         userSession = UserSession.user
 
+        val mapFragment = childFragmentManager.findFragmentById(R.id.map2) as SupportMapFragment
+        mapFragment.getMapAsync() { p0 ->
+            gMap = p0
+            gMap.isMyLocationEnabled = true
+        }
+
         paseoRepository.getPaseosPaseador(userSession.dni) {
             if (it.isNullOrEmpty()) {
                 Snackbar.make(v, "No tiene un paseo asignado", Snackbar.LENGTH_SHORT).show()

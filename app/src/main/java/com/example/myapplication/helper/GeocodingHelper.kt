@@ -3,6 +3,7 @@ package com.example.myapplication.helper
 import android.content.Context
 import android.location.Address
 import android.location.Geocoder
+import android.util.Log
 import com.google.android.gms.maps.model.LatLng
 import java.util.Locale
 
@@ -21,7 +22,8 @@ class GeocodingHelper(private val context: Context) {
 
             if (addresses!!.isNotEmpty()) {
                 val address: Address = addresses[0]
-                addressText = address.getAddressLine(0)
+                addressText = "${address.thoroughfare} ${address.featureName}"
+                Log.d("DIRECCION", address.toString())
             }
 
         } catch (e: Exception) {

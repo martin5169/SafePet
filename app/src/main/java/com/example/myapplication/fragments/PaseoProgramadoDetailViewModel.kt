@@ -2,6 +2,7 @@ package com.example.myapplication.fragments
 
 import android.annotation.SuppressLint
 import android.os.Looper
+import android.util.Log
 
 import androidx.lifecycle.ViewModel
 import com.example.myapplication.entities.EstadoEnum
@@ -39,6 +40,7 @@ class PaseoProgramadoDetailViewModel : ViewModel() {
             override fun onLocationResult(locationResult: LocationResult) {
                 super.onLocationResult(locationResult)
                 locationResult.lastLocation?.let { location ->
+                    Log.d("LOCATION", "${location.latitude.toString()} ${location.longitude.toString()}")
                     paseoRepository.updateLocationPaseador(dniPaseador, location.latitude, location.longitude)
                     paseadorRepository.updateLocationPaseador(dniPaseador, location.latitude, location.longitude)
                 }

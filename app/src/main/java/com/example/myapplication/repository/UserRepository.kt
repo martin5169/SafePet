@@ -1,5 +1,6 @@
 package com.example.myapplication.repository
 
+import com.example.myapplication.entities.Location
 import com.example.myapplication.entities.PaseoProgramado
 import com.example.myapplication.entities.User
 import com.google.firebase.database.*
@@ -92,6 +93,21 @@ class UserRepository() {
   }
   // Agregar un paseo pogramado al usuario
 
-
+  fun updateDireccionUser(userDni: String, direccion: String, location: android.location.Location) {
+    val usersQuery = usersReference.orderByChild("dni").equalTo(userDni)
+    usersQuery.addListenerForSingleValueEvent(object : ValueEventListener {
+      override fun onDataChange(snapshot: DataSnapshot) {
+        if (snapshot.exists()) {
+          for (userSnapshot in snapshot.children) {
+            userSnapshot.ref.child("direccion").setValue(direccion)
+            userSnapshot.ref.child("location").child("latitude").setValue(location.latitude)
+            userSnapshot.ref.child("location").child("longitude").setValue(location.longitude)
+          }
+        }
+      }
+      override fun onCancelled(error: DatabaseError) {
+      }
+    })
+  }
 }
 
