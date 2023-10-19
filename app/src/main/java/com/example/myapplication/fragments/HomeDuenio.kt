@@ -9,7 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ProgressBar
+import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
@@ -28,10 +31,13 @@ class HomeDuenio : Fragment() {
 
     lateinit var v: View
     lateinit var text: TextView
+    lateinit var textDireccion: TextView
     lateinit var btnPedidos: Button
     lateinit var btnPerfilPet: Button
     lateinit var btnHistorial: Button
     lateinit var fusedLocationClient: FusedLocationProviderClient
+    lateinit var progressBar: ProgressBar
+    lateinit var mainLayout: ConstraintLayout
     val userRepository = UserRepository.getInstance()
 
     override fun onCreateView(
@@ -44,8 +50,9 @@ class HomeDuenio : Fragment() {
         text = v.findViewById(R.id.welcomeTextDuenio)
         btnHistorial = v.findViewById(R.id.btnHistorial)
         btnPerfilPet = v.findViewById(R.id.btnPerfilPet)
-
-
+        textDireccion = v.findViewById(R.id.direccionText)
+        progressBar = v.findViewById(R.id.progressBar)
+        mainLayout = v.findViewById(R.id.frameLayout2)
         return v
     }
 
@@ -53,26 +60,34 @@ class HomeDuenio : Fragment() {
     override fun onStart() {
         super.onStart()
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
-
+        progressBar.visibility = View.GONE
         val user = UserSession.user as User
-        text.textAlignment = TextView.TEXT_ALIGNMENT_CENTER
-        text.text= if(user.direccion.isNullOrEmpty()) {
+        text.text = "Bienvenido, ${user.name}"
+        textDireccion.text = if (user.direccion.isNullOrEmpty()) {
             "Seleccionar Ubicacion"
-        } else{
+        } else {
             "${user.direccion}"
         }
-
-        text.setOnClickListener {
-            if(user.direccion.isNullOrEmpty()) {
-                fusedLocationClient.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, null).addOnSuccessListener {
-                    if(it != null) {
-                        val direccion = GeocodingHelper(requireContext()).getAddressFromLatLng(LatLng(it.latitude, it.longitude))
+        textDireccion.setOnClickListener {
+            progressBar.visibility = View.VISIBLE
+            mainLayout.alpha = 0.7f
+            mainLayout.isEnabled = false
+            fusedLocationClient.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, null)
+                .addOnSuccessListener {
+                    if (it != null) {
+                        val direccion = GeocodingHelper(requireContext()).getAddressFromLatLng(
+                            LatLng(
+                                it.latitude,
+                                it.longitude
+                            )
+                        )
                         showPopUp(user, direccion, it)
                     }
                 }
-            }
         }
-
+        if(user.direccion.isNullOrEmpty()) {
+            textDireccion.performClick()
+        }
         btnPedidos.setOnClickListener {
             val action = HomeDuenioDirections.actionHome2ToUserList()
             findNavController().navigate(action)
@@ -100,9 +115,13 @@ class HomeDuenio : Fragment() {
         builder.setPositiveButton("Confirmar") { dialog, _ ->
             (UserSession.user as User).direccion = input.text.toString()
             userRepository.updateDireccionUser(user.dni, input.text.toString(), location)
+            textDireccion.text = input.text.toString()
             dialog.dismiss()
         }
         val dialog = builder.create()
+        progressBar.visibility = View.GONE
+        mainLayout.isEnabled = true
+        mainLayout.alpha = 1f
         dialog.show()
     }
 }

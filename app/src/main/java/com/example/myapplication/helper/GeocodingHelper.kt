@@ -23,7 +23,6 @@ class GeocodingHelper(private val context: Context) {
             if (addresses!!.isNotEmpty()) {
                 val address: Address = addresses[0]
                 addressText = "${address.thoroughfare} ${address.featureName}"
-                Log.d("DIRECCION", address.toString())
             }
 
         } catch (e: Exception) {
