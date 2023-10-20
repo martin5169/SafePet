@@ -3,6 +3,7 @@ package com.example.myapplication.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
@@ -25,9 +26,34 @@ class PaseadorAdapter(var paseadores : MutableList<Paseador>,
             textLastName.text = lastName
         }
         fun setUserName (name : String){
-            val textName : TextView = view.findViewById(R.id.txtMascotaName)
+            val textName : TextView = view.findViewById(R.id.txtPaseadorName)
             textName.text = name
         }
+
+        fun setPromedio(promedio: Int) {
+            val stars: Array<ImageView> = arrayOf(
+                view.findViewById(R.id.star1),
+                view.findViewById(R.id.star2),
+                view.findViewById(R.id.star3),
+                view.findViewById(R.id.star4),
+                view.findViewById(R.id.star5)
+            )
+
+            // Ocultar todas las estrellas
+            for (star in stars) {
+                star.visibility = View.INVISIBLE
+            }
+
+            if (promedio > 0) {
+                // Mostrar solo la cantidad de estrellas correspondientes al promedio
+                for (i in 0 until promedio) {
+                    stars[i].visibility = View.VISIBLE
+                }
+            }
+        }
+
+
+
 
         fun getCard() : CardView {
             return view.findViewById(R.id.cardPaseoProgramado)
@@ -46,6 +72,7 @@ class PaseadorAdapter(var paseadores : MutableList<Paseador>,
     override fun onBindViewHolder(holder: UserHolder, position: Int) {
         holder.setUserLastName(paseadores[position].lastName)
         holder.setUserName(paseadores[position].name)
+        holder.setPromedio(paseadores[position].promedioPuntuaciones)
 
         holder.getCard().setOnClickListener{
             onClick(position)

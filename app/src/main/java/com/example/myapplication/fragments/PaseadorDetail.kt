@@ -12,7 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
 import com.google.android.material.snackbar.Snackbar
 
-class PaseadorDetail : Fragment() {
+class PaseadorDetail : Fragment(){
 
     lateinit var v : View
     lateinit var paseadorLastname : TextView
@@ -20,6 +20,7 @@ class PaseadorDetail : Fragment() {
     lateinit var paseadorDni : TextView
     lateinit var paseadorMail : TextView
     lateinit var paseadorTarifa : TextView
+    lateinit var promedioCal : TextView
     lateinit var btnSolicitarPaseo : Button
 
 
@@ -31,6 +32,7 @@ class PaseadorDetail : Fragment() {
         paseadorLastname = v.findViewById(R.id.paseadorLastName)
         paseadorName = v.findViewById(R.id.paseadorName)
         paseadorDni = v.findViewById(R.id.paseadorDni)
+        promedioCal = v.findViewById(R.id.promedioCal)
         paseadorMail = v.findViewById(R.id.paseadorMail)
         paseadorTarifa = v.findViewById(R.id.paseadorTarifa)
         btnSolicitarPaseo = v.findViewById(R.id.btnSolicitarPaseo)
@@ -49,6 +51,14 @@ class PaseadorDetail : Fragment() {
         } else {
             "$0"
         }
+
+        promedioCal.text =  if (paseador.promedioPuntuaciones == 0) {
+            "Aun no se puede calcular"
+        } else {
+            paseador.promedioPuntuaciones.toString()
+        }
+
+
 
         btnSolicitarPaseo.setOnClickListener{
             val action = PaseadorDetailDirections.actionPaseadorDetailToCalendarioPaseador(paseador)

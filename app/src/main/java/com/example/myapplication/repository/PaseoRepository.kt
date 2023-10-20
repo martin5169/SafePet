@@ -2,6 +2,7 @@ package com.example.myapplication.repository
 
 import android.util.Log
 import com.example.myapplication.entities.EstadoEnum
+import com.example.myapplication.entities.Paseador
 import com.example.myapplication.entities.PaseoProgramado
 import com.google.android.gms.tasks.Task
 import com.google.firebase.database.DataSnapshot
@@ -86,7 +87,7 @@ class PaseoRepository {
             }
         })
     }
-    fun updateCalificacion(id: String, calificacion: Int) {
+    fun updateCalificacionPaseo(id: String, calificacion: Int) {
         val usersQuery = paseosReference.child(id)
         usersQuery.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {

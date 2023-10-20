@@ -111,5 +111,36 @@ class PaseadorRepository() {
     })
   }
 
+  fun calificar(userDni: String, calificacion: Int) {
+    val usersQuery = paseadoresReference.orderByChild("dni").equalTo(userDni)
+
+    usersQuery.addListenerForSingleValueEvent(object : ValueEventListener {
+      override fun onDataChange(snapshot: DataSnapshot) {
+        if (snapshot.exists()) {
+          for (userSnapshot in snapshot.children) {
+            val paseador = userSnapshot.getValue(Paseador::class.java)
+
+            paseador?.let {
+              val promedioActual = it.promedioPuntuaciones
+              if(promedioActual>0){
+              val nuevaCalificacion = (promedioActual + calificacion) / 2 // Calcula el nuevo promedio
+              userSnapshot.ref.child("promedioPuntuaciones").setValue(nuevaCalificacion)
+              }
+              else{
+                // Calcula el nuevo promedio
+                userSnapshot.ref.child("promedioPuntuaciones").setValue(calificacion)
+              }
+            }
+          }
+        }
+      }
+
+      override fun onCancelled(error: DatabaseError) {
+        // Manejar errores si es necesario
+      }
+    })
+  }
+
+
 }
 

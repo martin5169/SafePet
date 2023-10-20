@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
+import com.example.myapplication.fragments.CalificarPaseo
+import com.example.myapplication.fragments.PaseadorDetail
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivityDuenio : AppCompatActivity() {
@@ -19,6 +21,8 @@ class MainActivityDuenio : AppCompatActivity() {
         NavigationUI.setupWithNavController(bottomNavView,navHostFragment.navController)
 
     }
+
+
 
 
 }
