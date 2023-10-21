@@ -161,7 +161,7 @@ class RegisterForm : Fragment() {
                                     Log.w("REGISTER", "createUserWithEmail:failure", task.exception)
                                     Toast.makeText(
                                         requireContext(),
-                                        "Authentication failed.",
+                                        "Error al crear el usuario.",
                                         Toast.LENGTH_SHORT,
                                     ).show()
                                 }
