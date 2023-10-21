@@ -50,7 +50,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.724" />
+        app:layout_constraintVertical_bias="0.746" />
 
     <TextView
         android:id="@+id/selectedDate"
@@ -62,7 +62,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.808" />
+        app:layout_constraintVertical_bias="0.822" />
 
     <Spinner
         android:id="@+id/listaHorarios"
@@ -74,5 +74,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.595" />
+
+    <Switch
+        android:id="@+id/switchPaseoExclusivo"
+        android:layout_width="218dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="7dp"
+        android:text="Paseo Exclusivo"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calendarPaseador" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

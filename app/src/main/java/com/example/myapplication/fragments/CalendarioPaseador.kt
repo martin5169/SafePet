@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.CalendarView
 import android.widget.Spinner
+import android.widget.Switch
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
@@ -32,6 +33,7 @@ class CalendarioPaseador : Fragment() {
     lateinit var selectedDate: TextView
     lateinit var btnConfirm : Button
     lateinit var spinner : Spinner
+    lateinit var switchExclusivo: Switch
     lateinit var adaptador: ArrayAdapter<String>
     val programadoRepository = PaseoProgramadoRepository.getInstance()
     val horarios = mutableListOf("10:00hs", "11:00hs", "12:00hs")
@@ -45,6 +47,7 @@ class CalendarioPaseador : Fragment() {
         calendar = v.findViewById(calendarPaseador)
         selectedDate = v.findViewById(R.id.selectedDate)
         btnConfirm = v.findViewById(R.id.btnConfirm)
+        switchExclusivo = v.findViewById(R.id.switchPaseoExclusivo)
 
         spinner = v.findViewById(R.id.listaHorarios)
         adaptador = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, horarios)
@@ -72,25 +75,46 @@ class CalendarioPaseador : Fragment() {
                 "$dayOfMonth/${month + 1}/$year" // Suma 1 al mes ya que los meses comienzan en 0
             selectedDate.text = "$selectedDateCalendar"
 
-            programadoRepository.getPaseos { paseos ->
-                val fechasBuscadas = paseos.filter { it.fecha.substring(0, it.fecha.length - 7).trim() == selectedDateCalendar}
-                val fechas = fechasBuscadas.map { it.fecha.substring(it.fecha.length - 7) }
-                val fechasAgrupadas = fechas.groupingBy { it }.eachCount()
-                val fechasRepetidas5Veces = fechasAgrupadas.filter { it.value == 5 }.keys.toList()
-                if (fechasRepetidas5Veces.isNotEmpty()) {
-                    val fechasFiltradas = horarios.filter { it !in fechasRepetidas5Veces }
-                    val adaptadorActual = spinner.adapter as ArrayAdapter<String>
-                    adaptadorActual.clear()
-                    adaptadorActual.addAll(fechasFiltradas)
-                    adaptadorActual.notifyDataSetChanged()
-                } else {
-                    Log.d("ASD", "isEmpty")
-                    val adaptadorActual = spinner.adapter as ArrayAdapter<String>
-                    adaptadorActual.clear()
-                    adaptadorActual.addAll(originalHorarios)
-                    adaptadorActual.notifyDataSetChanged()
+            if (!switchExclusivo.isChecked){
+                programadoRepository.getPaseos { paseos ->
+                    val fechasBuscadas = paseos.filter { it.fecha.substring(0, it.fecha.length - 7).trim() == selectedDateCalendar}
+                    val fechas = fechasBuscadas.map { it.fecha.substring(it.fecha.length - 7) }
+                    val fechasAgrupadas = fechas.groupingBy { it }.eachCount()
+                    val fechasRepetidas5Veces = fechasAgrupadas.filter { it.value == 5 }.keys.toList()
+                    if (fechasRepetidas5Veces.isNotEmpty()) {
+                        val fechasFiltradas = horarios.filter { it !in fechasRepetidas5Veces }
+                        val adaptadorActual = spinner.adapter as ArrayAdapter<String>
+                        adaptadorActual.clear()
+                        adaptadorActual.addAll(fechasFiltradas)
+                        adaptadorActual.notifyDataSetChanged()
+                    } else {
+                        Log.d("ASD", "isEmpty")
+                        val adaptadorActual = spinner.adapter as ArrayAdapter<String>
+                        adaptadorActual.clear()
+                        adaptadorActual.addAll(originalHorarios)
+                        adaptadorActual.notifyDataSetChanged()
+                    }
+                }
+            }else {
+                programadoRepository.getPaseos { paseos ->
+                    val filtrados = paseos.filter {
+                        it.fecha.substring(0, 10).trim() == "$dayOfMonth/${(month + 1)}/${year}"
+                    }
+                    if (filtrados.isNotEmpty()) {
+                        val horariosAEliminar = filtrados.map { it.fecha.substring(it.fecha.length - 7)}
+                        val horariosFiltrados = horarios.filter { hora ->
+                            !horariosAEliminar.any { horaEliminar ->
+                                hora.equals(horaEliminar)
+                            }
+                        }
+                        val adaptadorActual = spinner.adapter as ArrayAdapter<String>
+                        adaptadorActual.clear()
+                        adaptadorActual.addAll(horariosFiltrados)
+                        adaptadorActual.notifyDataSetChanged()
+                    }
                 }
             }
+
 
         }
 
