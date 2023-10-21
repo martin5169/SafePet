@@ -1,12 +1,14 @@
 package com.example.myapplication.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
 import com.google.android.material.snackbar.Snackbar
@@ -14,6 +16,9 @@ import com.example.myapplication.entities.Paseador
 import com.example.myapplication.repository.PaseadorRepository
 import com.example.myapplication.entities.User
 import com.example.myapplication.repository.UserRepository
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class RegisterForm : Fragment() {
 
@@ -26,6 +31,7 @@ class RegisterForm : Fragment() {
     lateinit var pass: EditText
     lateinit var paseadoresRepository: PaseadorRepository
     lateinit var usersRepository: UserRepository
+    lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,6 +45,7 @@ class RegisterForm : Fragment() {
         dni = v.findViewById(R.id.dni)
         mail = v.findViewById(R.id.dniUser)
         pass = v.findViewById(R.id.pass)
+        auth = Firebase.auth
 
         paseadoresRepository = PaseadorRepository.getInstance()
         usersRepository = UserRepository.getInstance()
@@ -81,10 +88,31 @@ class RegisterForm : Fragment() {
                             enteredMail
                         )
                         paseadoresRepository.addUser(newPaseador)
-                        Snackbar.make(v, "Paseador registrado con éxito", Snackbar.LENGTH_SHORT)
-                            .show()
-                        val action = RegisterFormDirections.actionRegisterForm2ToLogin22()
-                        findNavController().navigate(action)
+                        auth.createUserWithEmailAndPassword(enteredMail, enteredPass)
+                            .addOnCompleteListener(requireActivity()) { task ->
+                                if (task.isSuccessful) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    Log.d("REGISTER", "createUserWithEmail:success")
+                                    val user = auth.currentUser
+                                    Snackbar.make(
+                                        v,
+                                        "Paseador registrado con éxito",
+                                        Snackbar.LENGTH_SHORT
+                                    )
+                                        .show()
+                                    val action =
+                                        RegisterFormDirections.actionRegisterForm2ToLogin22()
+                                    findNavController().navigate(action)
+                                } else {
+                                    // If sign in fails, display a message to the user.
+                                    Log.w("REGISTER", "createUserWithEmail:failure", task.exception)
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "Authentication failed.",
+                                        Toast.LENGTH_SHORT,
+                                    ).show()
+                                }
+                            }
                     }
                 }
             } else {
@@ -104,13 +132,41 @@ class RegisterForm : Fragment() {
                             Snackbar.LENGTH_SHORT
                         ).show()
                     } else {
-                        val newUser =
-                            User(enteredName, enteredLastName, enteredPass, enteredDni, enteredMail)
-                        usersRepository.addUser(newUser)
-                        Snackbar.make(v, "Usuario registrado con éxito", Snackbar.LENGTH_SHORT)
-                            .show()
-                        val action = RegisterFormDirections.actionRegisterForm2ToLogin22()
-                        findNavController().navigate(action)
+
+                        auth.createUserWithEmailAndPassword(enteredMail, enteredPass)
+                            .addOnCompleteListener(requireActivity()) { task ->
+                                if (task.isSuccessful) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    Log.d("REGISTER", "createUserWithEmail:success")
+                                    val newUser =
+                                        User(
+                                            enteredName,
+                                            enteredLastName,
+                                            enteredPass,
+                                            enteredDni,
+                                            enteredMail
+                                        )
+                                    usersRepository.addUser(newUser)
+                                    Snackbar.make(
+                                        v,
+                                        "Usuario registrado con éxito",
+                                        Snackbar.LENGTH_SHORT
+                                    )
+                                        .show()
+                                    val action =
+                                        RegisterFormDirections.actionRegisterForm2ToLogin22()
+                                    findNavController().navigate(action)
+                                } else {
+                                    // If sign in fails, display a message to the user.
+                                    Log.w("REGISTER", "createUserWithEmail:failure", task.exception)
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "Authentication failed.",
+                                        Toast.LENGTH_SHORT,
+                                    ).show()
+                                }
+                            }
+
                     }
                 }
             }

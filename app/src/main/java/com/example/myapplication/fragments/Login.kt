@@ -1,11 +1,13 @@
 package com.example.myapplication.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
@@ -13,6 +15,9 @@ import com.example.myapplication.entities.UserSession
 import com.example.myapplication.repository.PaseadorRepository
 import com.google.android.material.snackbar.Snackbar
 import com.example.myapplication.repository.UserRepository
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class Login : Fragment() {
 
@@ -21,6 +26,7 @@ class Login : Fragment() {
     lateinit var btnRegister: Button
     lateinit var name: EditText
     lateinit var pass: EditText
+    lateinit var auth: FirebaseAuth
     val userRepository = UserRepository.getInstance()
     val paseadorRepository = PaseadorRepository.getInstance()
 
@@ -34,6 +40,7 @@ class Login : Fragment() {
         btnRegister = v.findViewById(R.id.btnNavigate)
         name = v.findViewById(R.id.name)
         pass = v.findViewById(R.id.userPassword)
+        auth = Firebase.auth
 
         return v
     }
@@ -46,41 +53,49 @@ class Login : Fragment() {
                 val enteredMail = name.text.toString()
                 val enteredPass = pass.text.toString()
 
-                userRepository.getUsers { userList ->
-                    val user = userList.find { it.mail == enteredMail }
-                    if (user != null) {
-                        if (user.password == enteredPass) {
-                            UserSession.user = user
-                            val action = LoginDirections.actionLogin2ToMainActivity()
-                            findNavController().navigate(action)
-                        }
-                    }
-                }
+                auth.signInWithEmailAndPassword(enteredMail, enteredPass)
+                    .addOnCompleteListener(requireActivity()) { task ->
+                        if (task.isSuccessful) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d("LOGIN", "signInWithEmail:success")
+                            val userAuth = auth.currentUser
+                            userRepository.getUsers { userList ->
+                                val user = userList.find { it.mail == enteredMail }
+                                if (user != null) {
+                                    UserSession.user = user
+                                    val action = LoginDirections.actionLogin2ToMainActivity()
+                                    findNavController().navigate(action)
+                                }
+                            }
 
-                paseadorRepository.getPaseadores { paseadoresList ->
-                    val paseador = paseadoresList.find { it.mail == enteredMail }
-                    if (paseador != null) {
-                        if (paseador.password == enteredPass) {
-                            UserSession.user = paseador
-                            val action = LoginDirections.actionLogin2ToMainActivityPaseador()
-                            findNavController().navigate(action)
+                            paseadorRepository.getPaseadores { paseadoresList ->
+                                val paseador = paseadoresList.find { it.mail == enteredMail }
+                                if (paseador != null) {
+                                    UserSession.user = paseador
+                                    val action =
+                                        LoginDirections.actionLogin2ToMainActivityPaseador()
+                                    findNavController().navigate(action)
+                                }
+                            }
                         } else {
-                            Snackbar.make(v, "Contraseña incorrecta", Snackbar.LENGTH_SHORT).show()
+                            // If sign in fails, display a message to the user.
+                            Log.w("LOGIN", "signInWithEmail:failure", task.exception)
+                            Toast.makeText(
+                                requireContext(),
+                                "Error de autenticacion.",
+                                Toast.LENGTH_SHORT,
+                            ).show()
                         }
-                    } else {
-                        Snackbar.make(v, "Usuario no encontrado", Snackbar.LENGTH_SHORT).show()
                     }
-                }
             } catch (e: Exception) {
                 e.printStackTrace()
                 Snackbar.make(v, "Ocurrió un error al iniciar sesión", Snackbar.LENGTH_SHORT).show()
             }
-        }
 
-
-        btnRegister.setOnClickListener {
-            val action = LoginDirections.actionLogin2ToRegisterOptions2()
-            findNavController().navigate(action)
+            btnRegister.setOnClickListener {
+                val action = LoginDirections.actionLogin2ToRegisterOptions2()
+                findNavController().navigate(action)
+            }
         }
     }
 }

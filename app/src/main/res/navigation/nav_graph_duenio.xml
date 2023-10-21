@@ -25,9 +25,6 @@
         <action
             android:id="@+id/action_home_to_userHistorial"
             app:destination="@id/userHistorial" />
-        <action
-            android:id="@+id/action_home_to_seleccionarUbicacion"
-            app:destination="@id/seleccionarUbicacion" />
     </fragment>
     <fragment
         android:id="@+id/paseadoresList"
@@ -124,8 +121,4 @@
             android:id="@+id/action_calificarPaseo_to_userHistorial"
             app:destination="@id/userHistorial" />
     </fragment>
-    <fragment
-        android:id="@+id/seleccionarUbicacion"
-        android:name="com.example.myapplication.fragments.SeleccionarUbicacion"
-        android:label="SeleccionarUbicacion" />
 </navigation>
