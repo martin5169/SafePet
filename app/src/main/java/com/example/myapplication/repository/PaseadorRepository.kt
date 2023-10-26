@@ -141,6 +141,23 @@ class PaseadorRepository() {
     })
   }
 
+    fun updateEstaPaseando(userDni: String, b: Boolean) {
+      val usersQuery = paseadoresReference.orderByChild("dni").equalTo(userDni)
+      usersQuery.addListenerForSingleValueEvent(object : ValueEventListener {
+        override fun onDataChange(snapshot: DataSnapshot) {
+          if (snapshot.exists()) {
+            for (userSnapshot in snapshot.children) {
+              userSnapshot.ref.child("estaPaseando").setValue(b)
+            }
+          }
+        }
+
+        override fun onCancelled(error: DatabaseError) {
+
+        }
+      })
+    }
+
 
 }
 

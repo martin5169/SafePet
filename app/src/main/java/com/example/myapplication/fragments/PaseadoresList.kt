@@ -66,7 +66,7 @@ class PaseadoresList : Fragment() {
 
 
             paseadoresRepository.getPaseadores { paseadoresList ->
-                paseadoresOriginales = paseadoresList
+                paseadoresOriginales = paseadoresList.sortedBy { -it.promedioPuntuaciones }
                 adapter = PaseadorAdapter(paseadoresOriginales.toMutableList()) { position ->
                     val action = PaseadoresListDirections.actionPaseadoresListToPaseadorDetail(paseadoresOriginales[position])
                     findNavController().navigate(action)

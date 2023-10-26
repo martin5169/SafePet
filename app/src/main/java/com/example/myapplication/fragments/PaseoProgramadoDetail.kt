@@ -80,10 +80,9 @@ class PaseoProgramadoDetail : Fragment() {
         val format = SimpleDateFormat("dd/MM/yyyy HH:mm")
         val fecha = format.parse(paseo.fecha)
         val fechaHoy = Date()
-
+        btnCalificar.visibility = View.GONE
         if (paseo.calificacion == 0) {
             calificacion.text = "Sin calificar"
-            btnCalificar.visibility = View.VISIBLE
         } else {
             calificacion.text = "${paseo.calificacion.toString()} ESTRELLAS"
             btnCalificar.visibility = View.GONE
@@ -92,29 +91,32 @@ class PaseoProgramadoDetail : Fragment() {
         if (userSession is User) {
             btnCancelarPaseo.visibility = View.VISIBLE
         }
-        if (userSession is Paseador) {
-            btnCalificar.visibility = View.GONE
-        }
+
         if (paseo.estado == EstadoEnum.ACTIVO) {
             btnIniciarPaseo.text = "El paseo ya inicio"
             btnIniciarPaseo.isEnabled = false
-            btnCancelarPaseo.visibility = View.VISIBLE
+            btnCancelarPaseo.visibility = View.GONE
             btnCancelarPaseo.text = "Finalizar paseo"
 
         } else if (paseo.estado == EstadoEnum.FINALIZADO) {
             btnIniciarPaseo.text = "El paseo ya finalizo"
             btnIniciarPaseo.isEnabled = false
             btnCancelarPaseo.visibility = View.GONE
+            btnCalificar.visibility = if(paseo.calificacion == 0) {
+                View.VISIBLE
+            }else {
+                View.GONE
+            }
         }
 
-        if (((fechaHoy.time - 10800000) - fecha.time).absoluteValue >= 300000 || userSession is User) {
+        if (((fechaHoy.time - 10800000) - fecha.time).absoluteValue >= 300000) {
+            Log.d("FECHA", "FECHA")
             btnIniciarPaseo.visibility = View.GONE
-            btnCancelarPaseo.visibility = View.GONE
         }
         btnIniciarPaseo.setOnClickListener {
             comenzarPaseo(location, paseo)
-            //val action = PaseoProgramadoDetailDirections.actionPaseoProgramadoDetailToHome()
-            //findNavController().navigate(action)
+            val action = PaseoProgramadoDetailDirections.actionPaseoProgramadoDetailToHome()
+            findNavController().navigate(action)
             Snackbar.make(v, "Paseo iniciado exitosamente", Snackbar.LENGTH_SHORT).show()
         }
 

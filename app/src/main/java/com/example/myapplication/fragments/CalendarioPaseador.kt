@@ -139,6 +139,11 @@ class CalendarioPaseador : Fragment() {
         builder.setMessage("¿Confirma la fecha y hora seleccionadas?")
         builder.setPositiveButton("Sí") { _, _ ->
             // USUARIO CONFIRMA, HACER VALIDACIÓN DE FECHA DISPONIBLE
+            paseador.tarifa = if(switchExclusivo.isChecked) {
+                paseador.tarifa * 5
+            }else {
+                paseador.tarifa
+            }
             val paseoProgramado = PaseoProgramado(paseador, user, dateTimeString, EstadoEnum.NO_ACTIVO,0)
             paseoProgramadoRepository.addPaseo(paseoProgramado)
             Snackbar.make(v, "Fecha y hora asignadas con éxito", Snackbar.LENGTH_SHORT).show()

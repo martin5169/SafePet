@@ -29,22 +29,6 @@
         app:layout_constraintVertical_bias="0.765"
         app:rippleColor="#009688" />
 
-    <Button
-        android:id="@+id/btnNavigate"
-        android:layout_width="155dp"
-        android:layout_height="63dp"
-        android:backgroundTint="#009688"
-        android:text="Registrate"
-        android:textColorHighlight="#009688"
-        android:textColorLink="#009688"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.887"
-        app:rippleColor="#009688" />
-
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/userPassword"
         android:layout_width="303dp"
@@ -96,5 +80,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.32" />
+
+    <Button
+        android:id="@+id/btnRegistrar"
+        android:layout_width="155dp"
+        android:layout_height="63dp"
+        android:backgroundTint="#009688"
+        android:text="Registrarte"
+        android:textColorHighlight="#009688"
+        android:textColorLink="#009688"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.914"
+        app:rippleColor="#009688" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

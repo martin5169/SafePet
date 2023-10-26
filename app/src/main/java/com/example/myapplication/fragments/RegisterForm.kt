@@ -88,12 +88,14 @@ class RegisterForm : Fragment() {
                             enteredMail
                         )
                         paseadoresRepository.addUser(newPaseador)
+
                         auth.createUserWithEmailAndPassword(enteredMail, enteredPass)
                             .addOnCompleteListener(requireActivity()) { task ->
                                 if (task.isSuccessful) {
                                     // Sign in success, update UI with the signed-in user's information
                                     Log.d("REGISTER", "createUserWithEmail:success")
                                     val user = auth.currentUser
+                                    user?.sendEmailVerification()
                                     Snackbar.make(
                                         v,
                                         "Paseador registrado con éxito",

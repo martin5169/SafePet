@@ -13,6 +13,7 @@ import com.example.myapplication.R
 import com.example.myapplication.adapters.PaseosProgramadosAdapter
 import com.example.myapplication.entities.UserSession
 import com.example.myapplication.repository.PaseoProgramadoRepository
+import java.text.SimpleDateFormat
 
 class UserHistorial : Fragment() {
 
@@ -38,11 +39,12 @@ class UserHistorial : Fragment() {
     override fun onStart() {
         super.onStart()
         val userDNI = UserSession.user.dni
+        val format = SimpleDateFormat("dd/MM/yyyy HH:mm")
         paseosRepository.getPaseos { paseosList ->
-            val paseosFiltrados = paseosList.filter { paseo ->
+            var paseosFiltrados = paseosList.filter { paseo ->
                 paseo.user.dni == userDNI
             }.toMutableList()
-
+            paseosFiltrados = paseosFiltrados.sortedWith(compareByDescending {  format.parse(it.fecha)?.time }).toMutableList()
             adapter = PaseosProgramadosAdapter(paseosFiltrados) { position ->
                 val action = UserHistorialDirections.actionUserHistorialToPaseoProgramadoDetail(
                     paseosFiltrados[position]
@@ -58,6 +60,7 @@ class UserHistorial : Fragment() {
             } else {
                 textoSinPaseos.text = "Estos son tus paseos programados"
             }
+
             recyclerPaseosList.layoutManager = LinearLayoutManager(context)
             recyclerPaseosList.adapter = adapter
         }

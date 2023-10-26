@@ -20,6 +20,7 @@ import com.example.myapplication.entities.EstadoEnum
 import com.example.myapplication.entities.PaseoProgramado
 import com.example.myapplication.entities.UserSession
 import com.example.myapplication.repository.PaseoProgramadoRepository
+import java.text.SimpleDateFormat
 
 class PaseadorHistorial : Fragment() {
 
@@ -54,6 +55,7 @@ class PaseadorHistorial : Fragment() {
         super.onStart()
         spinner.setSelection(0)
         val userDNI = UserSession.user.dni
+        val format = SimpleDateFormat("dd/MM/yyyy HH:mm")
         paseosRepository.getPaseos { paseosList ->
             paseosFiltrados = paseosList.filter { paseo ->
                 paseo.paseador.dni == userDNI
@@ -65,6 +67,8 @@ class PaseadorHistorial : Fragment() {
             }
 
             paseosOriginales = paseosFiltrados
+            paseosFiltrados = paseosFiltrados.sortedWith(compareByDescending {  format.parse(it.fecha)?.time })
+
             adapter.paseos = paseosFiltrados.toMutableList()
             paseosFiltrados = adapter.paseos
             adapter.notifyDataSetChanged()

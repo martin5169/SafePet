@@ -37,7 +37,7 @@ class Login : Fragment() {
         v = inflater.inflate(R.layout.fragment_login, container, false)
 
         btnLogin = v.findViewById(R.id.btnNavigate2)
-        btnRegister = v.findViewById(R.id.btnNavigate)
+        btnRegister = v.findViewById(R.id.btnRegistrar)
         name = v.findViewById(R.id.name)
         pass = v.findViewById(R.id.userPassword)
         auth = Firebase.auth
@@ -59,6 +59,10 @@ class Login : Fragment() {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("LOGIN", "signInWithEmail:success")
                             val userAuth = auth.currentUser
+                            /*if(!userAuth!!.isEmailVerified){
+                                Snackbar.make(v, "El mail aun no está verificado", Snackbar.LENGTH_SHORT).show()
+                                return@addOnCompleteListener
+                            }*/
                             userRepository.getUsers { userList ->
                                 val user = userList.find { it.mail == enteredMail }
                                 if (user != null) {
@@ -82,7 +86,7 @@ class Login : Fragment() {
                             Log.w("LOGIN", "signInWithEmail:failure", task.exception)
                             Toast.makeText(
                                 requireContext(),
-                                "Error de autenticacion.",
+                                "El usuario no está registrado.",
                                 Toast.LENGTH_SHORT,
                             ).show()
                         }
@@ -91,11 +95,11 @@ class Login : Fragment() {
                 e.printStackTrace()
                 Snackbar.make(v, "Ocurrió un error al iniciar sesión", Snackbar.LENGTH_SHORT).show()
             }
-
-            btnRegister.setOnClickListener {
-                val action = LoginDirections.actionLogin2ToRegisterOptions2()
-                findNavController().navigate(action)
-            }
         }
+        btnRegister.setOnClickListener {
+            val action = LoginDirections.actionLogin2ToRegisterOptions2()
+            findNavController().navigate(action)
+        }
+
     }
 }

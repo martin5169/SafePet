@@ -1,5 +1,6 @@
 package com.example.myapplication.fragments
 
+import android.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,7 +11,11 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
+import com.example.myapplication.entities.EstadoEnum
+import com.example.myapplication.entities.Paseador
 import com.example.myapplication.entities.UserSession
+import com.example.myapplication.repository.PaseadorRepository
+import com.google.android.material.snackbar.Snackbar
 
 class HomePaseador : Fragment() {
 
@@ -20,6 +25,8 @@ class HomePaseador : Fragment() {
     lateinit var btnPerfilPaseador : Button
     lateinit var btnMediosCobro: Button
     lateinit var btnPasearAhora: Button
+    lateinit var viewModel: HomePaseadorViewModel
+    val paseadorRepository = PaseadorRepository.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,6 +39,7 @@ class HomePaseador : Fragment() {
         btnPasearAhora = v.findViewById(R.id.mapaPaseador2)
         btnHistorial = v.findViewById(R.id.btnHistorialPaseador)
         text = v.findViewById(R.id.welcomeTextPaseador)
+        viewModel = HomePaseadorViewModel()
 
         btnMediosCobro = v.findViewById(R.id.mediosDeCobroPaseador2)
 
@@ -42,6 +50,11 @@ class HomePaseador : Fragment() {
         super.onStart()
 
         val user = UserSession.user
+        btnPasearAhora.text = if ( (user as Paseador).estaPaseando ) {
+            "Dejar de Pasear"
+        }else {
+            "Pasear Ahora"
+        }
         text.text= "Bienvenido, ${user.name}"
 
         btnMediosCobro.setOnClickListener {
@@ -59,8 +72,37 @@ class HomePaseador : Fragment() {
             findNavController().navigate(action)
         }
 
+        btnPasearAhora.setOnClickListener {
+            showConfirmationDialog(user.dni)
+        }
 
+    }
 
+    private fun showConfirmationDialog(dni: String) {
+        val builder = AlertDialog.Builder(requireContext())
+
+        builder.setTitle("Confirmación")
+        val message = if((UserSession.user as Paseador).estaPaseando) {
+            "¿Estás seguro de desactivar tu ubicación?"
+        }else {
+            "¿Estás seguro de hacer visible tu ubicación?"
+        }
+        builder.setMessage(message)
+        builder.setPositiveButton("Sí") { _, _ ->
+            paseadorRepository.updateEstaPaseando(dni, !(UserSession.user as Paseador).estaPaseando)
+            (UserSession.user as Paseador).estaPaseando = !(UserSession.user as Paseador).estaPaseando
+            viewModel.createLocationCallback(UserSession.user.dni)
+            viewModel.startLocationUpdates()
+            Snackbar.make(v, "Ubicación activada", Snackbar.LENGTH_SHORT).show()
+            findNavController().popBackStack()
+        }
+
+        builder.setNegativeButton("No") { _, _ ->
+            // Usuario canceló, no se realiza la actualización
+        }
+
+        val dialog = builder.create()
+        dialog.show()
     }
 
 }
