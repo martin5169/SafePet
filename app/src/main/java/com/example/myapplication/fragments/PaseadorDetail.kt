@@ -1,7 +1,9 @@
 package com.example.myapplication.fragments
 
+import android.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +12,14 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
+import com.example.myapplication.entities.EstadoEnum
+import com.example.myapplication.entities.PaseoProgramado
+import com.example.myapplication.entities.User
+import com.example.myapplication.entities.UserSession
+import com.example.myapplication.repository.PaseoProgramadoRepository
 import com.google.android.material.snackbar.Snackbar
+import java.text.SimpleDateFormat
+import java.util.Date
 
 class PaseadorDetail : Fragment(){
 
@@ -22,6 +31,8 @@ class PaseadorDetail : Fragment(){
     lateinit var paseadorTarifa : TextView
     lateinit var promedioCal : TextView
     lateinit var btnSolicitarPaseo : Button
+    lateinit var btnSolicitarPaseoInstantaneo : Button
+    val paseoProgramadoRepository = PaseoProgramadoRepository.getInstance()
 
 
     override fun onCreateView(
@@ -36,12 +47,14 @@ class PaseadorDetail : Fragment(){
         paseadorMail = v.findViewById(R.id.paseadorMail)
         paseadorTarifa = v.findViewById(R.id.paseadorTarifa)
         btnSolicitarPaseo = v.findViewById(R.id.btnSolicitarPaseo)
+        btnSolicitarPaseoInstantaneo = v.findViewById(R.id.paseoInstantaneo)
 
         return v
     }
     override fun onStart() {
         super.onStart()
         val paseador = PaseadorDetailArgs.fromBundle(requireArguments()).paseador
+        val format = SimpleDateFormat("dd/MM/yyyy HH:mm")
         paseadorLastname.text= paseador.lastName
         paseadorName.text= paseador.name
         paseadorDni.text= paseador.dni
@@ -57,14 +70,39 @@ class PaseadorDetail : Fragment(){
         } else {
             paseador.promedioPuntuaciones.toString()
         }
+        var fechaActual = Date()
+        fechaActual = Date(fechaActual.time - 10800000)
+        Log.d("ESTA PASEANDO", paseador.estaPaseando.toString())
+        if(!paseador.estaPaseando) {
+            Log.d("ESTA PASEANDO", "ESTA PASEANDO")
+            btnSolicitarPaseoInstantaneo.visibility = View.GONE
+        }else {
+            btnSolicitarPaseoInstantaneo.visibility = View.VISIBLE
+        }
 
+        btnSolicitarPaseoInstantaneo.setOnClickListener {
 
+            val builder = AlertDialog.Builder(requireContext())
+            builder.setTitle("Confirmación")
+            builder.setMessage("¿Esta seguro de solicitar el paseo? Se enviará una solicitud de manera instantanea al paseador")
+            builder.setPositiveButton("Sí") { _, _ ->
+                val paseoProgramado = PaseoProgramado(paseador, UserSession.user as User, "${format.format(fechaActual)}hs", EstadoEnum.SOLICITADO,0)
+                paseoProgramadoRepository.addPaseo(paseoProgramado)
+                findNavController().popBackStack()
+            }
+
+            builder.setNegativeButton("No") { _, _ ->
+                // Usuario canceló, no se realiza la actualización
+            }
+
+            val dialog = builder.create()
+            dialog.show()
+        }
 
         btnSolicitarPaseo.setOnClickListener{
             val action = PaseadorDetailDirections.actionPaseadorDetailToCalendarioPaseador(paseador)
             findNavController().navigate(action)
         }
-
 
     }
 

@@ -67,8 +67,9 @@ class PaseadoresList : Fragment() {
 
             paseadoresRepository.getPaseadores { paseadoresList ->
                 paseadoresOriginales = paseadoresList.sortedBy { -it.promedioPuntuaciones }
-                adapter = PaseadorAdapter(paseadoresOriginales.toMutableList()) { position ->
-                    val action = PaseadoresListDirections.actionPaseadoresListToPaseadorDetail(paseadoresOriginales[position])
+                paseadoresFiltrados = paseadoresOriginales
+                adapter = PaseadorAdapter(paseadoresFiltrados.toMutableList()) { position ->
+                    val action = PaseadoresListDirections.actionPaseadoresListToPaseadorDetail(paseadoresFiltrados[position])
                     findNavController().navigate(action)
                 }
 
@@ -82,8 +83,10 @@ class PaseadoresList : Fragment() {
                     val selectedValue = spinner.selectedItem.toString()
                     if (selectedValue == "TODOS") {
                         adapter.paseadores = paseadoresOriginales.toMutableList()
+                        this@PaseadoresList.paseadoresFiltrados = adapter.paseadores
                     } else if (selectedValue == "ACTIVO") {
                         adapter.paseadores = paseadoresOriginales.filter { it.estaPaseando }.toMutableList()
+                        this@PaseadoresList.paseadoresFiltrados = adapter.paseadores
                     }
                     adapter.notifyDataSetChanged()
                     Log.d("CHANGE", adapter.paseadores.joinToString())

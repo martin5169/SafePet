@@ -107,6 +107,11 @@ class PaseoProgramadoDetail : Fragment() {
             }else {
                 View.GONE
             }
+        } else if(paseo.estado == EstadoEnum.SOLICITADO) {
+            btnIniciarPaseo.text = "Aceptar paseo"
+            btnIniciarPaseo.visibility = View.VISIBLE
+            btnCancelarPaseo.text = "Rechazar paseo"
+            btnCancelarPaseo.visibility = View.VISIBLE
         }
 
         if (((fechaHoy.time - 10800000) - fecha.time).absoluteValue >= 300000) {
@@ -115,8 +120,7 @@ class PaseoProgramadoDetail : Fragment() {
         }
         btnIniciarPaseo.setOnClickListener {
             comenzarPaseo(location, paseo)
-            val action = PaseoProgramadoDetailDirections.actionPaseoProgramadoDetailToHome()
-            findNavController().navigate(action)
+            findNavController().popBackStack()
             Snackbar.make(v, "Paseo iniciado exitosamente", Snackbar.LENGTH_SHORT).show()
         }
 
@@ -125,8 +129,7 @@ class PaseoProgramadoDetail : Fragment() {
         }
 
         btnCalificar.setOnClickListener() {
-            val action =
-                PaseoProgramadoDetailDirections.actionPaseoProgramadoDetailToCalificarPaseo(paseo)
+            val action = PaseoProgramadoDetailDirections.actionPaseoProgramadoDetailToCalificarPaseo(paseo)
             findNavController().navigate(action)
         }
 
