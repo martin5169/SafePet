@@ -12,14 +12,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.example.myapplication.adapters.PaseosProgramadosAdapter
 import com.example.myapplication.entities.UserSession
-import com.example.myapplication.repository.PaseoProgramadoRepository
+import com.example.myapplication.repository.PaseoRepository
 import java.text.SimpleDateFormat
 
 class UserHistorial : Fragment() {
 
     lateinit var v: View
     lateinit var recyclerPaseosList: RecyclerView
-    lateinit var paseosRepository: PaseoProgramadoRepository
+    lateinit var paseosRepository: PaseoRepository
     lateinit var adapter: PaseosProgramadosAdapter
     lateinit var textoSinPaseos: TextView
     override fun onCreateView(
@@ -29,7 +29,7 @@ class UserHistorial : Fragment() {
         v = inflater.inflate(R.layout.fragment_user_historial, container, false)
 
         recyclerPaseosList = v.findViewById(R.id.recyclerPaseo)
-        paseosRepository = PaseoProgramadoRepository.getInstance()
+        paseosRepository = PaseoRepository.getInstance()
         textoSinPaseos = v.findViewById(R.id.notificacionVacioUser)
 
         return v

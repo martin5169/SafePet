@@ -1,6 +1,5 @@
 package com.example.myapplication.fragments
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -19,14 +18,14 @@ import com.example.myapplication.adapters.PaseosProgramadosAdapter
 import com.example.myapplication.entities.EstadoEnum
 import com.example.myapplication.entities.PaseoProgramado
 import com.example.myapplication.entities.UserSession
-import com.example.myapplication.repository.PaseoProgramadoRepository
+import com.example.myapplication.repository.PaseoRepository
 import java.text.SimpleDateFormat
 
 class PaseadorHistorial : Fragment() {
 
     lateinit var v : View
     lateinit var recyclerPaseosPaseador: RecyclerView
-    lateinit var paseosRepository: PaseoProgramadoRepository
+    lateinit var paseosRepository: PaseoRepository
     lateinit var adapter: PaseosProgramadosAdapter
     lateinit var textoSinPaseos : TextView
     lateinit var spinner : Spinner
@@ -43,7 +42,7 @@ class PaseadorHistorial : Fragment() {
 
         recyclerPaseosPaseador = v.findViewById(R.id.recyclerList)
         textoSinPaseos = v.findViewById(R.id.notificacionVacio)
-        paseosRepository = PaseoProgramadoRepository.getInstance()
+        paseosRepository = PaseoRepository.getInstance()
         spinner = v.findViewById(R.id.filtroEstados)
         adaptador = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, estados)
         adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)

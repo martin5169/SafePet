@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.CalendarView
@@ -23,7 +22,7 @@ import com.example.myapplication.entities.PaseoProgramado
 import com.example.myapplication.entities.User
 import com.example.myapplication.entities.UserAbstract
 import com.example.myapplication.entities.UserSession.user
-import com.example.myapplication.repository.PaseoProgramadoRepository
+import com.example.myapplication.repository.PaseoRepository
 import com.google.android.material.snackbar.Snackbar
 
 class CalendarioPaseador : Fragment() {
@@ -35,7 +34,7 @@ class CalendarioPaseador : Fragment() {
     lateinit var spinner : Spinner
     lateinit var switchExclusivo: Switch
     lateinit var adaptador: ArrayAdapter<String>
-    val programadoRepository = PaseoProgramadoRepository.getInstance()
+    val programadoRepository = PaseoRepository.getInstance()
     val horarios = mutableListOf("10:00hs", "11:00hs", "12:00hs")
     private val originalHorarios = mutableListOf("10:00hs", "11:00hs", "12:00hs")
 
@@ -134,7 +133,7 @@ class CalendarioPaseador : Fragment() {
     private fun showConfirmationDialog(user: UserAbstract, dateTimeString: String) {
         val builder = AlertDialog.Builder(requireContext())
         val paseador = CalendarioPaseadorArgs.fromBundle(requireArguments()).Paseador
-        val paseoProgramadoRepository = PaseoProgramadoRepository.getInstance()
+        val paseoProgramadoRepository = PaseoRepository .getInstance()
         builder.setTitle("Confirmación")
         builder.setMessage("¿Confirma la fecha y hora seleccionadas?")
         builder.setPositiveButton("Sí") { _, _ ->

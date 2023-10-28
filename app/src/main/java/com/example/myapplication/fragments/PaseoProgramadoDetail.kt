@@ -13,12 +13,10 @@ import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
 import com.example.myapplication.entities.EstadoEnum
-import com.example.myapplication.entities.Paseador
 import com.example.myapplication.entities.PaseoProgramado
 import com.example.myapplication.entities.User
 import com.example.myapplication.entities.UserAbstract
 import com.example.myapplication.entities.UserSession
-import com.example.myapplication.repository.PaseoProgramadoRepository
 import com.example.myapplication.repository.PaseoRepository
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices

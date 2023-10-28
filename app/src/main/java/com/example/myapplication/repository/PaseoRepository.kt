@@ -47,10 +47,12 @@ class PaseoRepository {
         }
     }
 
-    fun addPaseo(paseo: PaseoProgramado): Task<Void> {
-        val paseadorKey = paseosReference.push().key // erar una clave única para el paseador
-
-        return paseosReference.child(paseadorKey!!).setValue(paseo)
+    fun addPaseo(paseo: PaseoProgramado) {
+        val userKey = paseosReference.push().key // Generar una clave única para el paseo
+        userKey?.let {
+            paseo.id = it // Asignar la clave única al atributo "id" del paseo programado
+            paseosReference.child(it).setValue(paseo)
+        }
     }
 
     fun updateLocationPaseador(paseadorDni: String, latitude: Double, longitude: Double) {
@@ -94,6 +96,25 @@ class PaseoRepository {
                 if (snapshot.exists()) {
                     snapshot.ref.child("calificacion").setValue(calificacion)
                 }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
+    }
+
+    fun getPaseos(callback: (List<PaseoProgramado>) -> Unit) {
+        paseosReference.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val paseosList = mutableListOf<PaseoProgramado>()
+                for (childSnapshot in snapshot.children) {
+                    val paseoProgramado = childSnapshot.getValue(PaseoProgramado::class.java)
+                    paseoProgramado?.let {
+                        paseosList.add(it)
+                    }
+                }
+                callback(paseosList)
             }
 
             override fun onCancelled(error: DatabaseError) {

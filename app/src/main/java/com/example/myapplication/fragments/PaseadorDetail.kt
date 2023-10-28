@@ -1,7 +1,6 @@
 package com.example.myapplication.fragments
 
 import android.app.AlertDialog
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -16,8 +15,7 @@ import com.example.myapplication.entities.EstadoEnum
 import com.example.myapplication.entities.PaseoProgramado
 import com.example.myapplication.entities.User
 import com.example.myapplication.entities.UserSession
-import com.example.myapplication.repository.PaseoProgramadoRepository
-import com.google.android.material.snackbar.Snackbar
+import com.example.myapplication.repository.PaseoRepository
 import java.text.SimpleDateFormat
 import java.util.Date
 
@@ -32,7 +30,7 @@ class PaseadorDetail : Fragment(){
     lateinit var promedioCal : TextView
     lateinit var btnSolicitarPaseo : Button
     lateinit var btnSolicitarPaseoInstantaneo : Button
-    val paseoProgramadoRepository = PaseoProgramadoRepository.getInstance()
+    val paseoProgramadoRepository = PaseoRepository.getInstance()
 
 
     override fun onCreateView(
