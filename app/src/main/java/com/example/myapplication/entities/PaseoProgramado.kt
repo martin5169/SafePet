@@ -12,6 +12,7 @@ class PaseoProgramado(): Parcelable {
     var id : String=""
     var estado: EstadoEnum = EstadoEnum.NO_ACTIVO
     var calificacion : Int = 0
+    var medioDePago: MedioDePagoEnum = MedioDePagoEnum.EFECTIVO
 
     constructor(paseador: Paseador, user: UserAbstract, fecha: String, estadoEnum: EstadoEnum,calificacion:Int) : this() {
         this.paseador = paseador

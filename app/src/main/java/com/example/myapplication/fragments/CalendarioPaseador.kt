@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.CalendarView
@@ -18,6 +19,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
 import com.example.myapplication.R.id.calendarPaseador
 import com.example.myapplication.entities.EstadoEnum
+import com.example.myapplication.entities.MedioDePagoEnum
 import com.example.myapplication.entities.PaseoProgramado
 import com.example.myapplication.entities.User
 import com.example.myapplication.entities.UserAbstract
@@ -32,11 +34,15 @@ class CalendarioPaseador : Fragment() {
     lateinit var selectedDate: TextView
     lateinit var btnConfirm : Button
     lateinit var spinner : Spinner
+    lateinit var mediosDePago : Spinner
+    lateinit var mpAdaptador: ArrayAdapter<String>
     lateinit var switchExclusivo: Switch
     lateinit var adaptador: ArrayAdapter<String>
+    var medioDePagoText: String? = null
     val programadoRepository = PaseoRepository.getInstance()
     val horarios = mutableListOf("10:00hs", "11:00hs", "12:00hs")
     private val originalHorarios = mutableListOf("10:00hs", "11:00hs", "12:00hs")
+    val mediosDePagoList = mutableListOf("Efectivo", "Pago Online")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,6 +54,10 @@ class CalendarioPaseador : Fragment() {
         btnConfirm = v.findViewById(R.id.btnConfirm)
         switchExclusivo = v.findViewById(R.id.switchPaseoExclusivo)
 
+        mediosDePago = v.findViewById(R.id.medioDePago)
+        mpAdaptador = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, mediosDePagoList)
+        mpAdaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        mediosDePago.adapter = mpAdaptador
         spinner = v.findViewById(R.id.listaHorarios)
         adaptador = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, horarios)
         adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -116,11 +126,25 @@ class CalendarioPaseador : Fragment() {
 
 
         }
+        mediosDePago.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View,
+                position: Int,
+                id: Long
+            ) {
+                val selectedItem = parent.getItemAtPosition(position).toString()
+                medioDePagoText = selectedItem
+            }
 
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Manejar el caso cuando no se ha seleccionado ningún elemento
+            }
+        }
         btnConfirm.setOnClickListener {
             val selectedDateString = selectedDate.text.toString()
             val selectedTime = spinner.selectedItem.toString()
-            if (selectedDateString.isNotEmpty() && selectedTime.isNotEmpty()) {
+            if (selectedDateString.isNotEmpty() && selectedTime.isNotEmpty() && !medioDePagoText.isNullOrEmpty()) {
                 val dateTimeString = "$selectedDateString $selectedTime"
                 showConfirmationDialog(user, dateTimeString)
 
@@ -133,17 +157,21 @@ class CalendarioPaseador : Fragment() {
     private fun showConfirmationDialog(user: UserAbstract, dateTimeString: String) {
         val builder = AlertDialog.Builder(requireContext())
         val paseador = CalendarioPaseadorArgs.fromBundle(requireArguments()).Paseador
-        val paseoProgramadoRepository = PaseoRepository .getInstance()
+        val paseoProgramadoRepository = PaseoRepository.getInstance()
         builder.setTitle("Confirmación")
         builder.setMessage("¿Confirma la fecha y hora seleccionadas?")
         builder.setPositiveButton("Sí") { _, _ ->
-            // USUARIO CONFIRMA, HACER VALIDACIÓN DE FECHA DISPONIBLE
             paseador.tarifa = if(switchExclusivo.isChecked) {
                 paseador.tarifa * 5
             }else {
                 paseador.tarifa
             }
             val paseoProgramado = PaseoProgramado(paseador, user, dateTimeString, EstadoEnum.NO_ACTIVO,0)
+            paseoProgramado.medioDePago = if(medioDePagoText == "EFECTIVO") {
+                MedioDePagoEnum.EFECTIVO
+            } else {
+                MedioDePagoEnum.TARJETA
+            }
             paseoProgramadoRepository.addPaseo(paseoProgramado)
             Snackbar.make(v, "Fecha y hora asignadas con éxito", Snackbar.LENGTH_SHORT).show()
             val action = CalendarioPaseadorDirections.actionCalendarioPaseadorToPaseadoresList()

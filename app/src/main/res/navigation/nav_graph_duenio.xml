@@ -108,6 +108,9 @@
         <action
             android:id="@+id/action_paseoProgramadoDetail_to_calificarPaseo"
             app:destination="@id/calificarPaseo" />
+        <action
+            android:id="@+id/action_paseoProgramadoDetail_to_realizarPago"
+            app:destination="@id/realizarPago" />
     </fragment>
     <fragment
         android:id="@+id/calificarPaseo"
@@ -121,4 +124,9 @@
             android:id="@+id/action_calificarPaseo_to_userHistorial"
             app:destination="@id/userHistorial" />
     </fragment>
+    <fragment
+        android:id="@+id/realizarPago"
+        android:name="com.example.myapplication.fragments.RealizarPago"
+        android:label="fragment_realizar_pago"
+        tools:layout="@layout/fragment_realizar_pago" />
 </navigation>

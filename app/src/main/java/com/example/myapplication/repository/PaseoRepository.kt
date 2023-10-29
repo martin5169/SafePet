@@ -123,4 +123,8 @@ class PaseoRepository {
         })
     }
 
+    fun deletePaseo(paseo: PaseoProgramado) {
+        paseosReference.child(paseo.id).removeValue()
+    }
+
 }

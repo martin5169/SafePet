@@ -13,6 +13,7 @@ import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
 import com.example.myapplication.entities.EstadoEnum
+import com.example.myapplication.entities.MedioDePagoEnum
 import com.example.myapplication.entities.PaseoProgramado
 import com.example.myapplication.entities.User
 import com.example.myapplication.entities.UserAbstract
@@ -116,16 +117,29 @@ class PaseoProgramadoDetail : Fragment() {
             btnIniciarPaseo.visibility = View.VISIBLE
             btnCancelarPaseo.text = "Rechazar paseo"
             btnCancelarPaseo.visibility = View.VISIBLE
+        } else if(paseo.estado == EstadoEnum.PAGO_PENDIENTE && userSession is User) {
+            Log.d("PAGO", "PAGO")
+            btnIniciarPaseo.text = "Realizar Pago"
+            btnIniciarPaseo.visibility = View.VISIBLE
+            btnCancelarPaseo.visibility = View.GONE
+            btnCalificar.visibility = View.VISIBLE
+        } else if(paseo.estado == EstadoEnum.PAGO_PENDIENTE) {
+            btnCancelarPaseo.visibility = View.GONE
+            btnCalificar.visibility = View.GONE
         }
 
-        if (((fechaHoy.time - 10800000) - fecha.time).absoluteValue >= 300000) {
+        if (((fechaHoy.time - 10800000) - fecha.time).absoluteValue >= 300000 && paseo.estado == EstadoEnum.NO_ACTIVO) {
             Log.d("FECHA", "FECHA")
             btnIniciarPaseo.visibility = View.GONE
         }
         btnIniciarPaseo.setOnClickListener {
-            comenzarPaseo(location, paseo)
-            findNavController().popBackStack()
-            Snackbar.make(v, "Paseo iniciado exitosamente", Snackbar.LENGTH_SHORT).show()
+            if(paseo.estado == EstadoEnum.PAGO_PENDIENTE) {
+                viewModel.realizarPago()
+            }else {
+                comenzarPaseo(location, paseo)
+                findNavController().popBackStack()
+                Snackbar.make(v, "Paseo iniciado exitosamente", Snackbar.LENGTH_SHORT).show()
+            }
         }
 
         btnCancelarPaseo.setOnClickListener {
@@ -147,8 +161,13 @@ class PaseoProgramadoDetail : Fragment() {
         builder.setMessage("¿Estás seguro de finalizar este paseo?")
         builder.setPositiveButton("Sí") { _, _ ->
             // USUARIO CONFIRMA, HACER VALIDACIÓN DE FECHA DISPONIBLE
-            paseosRepository.updateEstadoPaseo(paseo.id, EstadoEnum.FINALIZADO)
-            Snackbar.make(v, "Paseo eliminado con éxito", Snackbar.LENGTH_SHORT).show()
+            if(paseo.medioDePago == MedioDePagoEnum.TARJETA && paseo.estado != EstadoEnum.NO_ACTIVO) {
+                paseosRepository.updateEstadoPaseo(paseo.id, EstadoEnum.PAGO_PENDIENTE)
+            } else if(paseo.estado == EstadoEnum.NO_ACTIVO){
+                paseosRepository.deletePaseo(paseo)
+            } else {
+                paseosRepository.updateEstadoPaseo(paseo.id, EstadoEnum.FINALIZADO)
+            }
             findNavController().popBackStack()
         }
 

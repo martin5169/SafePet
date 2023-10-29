@@ -14,6 +14,9 @@ import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.Priority
+import com.google.android.gms.wallet.PaymentsClient
+import org.json.JSONArray
+import org.json.JSONObject
 
 class PaseoProgramadoDetailViewModel : ViewModel() {
 
@@ -21,6 +24,10 @@ class PaseoProgramadoDetailViewModel : ViewModel() {
     lateinit var locationCallback: LocationCallback
     val paseoRepository = PaseoRepository()
     val paseadorRepository = PaseadorRepository()
+    private lateinit var paymentsClient: PaymentsClient
+    private lateinit var garmentList: JSONArray
+    private lateinit var selectedGarment: JSONObject
+    private val LOAD_PAYMENT_DATA_REQUEST_CODE = 991
 
     @SuppressLint("MissingPermission")
      fun startLocationUpdates() {
@@ -55,4 +62,8 @@ class PaseoProgramadoDetailViewModel : ViewModel() {
         paseoRepository.updateEstadoPaseo(id, EstadoEnum.ACTIVO)
 
     }
+
+   fun realizarPago() {
+
+   }
 }
