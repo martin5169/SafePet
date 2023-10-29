@@ -5,12 +5,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
+import com.example.myapplication.entities.EstadoEnum
 import com.example.myapplication.entities.Paseador
 import com.example.myapplication.entities.PaseoProgramado
 import com.example.myapplication.entities.UserSession
@@ -31,8 +33,14 @@ class PaseosProgramadosAdapter(var paseos : MutableList<PaseoProgramado>,
             this.view = v
         }
 
+        val imagenPaseo : ImageView = view.findViewById(R.id.imagenPaseoPendiente)
         val user = UserSession.user
 
+        fun setImage (estadoPaseo : EstadoEnum){
+            if(estadoPaseo != EstadoEnum.FINALIZADO){
+                imagenPaseo.visibility = View.VISIBLE
+            }
+        }
 
         fun setDetails (detailsUser : String){
             val textDetail : TextView = view.findViewById(R.id.textDetail)
@@ -77,6 +85,7 @@ class PaseosProgramadosAdapter(var paseos : MutableList<PaseoProgramado>,
        // val colorPaseoAnterior = ContextCompat.getColor(holder.getCard().context, R.color.colorPaseoAnterior)
        // val colorPaseoNormal = ContextCompat.getColor(holder.getCard().context, R.color.colorPaseoNormal)
 
+        holder.setImage(paseo.estado)
         holder.getCard().isEnabled = true
 
         if (UserSession.user is Paseador) {

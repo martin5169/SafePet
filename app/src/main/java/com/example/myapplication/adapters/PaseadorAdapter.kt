@@ -32,11 +32,11 @@ class PaseadorAdapter(var paseadores : MutableList<Paseador>,
 
         fun setPromedio(promedio: Int) {
             val stars: Array<ImageView> = arrayOf(
-                view.findViewById(R.id.star1),
-                view.findViewById(R.id.star2),
-                view.findViewById(R.id.star3),
-                view.findViewById(R.id.star4),
-                view.findViewById(R.id.star5)
+                view.findViewById(R.id.starfilled1),
+                view.findViewById(R.id.starfilled2),
+                view.findViewById(R.id.starfilled3),
+                view.findViewById(R.id.starfilled4),
+                view.findViewById(R.id.starfilled5)
             )
 
             // Ocultar todas las estrellas
