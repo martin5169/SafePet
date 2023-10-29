@@ -33,6 +33,7 @@ class PaseoProgramadoDetail : Fragment() {
 
     private lateinit var v: View
     private lateinit var fechaPaseo: TextView
+    private lateinit var ubicacion: TextView
     private lateinit var duenioPaseo: TextView
     private lateinit var paseadorPaseo: TextView
     private lateinit var mascota: TextView
@@ -51,6 +52,7 @@ class PaseoProgramadoDetail : Fragment() {
     ): View? {
         v = inflater.inflate(R.layout.fragment_paseo_programado_detail, container, false)
         fechaPaseo = v.findViewById(R.id.fechaPaseo)
+        ubicacion = v.findViewById(R.id.ubicacion)
         duenioPaseo = v.findViewById(R.id.dueño)
         paseadorPaseo = v.findViewById(R.id.paseador)
         mascota = v.findViewById(R.id.mascota)
@@ -72,6 +74,7 @@ class PaseoProgramadoDetail : Fragment() {
         val paseo =
             PaseoProgramadoDetailArgs.fromBundle(requireArguments()).paseoProgramadodetalle
         fechaPaseo.text = paseo.fecha
+        ubicacion.text = paseo.user.direccion
         duenioPaseo.text = "${paseo.user.lastName}, ${paseo.user.name} "
         paseadorPaseo.text = "${paseo.paseador.lastName}, ${paseo.paseador.name} "
         mascota.text = paseo.user.mascota.nombre

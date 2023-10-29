@@ -7,6 +7,19 @@
     android:layout_height="match_parent"
     tools:context=".fragments.PaseoProgramadoDetail">
 
+    <ImageView
+        android:id="@+id/imageView18"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginBottom="26dp"
+        android:src="@drawable/icons8location50"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.166"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.150" />
+
     <Button
         android:id="@+id/btnCalificar"
         android:layout_width="168dp"
@@ -24,6 +37,19 @@
         app:layout_constraintVertical_bias="0.778" />
 
     <TextView
+        android:id="@+id/mascota"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.446" />
+
+    <TextView
         android:id="@+id/valorPaseo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,19 +59,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.547" />
 
     <ImageView
-        android:id="@+id/imageView8"
+        android:id="@+id/imageView17"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:src="@drawable/icons8user50"
+        android:src="@drawable/icons8dog51paseadorperfil"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.166"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.2" />
+        app:layout_constraintVertical_bias="0.346" />
 
     <TextView
         android:id="@+id/fechaPaseo"
@@ -58,10 +85,10 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.099" />
+        app:layout_constraintVertical_bias="0.050" />
 
     <TextView
-        android:id="@+id/paseador"
+        android:id="@+id/ubicacion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="160dp"
@@ -71,32 +98,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.303" />
-
-    <ImageView
-        android:id="@+id/imageView10"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:src="@drawable/icons8date50"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.166"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.1" />
-
-    <TextView
-        android:id="@+id/dueño"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.2" />
+        app:layout_constraintVertical_bias="0.145" />
 
     <TextView
         android:id="@+id/calificacionPaseo"
@@ -109,10 +111,22 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.599" />
+        app:layout_constraintVertical_bias="0.645" />
+
+    <ImageView
+        android:id="@+id/imageView12"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/icons8dolar64"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.166"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.547" />
 
     <TextView
-        android:id="@+id/mascota"
+        android:id="@+id/dueño"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="160dp"
@@ -122,31 +136,44 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.4" />
+        app:layout_constraintVertical_bias="0.246" />
+
+    <TextView
+        android:id="@+id/paseador"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.349" />
 
     <ImageView
-        android:id="@+id/imageView15"
+        android:id="@+id/imageView10"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:src="@drawable/icons8star50"
+        android:src="@drawable/icons8date50"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.166"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.601" />
+        app:layout_constraintVertical_bias="0.050" />
 
     <ImageView
-        android:id="@+id/imageView17"
+        android:id="@+id/imageView8"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:src="@drawable/icons8dog51paseadorperfil"
+        android:src="@drawable/icons8user50"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.166"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.299" />
+        app:layout_constraintVertical_bias="0.247" />
 
     <ImageView
         android:id="@+id/imageView9"
@@ -158,18 +185,19 @@
         app:layout_constraintHorizontal_bias="0.166"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.4" />
+        app:layout_constraintVertical_bias="0.446" />
 
     <ImageView
-        android:id="@+id/imageView12"
+        android:id="@+id/imageView15"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:src="@drawable/icons8dolar64"
+        android:src="@drawable/icons8star50"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.166"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.649" />
 
     <Button
         android:id="@+id/btnIniciarPaseo"
