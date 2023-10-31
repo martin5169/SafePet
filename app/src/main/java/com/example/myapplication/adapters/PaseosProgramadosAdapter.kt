@@ -40,6 +40,9 @@ class PaseosProgramadosAdapter(var paseos : MutableList<PaseoProgramado>,
             if(estadoPaseo != EstadoEnum.FINALIZADO){
                 imagenPaseo.visibility = View.VISIBLE
             }
+            else{
+                imagenPaseo.visibility = View.GONE
+            }
         }
 
         fun setDetails (detailsUser : String){
