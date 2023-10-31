@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.ProgressBar
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
@@ -31,6 +32,7 @@ class PaseadorHistorial : Fragment() {
     lateinit var spinner : Spinner
     lateinit var adaptador: ArrayAdapter<String>
     lateinit var paseos: List<PaseoProgramado>
+    lateinit var progressBar: ProgressBar
     val estados = mutableListOf("TODOS","ACTIVO", "NO_ACTIVO", "FINALIZADO")
     var paseosOriginales: List<PaseoProgramado> = mutableListOf()
     var paseosFiltrados: List<PaseoProgramado> = mutableListOf()
@@ -47,6 +49,9 @@ class PaseadorHistorial : Fragment() {
         adaptador = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, estados)
         adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adaptador
+
+
+        progressBar = v.findViewById(R.id.progressBar2)
         return v
     }
 
@@ -71,7 +76,7 @@ class PaseadorHistorial : Fragment() {
             adapter.paseos = paseosFiltrados.toMutableList()
             paseosFiltrados = adapter.paseos
             adapter.notifyDataSetChanged()
-
+            progressBar.visibility = View.GONE
         }
 
         adapter = PaseosProgramadosAdapter(paseosFiltrados.toMutableList()) { position ->
@@ -108,7 +113,6 @@ class PaseadorHistorial : Fragment() {
                 // Aquí se ejecutará el código cuando no se haya seleccionado ningún elemento
             }
         }
-
     }
 
 }

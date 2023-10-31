@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,6 +23,8 @@ class UserHistorial : Fragment() {
     lateinit var paseosRepository: PaseoRepository
     lateinit var adapter: PaseosProgramadosAdapter
     lateinit var textoSinPaseos: TextView
+    lateinit var progressBar: ProgressBar
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,6 +35,8 @@ class UserHistorial : Fragment() {
         paseosRepository = PaseoRepository.getInstance()
         textoSinPaseos = v.findViewById(R.id.notificacionVacioUser)
 
+        progressBar = v.findViewById(R.id.progressBar)
+
         return v
 
     }
@@ -40,6 +45,7 @@ class UserHistorial : Fragment() {
         super.onStart()
         val userDNI = UserSession.user.dni
         val format = SimpleDateFormat("dd/MM/yyyy HH:mm")
+
         paseosRepository.getPaseos { paseosList ->
             var paseosFiltrados = paseosList.filter { paseo ->
                 paseo.user.dni == userDNI
@@ -63,6 +69,8 @@ class UserHistorial : Fragment() {
 
             recyclerPaseosList.layoutManager = LinearLayoutManager(context)
             recyclerPaseosList.adapter = adapter
+
+            progressBar.visibility = View.GONE
         }
 
     }

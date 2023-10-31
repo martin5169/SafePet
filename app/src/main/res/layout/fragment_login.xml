@@ -8,14 +8,9 @@
     android:backgroundTint="#009688"
     tools:context=".fragments.Login">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
     <Button
         android:id="@+id/btnNavigate2"
-        android:layout_width="155dp"
+        android:layout_width="170dp"
         android:layout_height="63dp"
         android:backgroundTint="#009688"
         android:text="Ingresar"
@@ -34,6 +29,8 @@
         android:layout_width="303dp"
         android:layout_height="wrap_content"
         android:hint="Ingresa tu email"
+        android:singleLine="true"
+        android:nextFocusUp="@id/userPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.462"
@@ -45,8 +42,11 @@
         android:id="@+id/userPassword"
         android:layout_width="303dp"
         android:layout_height="wrap_content"
+        android:singleLine="true"
         android:hint="Contraseña"
         android:inputType="textPassword"
+        android:nextFocusUp="@id/btnNavigate2"
+        android:imeOptions="actionDone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.462"
@@ -83,13 +83,14 @@
 
     <Button
         android:id="@+id/btnRegistrar"
-        android:layout_width="155dp"
+        android:layout_width="170dp"
         android:layout_height="63dp"
         android:backgroundTint="#009688"
         android:text="Registrarte"
         android:textColorHighlight="#009688"
         android:textColorLink="#009688"
         android:textSize="20sp"
+        android:nextFocusDown="@id/userPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

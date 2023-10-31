@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.ProgressBar
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
@@ -30,6 +31,7 @@ class PaseadoresList : Fragment() {
     lateinit var txtTitle : TextView
     lateinit var spinner : Spinner
     lateinit var adaptador: ArrayAdapter<String>
+    lateinit var progressBar: ProgressBar
     val estados = mutableListOf("TODOS","ACTIVO")
     var paseadoresOriginales: List<Paseador> = mutableListOf()
     var paseadoresFiltrados: List<Paseador> = mutableListOf()
@@ -55,6 +57,7 @@ class PaseadoresList : Fragment() {
         recyclerPaseadores.layoutManager = LinearLayoutManager(context)
         recyclerPaseadores.adapter = adapter
 
+        progressBar = v.findViewById(R.id.progressBar3)
 
         return v
     }
@@ -63,7 +66,6 @@ class PaseadoresList : Fragment() {
     override fun onStart() {
         super.onStart()
         spinner.setSelection(0)
-
 
             paseadoresRepository.getPaseadores { paseadoresList ->
                 paseadoresOriginales = paseadoresList.sortedBy { -it.promedioPuntuaciones }
@@ -76,6 +78,7 @@ class PaseadoresList : Fragment() {
                 adapter.paseadores = paseadoresOriginales.toMutableList()
                 recyclerPaseadores.layoutManager = LinearLayoutManager(context)
                 recyclerPaseadores.adapter = adapter
+                progressBar.visibility = View.GONE
             }
 
             spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -90,6 +93,7 @@ class PaseadoresList : Fragment() {
                     }
                     adapter.notifyDataSetChanged()
                     Log.d("CHANGE", adapter.paseadores.joinToString())
+                    progressBar = v.findViewById(R.id.progressBar2)
                 }
 
                 override fun onNothingSelected(parentView: AdapterView<*>?) {

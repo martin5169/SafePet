@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import com.example.myapplication.R
 import com.example.myapplication.entities.UserSession
 import com.example.myapplication.repository.UserRepository
@@ -15,6 +16,11 @@ import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.entities.User
+import com.example.myapplication.entities.UserAbstract
+import com.example.myapplication.repository.PaseadorRepository
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 
 class PerfilUser : Fragment() {
@@ -23,9 +29,10 @@ class PerfilUser : Fragment() {
     lateinit var name: TextView
     lateinit var lastName: TextView
     lateinit var dni: TextView
-    lateinit var contraseña : EditText
+    lateinit var contraseña : Button
     lateinit var mail : TextView
     lateinit var btnEdit: Button
+    lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -37,9 +44,10 @@ class PerfilUser : Fragment() {
         name = v.findViewById(R.id.name)
         lastName = v.findViewById(R.id.lastName)
         dni = v.findViewById(R.id.dniUser)
-        contraseña = v.findViewById(R.id.userContraseña)
+        contraseña = v.findViewById(R.id.cambiarPass2)
         mail = v.findViewById(R.id.userMail)
         btnEdit = v.findViewById(R.id.editPerfil)
+        auth = Firebase.auth
 
         return v
     }
@@ -51,43 +59,70 @@ class PerfilUser : Fragment() {
             name.text = user.name
             lastName.text = user.lastName
             dni.text = user.dni
-            contraseña.setText(user.password)
             mail.text = user.mail
         }
-
         btnEdit.setOnClickListener {
             val enteredMail = mail.text.toString()
-            val enteredPassword = contraseña.text.toString()
 
-            if (enteredMail.isNotEmpty() && enteredPassword.isNotEmpty()) {
-                showConfirmationDialog(user as User, enteredMail, enteredPassword)
+            if (enteredMail.isNotEmpty()) {
+                showConfirmationDialog(user, enteredMail)
+
             } else {
                 Snackbar.make(v, "Todos los campos son requeridos", Snackbar.LENGTH_SHORT).show()
             }
         }
-    }
+        contraseña.setOnClickListener {
+            val builder = AlertDialog.Builder(requireContext())
+            builder.setTitle("Cambio de Contraseña")
+            builder.setMessage("Enviaremos un mail para que actualices tu contraseña, ¿deseas continuar?")
+            builder.setPositiveButton("Sí") { _, _ ->
+                auth.sendPasswordResetEmail(user.mail)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            Toast.makeText(
+                                requireContext(),
+                                "Se envió el correo de cambio de contraseña.",
+                                Toast.LENGTH_SHORT,
+                            ).show()
+                        } else {
+                            Toast.makeText(
+                                requireContext(),
+                                "Fallo el envio del correo.",
+                                Toast.LENGTH_SHORT,
+                            ).show()
+                        }
+                    }
+            }
+            builder.setNegativeButton("No") { _, _ ->
+                // Usuario cancela, no se realiza la actualizacion
+            }
+            val dialog = builder.create()
+            dialog.show()
+        }
 
-    private fun showConfirmationDialog(user: User, enteredMail: String, enteredPassword: String) {
+    }
+    private fun showConfirmationDialog(user: UserAbstract, enteredMail: String) {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("Confirmación")
         builder.setMessage("¿Estás seguro de actualizar tus datos de perfil?")
 
         builder.setPositiveButton("Sí") { _, _ ->
-            // Usuario confirmó, realizar la actualización de datos aquí
-            val userRepository = UserRepository.getInstance()
-            userRepository.updateUser(user.dni, enteredMail, enteredPassword)
+            // Usuario confirma, realiza la actualización
+            val paseadorRepository = PaseadorRepository.getInstance()
+            paseadorRepository.updatePaseador(user.dni, enteredMail, "")
             Snackbar.make(v, "Datos actualizados con éxito", Snackbar.LENGTH_SHORT).show()
             user.mail = enteredMail
-            user.password = enteredPassword
-            val action = PerfilUserDirections.actionPerfilUserToHome()
+            user.password = ""
+            val action = PerfilPaseadorDirections.actionPerfilPaseador2ToHomePaseador()
             findNavController().navigate(action)
         }
 
         builder.setNegativeButton("No") { _, _ ->
-            // Usuario canceló, no se realiza la actualización
+            // Usuario cancela, no se realiza la actualizacion
         }
 
         val dialog = builder.create()
         dialog.show()
     }
+
 }
