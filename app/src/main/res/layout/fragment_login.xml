@@ -10,13 +10,13 @@
 
     <Button
         android:id="@+id/btnNavigate2"
-        android:layout_width="170dp"
-        android:layout_height="63dp"
+        android:layout_width="296dp"
+        android:layout_height="76dp"
         android:backgroundTint="#009688"
         android:text="Ingresar"
         android:textColorHighlight="#009688"
         android:textColorLink="#009688"
-        android:textSize="20sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -83,19 +83,20 @@
 
     <Button
         android:id="@+id/btnRegistrar"
-        android:layout_width="170dp"
-        android:layout_height="63dp"
+        android:layout_width="296dp"
+        android:layout_height="76dp"
         android:backgroundTint="#009688"
+        android:nextFocusDown="@id/userPassword"
         android:text="Registrarte"
         android:textColorHighlight="#009688"
         android:textColorLink="#009688"
-        android:textSize="20sp"
-        android:nextFocusDown="@id/userPassword"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.914"
+        app:layout_constraintVertical_bias="0.944"
         app:rippleColor="#009688" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

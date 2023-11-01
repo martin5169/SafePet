@@ -93,7 +93,7 @@ class PaseadoresList : Fragment() {
                     }
                     adapter.notifyDataSetChanged()
                     Log.d("CHANGE", adapter.paseadores.joinToString())
-                    progressBar = v.findViewById(R.id.progressBar2)
+                    //progressBar = v.findViewById(R.id.progressBar2)
                 }
 
                 override fun onNothingSelected(parentView: AdapterView<*>?) {

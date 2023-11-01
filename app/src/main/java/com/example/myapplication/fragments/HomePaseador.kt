@@ -73,28 +73,39 @@ class HomePaseador : Fragment() {
         }
 
         btnPasearAhora.setOnClickListener {
-            showConfirmationDialog(user.dni)
+            val user = UserSession.user as Paseador
+            val newState = !user.estaPaseando // Invierto el estado actual
+            showConfirmationDialog(user.dni, newState)
         }
 
     }
 
-    private fun showConfirmationDialog(dni: String) {
+    private fun showConfirmationDialog(dni: String, newState: Boolean) {
         val builder = AlertDialog.Builder(requireContext())
-
         builder.setTitle("Confirmación")
-        val message = if((UserSession.user as Paseador).estaPaseando) {
-            "¿Estás seguro de desactivar tu ubicación?"
-        }else {
+        val message = if(newState) {
             "¿Estás seguro de hacer visible tu ubicación?"
+        } else {
+            "¿Estás seguro de desactivar tu ubicación?"
         }
         builder.setMessage(message)
         builder.setPositiveButton("Sí") { _, _ ->
-            paseadorRepository.updateEstaPaseando(dni, !(UserSession.user as Paseador).estaPaseando)
-            (UserSession.user as Paseador).estaPaseando = !(UserSession.user as Paseador).estaPaseando
-            viewModel.createLocationCallback(UserSession.user.dni)
-            viewModel.startLocationUpdates()
-            Snackbar.make(v, "Ubicación activada", Snackbar.LENGTH_SHORT).show()
-            findNavController().popBackStack()
+            val user = UserSession.user as Paseador
+            paseadorRepository.updateEstaPaseando(dni, newState)
+            //viewModel.createLocationCallback(UserSession.user.dni)
+            //viewModel.startLocationUpdates()
+            user.estaPaseando = newState
+            btnPasearAhora.text = if (newState) {
+                "Dejar de Pasear"
+            } else {
+                "Pasear Ahora"
+            }
+
+            if(newState) {
+                Snackbar.make(v, "Ubicación activada", Snackbar.LENGTH_SHORT).show()
+            } else {
+                Snackbar.make(v, "Ubicación desactivada", Snackbar.LENGTH_SHORT).show()
+            }
         }
 
         builder.setNegativeButton("No") { _, _ ->

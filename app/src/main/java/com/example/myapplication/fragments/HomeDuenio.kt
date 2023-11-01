@@ -31,6 +31,7 @@ class HomeDuenio : Fragment() {
     lateinit var btnPedidos: Button
     lateinit var btnPerfilPet: Button
     lateinit var btnHistorial: Button
+    lateinit var btnBuscarPaseadores: Button
     lateinit var fusedLocationClient: FusedLocationProviderClient
     lateinit var progressBar: ProgressBar
     lateinit var mainLayout: ConstraintLayout
@@ -46,6 +47,7 @@ class HomeDuenio : Fragment() {
         text = v.findViewById(R.id.welcomeTextDuenio)
         btnHistorial = v.findViewById(R.id.btnHistorial)
         btnPerfilPet = v.findViewById(R.id.btnPerfilPet)
+        //btnBuscarPaseadores = v.findViewById(R.id.btnBuscarPaseadores)
         textDireccion = v.findViewById(R.id.direccionText)
         progressBar = v.findViewById(R.id.progressBar)
         mainLayout = v.findViewById(R.id.frameLayout2)
@@ -98,6 +100,8 @@ class HomeDuenio : Fragment() {
             val action = HomeDuenioDirections.actionHome2ToPerfilPet()
             findNavController().navigate(action)
         }
+
+
 
     }
 

@@ -9,123 +9,22 @@
 
     <Button
         android:id="@+id/btnHistorial"
-        android:layout_width="252dp"
-        android:layout_height="76dp"
+        android:layout_width="296dp"
+        android:layout_height="95dp"
         android:backgroundTint="#009688"
         android:text="Mis paseos"
         android:textColorHighlight="#009688"
         android:textColorLink="#009688"
-        android:textSize="20sp"
+        android:textSize="24sp"
         app:icon="@drawable/icons8list50"
         app:iconPadding="0dp"
         app:iconSize="44dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.303"
+        app:layout_constraintVertical_bias="0.428"
         app:rippleColor="#009688" />
-
-    <Button
-        android:id="@+id/btnNavigate10"
-        android:layout_width="252dp"
-        android:layout_height="76dp"
-        android:backgroundTint="#009688"
-        android:text="Buscar paseador"
-        android:textColorHighlight="#009688"
-        android:textColorLink="#009688"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.927"
-        app:rippleColor="#009688" />
-
-    <Button
-        android:id="@+id/btnPaseadores"
-        android:layout_width="252dp"
-        android:layout_height="76dp"
-        android:backgroundTint="#009688"
-        android:text="Ver paseadores"
-        android:textColorHighlight="#009688"
-        android:textColorLink="#009688"
-        android:textSize="20sp"
-        app:icon="@drawable/icons8dog51paseadorperfil"
-        app:iconPadding="0dp"
-        app:iconSize="44dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.723"
-        app:rippleColor="#009688" />
-
-    <Button
-        android:id="@+id/btnPerfilPet"
-        android:layout_width="252dp"
-        android:layout_height="76dp"
-        android:backgroundTint="#009688"
-        android:text="Mi mascota"
-        android:textColorHighlight="#009688"
-        android:textColorLink="#009688"
-        android:textSize="20sp"
-        app:icon="@drawable/pets"
-        app:iconPadding="0dp"
-        app:iconSize="44dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499"
-        app:rippleColor="#009688" />
-
-    <TextView
-        android:id="@+id/welcomeTextDuenio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="34sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.057" />
-
-    <TextView
-        android:id="@+id/direccionText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="TextView"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnHistorial"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.623"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcomeTextDuenio"
-        app:layout_constraintVertical_bias="0.298" />
-
-    <ImageView
-        android:id="@+id/imageView14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="7dp"
-        android:layout_marginBottom="26dp"
-        android:src="@drawable/icons8location50"
-        app:layout_constraintBottom_toTopOf="@+id/btnHistorial"
-        app:layout_constraintEnd_toStartOf="@+id/direccionText"
-        app:layout_constraintHorizontal_bias="0.945"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcomeTextDuenio"
-        app:layout_constraintVertical_bias="0.0" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -134,7 +33,103 @@
         android:layout_height="162dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.73" />
+
+    <Button
+        android:id="@+id/btnPaseadores"
+        android:layout_width="296dp"
+        android:layout_height="95dp"
+        android:backgroundTint="#009688"
+        android:text="Ver paseadores"
+        android:textColorHighlight="#009688"
+        android:textColorLink="#009688"
+        android:textSize="24sp"
+        app:icon="@drawable/icons8dog51paseadorperfil"
+        app:iconPadding="0dp"
+        app:iconSize="44dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.939"
+        app:rippleColor="#009688" />
+
+    <Button
+        android:id="@+id/btnPerfilPet"
+        android:layout_width="296dp"
+        android:layout_height="95dp"
+        android:backgroundTint="#009688"
+        android:text="Mi mascota"
+        android:textColorHighlight="#009688"
+        android:textColorLink="#009688"
+        android:textSize="24sp"
+        app:icon="@drawable/pets"
+        app:iconPadding="0dp"
+        app:iconSize="44dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.684"
+        app:rippleColor="#009688" />
+
+    <TextView
+        android:id="@+id/welcomeTextDuenio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.618"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.088" />
+
+    <ImageView
+        android:id="@+id/imageView14"
+        android:layout_width="45dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="7dp"
+        android:layout_marginBottom="26dp"
+        android:src="@drawable/icons8location50"
+        app:layout_constraintBottom_toTopOf="@+id/btnHistorial"
+        app:layout_constraintEnd_toStartOf="@+id/direccionText"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/welcomeTextDuenio"
+        app:layout_constraintVertical_bias="0.523" />
+
+    <TextView
+        android:id="@+id/direccionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="TextView"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnHistorial"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.641"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/welcomeTextDuenio"
+        app:layout_constraintVertical_bias="0.457" />
+
+    <ImageView
+        android:id="@+id/imageView20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="193dp"
+        android:src="@drawable/icons8wavinghandemoji48"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/welcomeTextDuenio"
+        app:layout_constraintHorizontal_bias="0.728"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

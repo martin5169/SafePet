@@ -10,6 +10,7 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 
 class HomePaseadorViewModel : ViewModel() {
@@ -20,7 +21,9 @@ class HomePaseadorViewModel : ViewModel() {
     val paseadorRepository = PaseadorRepository()
 
     @SuppressLint("MissingPermission")
+
     fun startLocationUpdates() {
+
         val locationRequest = LocationRequest.Builder(2000)
             .setPriority(Priority.PRIORITY_HIGH_ACCURACY)
             .build()

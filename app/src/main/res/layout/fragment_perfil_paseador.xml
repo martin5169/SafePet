@@ -29,7 +29,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.684" />
+        app:layout_constraintVertical_bias="0.666" />
 
     <TextView
         android:id="@+id/password7"
@@ -85,7 +85,7 @@
         android:id="@+id/password10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="152dp"
+        android:layout_marginBottom="180dp"
         android:text="CONTRASEÑA"
         android:textAllCaps="true"
         android:textColor="@color/design_default_color_secondary_variant"
@@ -93,6 +93,7 @@
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/lastName"
         app:layout_constraintVertical_bias="0.334" />

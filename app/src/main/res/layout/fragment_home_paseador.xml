@@ -13,23 +13,23 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textColor="#000000"
-        android:textSize="34sp"
+        android:textSize="26sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.581"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.083" />
+        app:layout_constraintVertical_bias="0.08" />
 
     <Button
         android:id="@+id/btnPerfilPaseador"
-        android:layout_width="252dp"
-        android:layout_height="76dp"
+        android:layout_width="296dp"
+        android:layout_height="95dp"
         android:backgroundTint="#009688"
         android:text="Ver mi perfil"
         android:textColorHighlight="#009688"
         android:textColorLink="#009688"
-        android:textSize="20sp"
+        android:textSize="24sp"
         app:icon="@drawable/icons8dog51paseadorperfil"
         app:iconPadding="0dp"
         app:iconSize="44dp"
@@ -43,13 +43,15 @@
 
     <Button
         android:id="@+id/mediosDeCobroPaseador2"
-        android:layout_width="252dp"
-        android:layout_height="76dp"
+        android:layout_width="296dp"
+        android:layout_height="95dp"
         android:backgroundTint="#009688"
-        android:text="Ver mis medios de cobro"
+        android:text="Mis medios de cobro"
         android:textColorHighlight="#009688"
         android:textColorLink="#009688"
-        android:textSize="20sp"
+        android:textSize="24sp"
+        app:icon="@drawable/icons8card50"
+        app:iconSize="44dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
@@ -60,13 +62,13 @@
 
     <Button
         android:id="@+id/btnHistorialPaseador"
-        android:layout_width="252dp"
-        android:layout_height="76dp"
+        android:layout_width="296dp"
+        android:layout_height="95dp"
         android:backgroundTint="#009688"
         android:text="Mis paseos"
         android:textColorHighlight="#009688"
         android:textColorLink="#009688"
-        android:textSize="20sp"
+        android:textSize="24sp"
         app:icon="@drawable/icons8list50"
         app:iconPadding="0dp"
         app:iconSize="44dp"
@@ -80,13 +82,13 @@
 
     <Button
         android:id="@+id/mapaPaseador2"
-        android:layout_width="252dp"
-        android:layout_height="76dp"
+        android:layout_width="296dp"
+        android:layout_height="95dp"
         android:backgroundTint="#009688"
         android:text="Pasear ahora"
         android:textColorHighlight="#009688"
         android:textColorLink="#009688"
-        android:textSize="20sp"
+        android:textSize="24sp"
         app:icon="@drawable/icons8ok50"
         app:iconPadding="0dp"
         app:iconSize="44dp"
@@ -97,5 +99,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.449"
         app:rippleColor="#009688" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icons8wavinghandemoji48"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/welcomeTextPaseador"
+        app:layout_constraintHorizontal_bias="0.821"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.083" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
