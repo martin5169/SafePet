@@ -33,7 +33,7 @@ class PaseadorHistorial : Fragment() {
     lateinit var adaptador: ArrayAdapter<String>
     lateinit var paseos: List<PaseoProgramado>
     lateinit var progressBar: ProgressBar
-    val estados = mutableListOf("TODOS","ACTIVO", "NO_ACTIVO", "FINALIZADO")
+    val estados = mutableListOf("TODOS","ACTIVO", "PENDIENTE", "FINALIZADO")
     var paseosOriginales: List<PaseoProgramado> = mutableListOf()
     var paseosFiltrados: List<PaseoProgramado> = mutableListOf()
     override fun onCreateView(

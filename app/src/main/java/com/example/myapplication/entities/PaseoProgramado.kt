@@ -10,7 +10,7 @@ class PaseoProgramado(): Parcelable {
     var user: User = User()
     var fecha : String = ""
     var id : String=""
-    var estado: EstadoEnum = EstadoEnum.NO_ACTIVO
+    var estado: EstadoEnum = EstadoEnum.PENDIENTE
     var calificacion : Int = 0
     var medioDePago: MedioDePagoEnum = MedioDePagoEnum.EFECTIVO
 

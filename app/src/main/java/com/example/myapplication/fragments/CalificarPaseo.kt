@@ -92,6 +92,7 @@ class CalificarPaseo : Fragment()  {
                     paseo.paseador.promedioPuntuaciones=promedioNuevo
                     Log.d(paseador.promedioPuntuaciones.toString(), "prom: ")
                     Snackbar.make(v, "Calificacion asignada con éxito", Snackbar.LENGTH_SHORT).show()
+                    findNavController().popBackStack()
                 }
 
             }

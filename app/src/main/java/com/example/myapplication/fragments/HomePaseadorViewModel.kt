@@ -15,14 +15,13 @@ import com.google.android.gms.location.Priority
 
 class HomePaseadorViewModel : ViewModel() {
 
-    lateinit var location: FusedLocationProviderClient
     lateinit var locationCallback: LocationCallback
     val paseoRepository = PaseoRepository()
     val paseadorRepository = PaseadorRepository()
 
     @SuppressLint("MissingPermission")
 
-    fun startLocationUpdates() {
+    fun startLocationUpdates(location: FusedLocationProviderClient) {
 
         val locationRequest = LocationRequest.Builder(2000)
             .setPriority(Priority.PRIORITY_HIGH_ACCURACY)

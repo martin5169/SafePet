@@ -21,13 +21,15 @@
 
     <Button
         android:id="@+id/bntRegisterDueño"
-        android:layout_width="252dp"
+        android:layout_width="296dp"
         android:layout_height="76dp"
         android:backgroundTint="#009688"
         android:text="Dueño"
         android:textColorHighlight="#009688"
         android:textColorLink="#009688"
-        android:textSize="20sp"
+        android:textSize="24sp"
+        app:icon="@drawable/icons8person30"
+        app:iconSize="44dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -38,13 +40,15 @@
 
     <Button
         android:id="@+id/btnRegisterPaseador"
-        android:layout_width="252dp"
-        android:layout_height="76dp"
+        android:layout_width="288dp"
+        android:layout_height="81dp"
         android:backgroundTint="#009688"
         android:text="Paseador"
         android:textColorHighlight="#009688"
         android:textColorLink="#009688"
-        android:textSize="20sp"
+        android:textSize="24sp"
+        app:icon="@drawable/icons8pet50paseadorlist"
+        app:iconSize="44dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -53,4 +57,18 @@
         app:layout_constraintVertical_bias="0.478"
         app:rippleColor="#009688" />
 
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="329dp"
+        android:layout_height="63dp"
+        android:fontFamily="sans-serif"
+        android:text="SAFEPET"
+        android:textAlignment="center"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.32" />
 </androidx.constraintlayout.widget.ConstraintLayout>

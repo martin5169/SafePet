@@ -91,7 +91,7 @@ class PaseadorRepository() {
   }
 
 
-  fun updateTarifa(userDni: String, newTarifa: String) {
+  fun updateTarifaYAlias(userDni: String, newTarifa: String, newAlias: String) {
     val usersQuery = paseadoresReference.orderByChild("dni").equalTo(userDni)
 
     usersQuery.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -100,6 +100,7 @@ class PaseadorRepository() {
           for (userSnapshot in snapshot.children) {
 
             userSnapshot.ref.child("tarifa").setValue(newTarifa.toInt())
+            userSnapshot.ref.child("alias").setValue(newAlias)
 
           }
         }

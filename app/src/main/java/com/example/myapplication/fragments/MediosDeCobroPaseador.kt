@@ -21,6 +21,7 @@ class MediosDeCobroPaseador : Fragment() {
 
     lateinit var v : View
     lateinit var tarifa : EditText
+    lateinit var alias : EditText
     lateinit var btnEdit: Button
 
     private lateinit var viewModel: MediosDeCobroPaseadorViewModel
@@ -31,6 +32,7 @@ class MediosDeCobroPaseador : Fragment() {
     ): View? {
         v =  inflater.inflate(R.layout.fragment_medios_de_cobro_paseador, container, false)
         tarifa = v.findViewById(R.id.paseadorTarifas)
+        alias = v.findViewById(R.id.aliasPaseador)
         btnEdit = v.findViewById(R.id.editDatosCobro)
 
         return v
@@ -41,12 +43,12 @@ class MediosDeCobroPaseador : Fragment() {
         val user = UserSession.user as Paseador
 
         tarifa.setText(user.tarifa.toString())
-
+        alias.setText(user.alias)
         btnEdit.setOnClickListener {
             val enteredTarifa = tarifa.text.toString()
-
-            if (enteredTarifa.isNotEmpty()) {
-                showConfirmationDialog(user, enteredTarifa)
+            val enteredAlias = alias.text.toString()
+            if (enteredTarifa.isNotEmpty() && enteredAlias.isNotEmpty()) {
+                showConfirmationDialog(user, enteredTarifa, enteredAlias)
                 user.tarifa = enteredTarifa.toInt()
             } else {
                 Snackbar.make(v, "Todos los campos son requeridos", Snackbar.LENGTH_SHORT).show()
@@ -55,7 +57,7 @@ class MediosDeCobroPaseador : Fragment() {
 
     }
 
-    private fun showConfirmationDialog(user: UserAbstract, enteredTarifa: String) {
+    private fun showConfirmationDialog(user: UserAbstract, enteredTarifa: String, enteredAlias: String) {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("Confirmación")
         builder.setMessage("¿Estás seguro de actualizar tus datos?")
@@ -63,7 +65,7 @@ class MediosDeCobroPaseador : Fragment() {
         builder.setPositiveButton("Sí") { _, _ ->
             // Usuario confirma, realiza la actualización
             val paseadorRepository = PaseadorRepository.getInstance()
-            paseadorRepository.updateTarifa(user.dni, enteredTarifa)
+            paseadorRepository.updateTarifaYAlias(user.dni, enteredTarifa, enteredAlias)
             Snackbar.make(v, "Datos actualizados con éxito", Snackbar.LENGTH_SHORT).show()
             // ARREGLAR ESTO>> actualizar la tarifa
 

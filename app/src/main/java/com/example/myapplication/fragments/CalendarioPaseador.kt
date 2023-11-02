@@ -42,7 +42,7 @@ class CalendarioPaseador : Fragment() {
     val programadoRepository = PaseoRepository.getInstance()
     val horarios = mutableListOf("10:00hs", "11:00hs", "12:00hs")
     private val originalHorarios = mutableListOf("10:00hs", "11:00hs", "12:00hs")
-    val mediosDePagoList = mutableListOf("Efectivo", "Pago Online")
+    val mediosDePagoList = mutableListOf("Efectivo", "Transferencia")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -166,11 +166,11 @@ class CalendarioPaseador : Fragment() {
             }else {
                 paseador.tarifa
             }
-            val paseoProgramado = PaseoProgramado(paseador, user, dateTimeString, EstadoEnum.NO_ACTIVO,0)
+            val paseoProgramado = PaseoProgramado(paseador, user, dateTimeString, EstadoEnum.PENDIENTE,0)
             paseoProgramado.medioDePago = if(medioDePagoText == "EFECTIVO") {
                 MedioDePagoEnum.EFECTIVO
             } else {
-                MedioDePagoEnum.TARJETA
+                MedioDePagoEnum.TRANSFERENCIA
             }
             paseoProgramadoRepository.addPaseo(paseoProgramado)
             Snackbar.make(v, "Fecha y hora asignadas con éxito", Snackbar.LENGTH_SHORT).show()

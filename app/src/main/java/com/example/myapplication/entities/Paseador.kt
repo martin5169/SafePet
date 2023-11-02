@@ -14,6 +14,7 @@ class Paseador(): Parcelable, UserAbstract() {
     var tarifa: Int = 0
     var puntuaciones: MutableList<Int> = mutableListOf()
     var promedioPuntuaciones : Int = 0
+    var alias: String = ""
 
     constructor(name: String, lastName: String, password: String, dni: String, mail:String) : this() {
         this.name = name

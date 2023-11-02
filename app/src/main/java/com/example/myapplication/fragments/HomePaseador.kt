@@ -15,6 +15,8 @@ import com.example.myapplication.entities.EstadoEnum
 import com.example.myapplication.entities.Paseador
 import com.example.myapplication.entities.UserSession
 import com.example.myapplication.repository.PaseadorRepository
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.material.snackbar.Snackbar
 
 class HomePaseador : Fragment() {
@@ -26,6 +28,7 @@ class HomePaseador : Fragment() {
     lateinit var btnMediosCobro: Button
     lateinit var btnPasearAhora: Button
     lateinit var viewModel: HomePaseadorViewModel
+    lateinit var location: FusedLocationProviderClient
     val paseadorRepository = PaseadorRepository.getInstance()
 
     override fun onCreateView(
@@ -40,7 +43,7 @@ class HomePaseador : Fragment() {
         btnHistorial = v.findViewById(R.id.btnHistorialPaseador)
         text = v.findViewById(R.id.welcomeTextPaseador)
         viewModel = HomePaseadorViewModel()
-
+        location = LocationServices.getFusedLocationProviderClient(requireContext())
         btnMediosCobro = v.findViewById(R.id.mediosDeCobroPaseador2)
 
 
@@ -92,8 +95,8 @@ class HomePaseador : Fragment() {
         builder.setPositiveButton("Sí") { _, _ ->
             val user = UserSession.user as Paseador
             paseadorRepository.updateEstaPaseando(dni, newState)
-            //viewModel.createLocationCallback(UserSession.user.dni)
-            //viewModel.startLocationUpdates()
+            viewModel.createLocationCallback(UserSession.user.dni)
+            viewModel.startLocationUpdates(location)
             user.estaPaseando = newState
             btnPasearAhora.text = if (newState) {
                 "Dejar de Pasear"
