@@ -1,6 +1,5 @@
 package com.example.myapplication.fragments
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -10,19 +9,14 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
 import com.google.android.material.snackbar.Snackbar
 import com.example.myapplication.entities.Paseador
 import com.example.myapplication.repository.PaseadorRepository
 import com.example.myapplication.entities.User
-import com.example.myapplication.entities.UserAbstract
-import com.example.myapplication.entities.UserSession
 import com.example.myapplication.repository.UserRepository
-import com.google.firebase.auth.ActionCodeSettings
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.actionCodeSettings
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -62,7 +56,6 @@ class RegisterForm : Fragment() {
     override fun onStart() {
         super.onStart()
         val seleccion = arguments?.getString("opcion")
-
         btnRegister.setOnClickListener {
             val enteredName = name.text.toString()
             val enteredLastName = lastName.text.toString()
@@ -73,10 +66,17 @@ class RegisterForm : Fragment() {
             if (seleccion == "paseador") {
                 paseadoresRepository.getPaseadores { paseadoresList ->
                     val paseadorByDni = paseadoresList.find { it.dni == enteredDni }
+                    val paseadorByMail = paseadoresList.find { it.mail == enteredMail }
                     if (paseadorByDni != null) {
                         Snackbar.make(
                             v,
                             "El DNI ingresado ya está registrado.",
+                            Snackbar.LENGTH_SHORT
+                        ).show()
+                    } else if (paseadorByMail != null) {
+                        Snackbar.make(
+                            v,
+                            "El correo electrónico ingresado ya está registrado.",
                             Snackbar.LENGTH_SHORT
                         ).show()
                     } else {
@@ -87,6 +87,8 @@ class RegisterForm : Fragment() {
                             enteredDni,
                             enteredMail
                         )
+                        paseadoresRepository.addUser(newPaseador)
+
                         auth.createUserWithEmailAndPassword(enteredMail, enteredPass)
                             .addOnCompleteListener(requireActivity()) { task ->
                                 if (task.isSuccessful) {
@@ -94,10 +96,15 @@ class RegisterForm : Fragment() {
                                     Log.d("REGISTER", "createUserWithEmail:success")
                                     val user = auth.currentUser
                                     user?.sendEmailVerification()
-
+                                    Snackbar.make(
+                                        v,
+                                        "Paseador registrado con éxito",
+                                        Snackbar.LENGTH_SHORT
+                                    )
+                                        .show()
                                     val action =
                                         RegisterFormDirections.actionRegisterForm2ToLogin22()
-                                    showDialog(action, seleccion, newPaseador)
+                                    findNavController().navigate(action)
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     Log.w("REGISTER", "createUserWithEmail:failure", task.exception)
@@ -113,10 +120,17 @@ class RegisterForm : Fragment() {
             } else {
                 usersRepository.getUsers { userList ->
                     val userByDni = userList.find { it.dni == enteredDni }
+                    val userByMail = userList.find { it.mail == enteredMail }
                     if (userByDni != null) {
                         Snackbar.make(
                             v,
                             "El DNI ingresado ya está registrado.",
+                            Snackbar.LENGTH_SHORT
+                        ).show()
+                    } else if (userByMail != null) {
+                        Snackbar.make(
+                            v,
+                            "El correo electrónico ingresado ya está registrado.",
                             Snackbar.LENGTH_SHORT
                         ).show()
                     } else {
@@ -124,7 +138,8 @@ class RegisterForm : Fragment() {
                         auth.createUserWithEmailAndPassword(enteredMail, enteredPass)
                             .addOnCompleteListener(requireActivity()) { task ->
                                 if (task.isSuccessful) {
-                                    // Sign in success, update UI with the signed-in user's information
+                                    val user = auth.currentUser
+                                    user?.sendEmailVerification()
                                     Log.d("REGISTER", "createUserWithEmail:success")
                                     val newUser =
                                         User(
@@ -134,10 +149,16 @@ class RegisterForm : Fragment() {
                                             enteredDni,
                                             enteredMail
                                         )
-
+                                    usersRepository.addUser(newUser)
+                                    Snackbar.make(
+                                        v,
+                                        "Usuario registrado con éxito",
+                                        Snackbar.LENGTH_SHORT
+                                    )
+                                        .show()
                                     val action =
                                         RegisterFormDirections.actionRegisterForm2ToLogin22()
-                                    showDialog(action, seleccion!!, newUser)
+                                    findNavController().navigate(action)
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     Log.w("REGISTER", "createUserWithEmail:failure", task.exception)
@@ -153,54 +174,6 @@ class RegisterForm : Fragment() {
                 }
             }
         }
-    }
-
-    private fun showDialog(action: NavDirections, seleccion: String, user: UserAbstract) {
-        val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("Confirma tu Email")
-        val input = EditText(requireContext())
-
-        builder.setView(input)
-
-        builder.setPositiveButton("Confirmar") { dialog, _ ->
-            if(input.text.toString() == "12345"){
-                Snackbar.make(
-                    v,
-                    "Se valido el mail correctamente",
-                    Snackbar.LENGTH_SHORT
-                ).show()
-                if(seleccion == "paseador") {
-                    paseadoresRepository.addUser(user as Paseador)
-                    Snackbar.make(
-                        v,
-                        "Paseador registrado con éxito",
-                        Snackbar.LENGTH_SHORT
-                    )
-                        .show()
-                } else {
-                    usersRepository.addUser(user as User)
-                    Snackbar.make(
-                        v,
-                        "Usuario registrado con éxito",
-                        Snackbar.LENGTH_SHORT
-                    )
-                        .show()
-                }
-                findNavController().navigate(action)
-                dialog.dismiss()
-
-            }else {
-                Snackbar.make(
-                    v,
-                    "El codigo ingresado es incorrecto.",
-                    Snackbar.LENGTH_SHORT
-                ).show()
-
-            }
-
-        }
-        val dialog = builder.create()
-        dialog.show()
     }
 
 }
