@@ -46,7 +46,7 @@ class PerfilUser : Fragment() {
         dni = v.findViewById(R.id.dniUser)
         contraseña = v.findViewById(R.id.cambiarPass2)
         mail = v.findViewById(R.id.userMail)
-        btnEdit = v.findViewById(R.id.editPerfil)
+        //btnEdit = v.findViewById(R.id.editPerfil)
         auth = Firebase.auth
 
         return v
@@ -61,16 +61,7 @@ class PerfilUser : Fragment() {
             dni.text = user.dni
             mail.text = user.mail
         }
-        btnEdit.setOnClickListener {
-            val enteredMail = mail.text.toString()
 
-            if (enteredMail.isNotEmpty()) {
-                showConfirmationDialog(user, enteredMail)
-
-            } else {
-                Snackbar.make(v, "Todos los campos son requeridos", Snackbar.LENGTH_SHORT).show()
-            }
-        }
         contraseña.setOnClickListener {
             val builder = AlertDialog.Builder(requireContext())
             builder.setTitle("Cambio de Contraseña")

@@ -17,7 +17,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.518" />
+        app:layout_constraintVertical_bias="0.569" />
 
     <TextView
         android:id="@+id/paseadorMail2"
@@ -29,7 +29,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.666" />
+        app:layout_constraintVertical_bias="0.717" />
 
     <TextView
         android:id="@+id/password7"
@@ -47,7 +47,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.325" />
+        app:layout_constraintVertical_bias="0.36" />
 
     <TextView
         android:id="@+id/password9"
@@ -63,7 +63,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.601" />
+        app:layout_constraintVertical_bias="0.651" />
 
     <TextView
         android:id="@+id/password8"
@@ -78,14 +78,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.454" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/password10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="180dp"
+        android:layout_marginBottom="128dp"
         android:text="CONTRASEÑA"
         android:textAllCaps="true"
         android:textColor="@color/design_default_color_secondary_variant"
@@ -99,24 +98,15 @@
         app:layout_constraintVertical_bias="0.334" />
 
     <Button
-        android:id="@+id/editPerfil2"
-        android:layout_width="292dp"
-        android:layout_height="76dp"
+        android:id="@+id/cambiarPass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
         android:backgroundTint="#009688"
-        android:text="Editar mis datos"
-        android:textColorHighlight="#009688"
-        android:textColorLink="#009688"
-        android:textSize="20sp"
-        app:icon="@drawable/icons8dog51paseadorperfil"
-        app:iconPadding="0dp"
-        app:iconSize="44dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Cambiar Contraseña"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.477"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.979"
-        app:rippleColor="#009688" />
+        app:layout_constraintTop_toBottomOf="@+id/password10" />
 
     <TextView
         android:id="@+id/password3"
@@ -131,10 +121,10 @@
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.204" />
+        app:layout_constraintVertical_bias="0.242" />
 
     <TextView
         android:id="@+id/lastNamePaseador"
@@ -146,7 +136,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.389" />
+        app:layout_constraintVertical_bias="0.422" />
 
     <TextView
         android:id="@+id/namePaseador"
@@ -158,7 +148,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.261" />
+        app:layout_constraintVertical_bias="0.288" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -171,18 +161,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.023" />
-
-    <Button
-        android:id="@+id/cambiarPass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="#009688"
-        android:text="Cambiar Contraseña"
-        app:layout_constraintBottom_toTopOf="@+id/editPerfil2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password10"
-        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -50,6 +50,7 @@ class MediosDeCobroPaseador : Fragment() {
             if (enteredTarifa.isNotEmpty() && enteredAlias.isNotEmpty()) {
                 showConfirmationDialog(user, enteredTarifa, enteredAlias)
                 user.tarifa = enteredTarifa.toInt()
+                user.alias = enteredAlias
             } else {
                 Snackbar.make(v, "Todos los campos son requeridos", Snackbar.LENGTH_SHORT).show()
             }

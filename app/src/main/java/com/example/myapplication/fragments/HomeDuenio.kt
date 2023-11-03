@@ -101,8 +101,6 @@ class HomeDuenio : Fragment() {
             findNavController().navigate(action)
         }
 
-
-
     }
 
     fun showPopUp(user: User, direccion: String, location: android.location.Location) {
