@@ -19,7 +19,6 @@ class FiltroSpinnerAdapter(context: Context, resource: Int, private val data: Li
         val textView = view.findViewById<TextView>(android.R.id.text1)
 
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f)
-        view.setBackgroundColor(R.color.colorPaseoAnterior)
 
         return view
     }

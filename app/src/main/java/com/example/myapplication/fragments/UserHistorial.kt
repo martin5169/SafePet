@@ -7,9 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.Spinner
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatSpinner
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -29,7 +31,7 @@ class UserHistorial : Fragment() {
     lateinit var paseosRepository: PaseoRepository
     lateinit var adapter: PaseosProgramadosAdapter
     lateinit var textoSinPaseos : TextView
-    lateinit var spinner : Spinner
+    lateinit var spinner : AppCompatSpinner
     lateinit var adaptador: FiltroSpinnerAdapter
     lateinit var paseos: List<PaseoProgramado>
     lateinit var progressBar: ProgressBar
@@ -46,11 +48,10 @@ class UserHistorial : Fragment() {
         recyclerPaseosList = v.findViewById(R.id.recyclerPaseo)
         paseosRepository = PaseoRepository.getInstance()
         textoSinPaseos = v.findViewById(R.id.notificacionVacioUser)
-        spinner = v.findViewById(R.id.filtroEstadosDuenio)
+        spinner = v.findViewById<AppCompatSpinner>(R.id.filtroEstadosDuenioSpinner)
         adaptador = FiltroSpinnerAdapter(requireContext(), android.R.layout.simple_spinner_item, estados)
         adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adaptador
-
 
         progressBar = v.findViewById(R.id.progressBar)
 

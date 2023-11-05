@@ -2,4 +2,6 @@
 <resources>
     <color name="colorPaseoAnterior">#674C97</color> <!-- Color para paseos anteriores (rojo) -->
     <color name="colorPaseoNormal">#656161</color> <!-- Color para paseos normales (blanco) -->
+    <color name="colorDropDown">#656161</color>
+    <color name="colorDropDownBtn">#5B5757</color>
 </resources>

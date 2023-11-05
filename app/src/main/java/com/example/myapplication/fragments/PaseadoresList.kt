@@ -12,10 +12,12 @@ import android.widget.ArrayAdapter
 import android.widget.ProgressBar
 import android.widget.Spinner
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatSpinner
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
+import com.example.myapplication.adapters.FiltroSpinnerAdapter
 import com.example.myapplication.entities.Paseador
 import com.example.myapplication.repository.PaseadorRepository
 
@@ -25,8 +27,8 @@ class PaseadoresList : Fragment() {
     lateinit var recyclerPaseadores: RecyclerView
     lateinit var paseadoresRepository: PaseadorRepository
     lateinit var txtTitle : TextView
-    lateinit var spinner : Spinner
-    lateinit var adaptador: ArrayAdapter<String>
+    lateinit var spinner : AppCompatSpinner
+    lateinit var adaptador: FiltroSpinnerAdapter
     lateinit var progressBar: ProgressBar
     val estados = mutableListOf("TODOS","ACTIVO")
     var paseadoresOriginales: List<Paseador> = mutableListOf()
@@ -40,8 +42,8 @@ class PaseadoresList : Fragment() {
         v = inflater.inflate(R.layout.fragment_paseadores_list, container, false)
         recyclerPaseadores = v.findViewById(R.id.recyclerUser)
         paseadoresRepository = PaseadorRepository.getInstance()
-        spinner = v.findViewById(R.id.filtroEstadosPaseadores)
-        adaptador = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, estados)
+        spinner = v.findViewById<AppCompatSpinner>(R.id.filtroEstadosPaseadoresSpinner)
+        adaptador = FiltroSpinnerAdapter(requireContext(), android.R.layout.simple_spinner_item, estados)
         adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adaptador
 

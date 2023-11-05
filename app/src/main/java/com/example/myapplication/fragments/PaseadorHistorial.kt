@@ -11,10 +11,12 @@ import android.widget.ArrayAdapter
 import android.widget.ProgressBar
 import android.widget.Spinner
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatSpinner
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
+import com.example.myapplication.adapters.FiltroSpinnerAdapter
 import com.example.myapplication.adapters.PaseosProgramadosAdapter
 import com.example.myapplication.entities.EstadoEnum
 import com.example.myapplication.entities.PaseoProgramado
@@ -29,8 +31,8 @@ class PaseadorHistorial : Fragment() {
     lateinit var paseosRepository: PaseoRepository
     lateinit var adapter: PaseosProgramadosAdapter
     lateinit var textoSinPaseos : TextView
-    lateinit var spinner : Spinner
-    lateinit var adaptador: ArrayAdapter<String>
+    lateinit var spinner : AppCompatSpinner
+    lateinit var adaptador: FiltroSpinnerAdapter
     lateinit var paseos: List<PaseoProgramado>
     lateinit var progressBar: ProgressBar
     val estados = mutableListOf("TODOS","ACTIVO", "PENDIENTE", "FINALIZADO")
@@ -45,8 +47,8 @@ class PaseadorHistorial : Fragment() {
         recyclerPaseosPaseador = v.findViewById(R.id.recyclerList)
         textoSinPaseos = v.findViewById(R.id.notificacionVacio)
         paseosRepository = PaseoRepository.getInstance()
-        spinner = v.findViewById(R.id.filtroEstados)
-        adaptador = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, estados)
+        spinner = v.findViewById<AppCompatSpinner>(R.id.filtroEstadosPaseadorSpinner)
+        adaptador = FiltroSpinnerAdapter(requireContext(), android.R.layout.simple_spinner_item, estados)
         adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adaptador
 
