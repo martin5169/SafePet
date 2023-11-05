@@ -16,11 +16,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
-import com.example.myapplication.adapters.PaseosProgramadosAdapter
-import com.example.myapplication.entities.EstadoEnum
 import com.example.myapplication.entities.Paseador
-import com.example.myapplication.entities.PaseoProgramado
-import com.example.myapplication.entities.UserSession
 import com.example.myapplication.repository.PaseadorRepository
 
 class PaseadoresList : Fragment() {
@@ -93,7 +89,6 @@ class PaseadoresList : Fragment() {
                     }
                     adapter.notifyDataSetChanged()
                     Log.d("CHANGE", adapter.paseadores.joinToString())
-                    //progressBar = v.findViewById(R.id.progressBar2)
                 }
 
                 override fun onNothingSelected(parentView: AdapterView<*>?) {

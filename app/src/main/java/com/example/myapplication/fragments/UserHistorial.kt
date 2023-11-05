@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.ProgressBar
 import android.widget.Spinner
 import android.widget.TextView
@@ -16,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.example.myapplication.adapters.PaseosProgramadosAdapter
+import com.example.myapplication.adapters.FiltroSpinnerAdapter
 import com.example.myapplication.entities.EstadoEnum
 import com.example.myapplication.entities.PaseoProgramado
 import com.example.myapplication.entities.UserSession
@@ -30,7 +30,7 @@ class UserHistorial : Fragment() {
     lateinit var adapter: PaseosProgramadosAdapter
     lateinit var textoSinPaseos : TextView
     lateinit var spinner : Spinner
-    lateinit var adaptador: ArrayAdapter<String>
+    lateinit var adaptador: FiltroSpinnerAdapter
     lateinit var paseos: List<PaseoProgramado>
     lateinit var progressBar: ProgressBar
     val estados = mutableListOf("TODOS","ACTIVO", "PENDIENTE", "FINALIZADO")
@@ -47,7 +47,7 @@ class UserHistorial : Fragment() {
         paseosRepository = PaseoRepository.getInstance()
         textoSinPaseos = v.findViewById(R.id.notificacionVacioUser)
         spinner = v.findViewById(R.id.filtroEstadosDuenio)
-        adaptador = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, estados)
+        adaptador = FiltroSpinnerAdapter(requireContext(), android.R.layout.simple_spinner_item, estados)
         adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adaptador
 
@@ -100,7 +100,7 @@ class UserHistorial : Fragment() {
                 if(selectedValue == "TODOS") {
                     adapter.paseos = paseosOriginales.toMutableList()
                     paseosFiltrados = adapter.paseos
-                }else {
+                } else {
                     adapter.paseos =
                         paseosOriginales.filter { it.estado == EstadoEnum.valueOf(selectedValue) }.toMutableList()
                     paseosFiltrados = adapter.paseos
