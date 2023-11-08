@@ -14,6 +14,7 @@ import com.example.myapplication.repository.PaseadorRepository
 import com.example.myapplication.repository.PaseoRepository
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationResult
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
@@ -60,10 +61,12 @@ class MapaPaseadorViewModel : ViewModel() {
                 if (userLatitude != null && userLongitude != null) {
                     val marcador = marcadores.find { it?.title.equals(user.dni) }
                     if (marcador != null) {
+                        Log.d("ACTUALIZAR CAMARA", "ACTUALIZAR")
                         marcador.position =
                             LatLng(userLatitude as Double, userLongitude as Double)
                     } else {
                         addMarcador(gMap, LatLng(userLatitude as Double, userLongitude as Double), snapshot.key!!)
+
                     }
 
                 }

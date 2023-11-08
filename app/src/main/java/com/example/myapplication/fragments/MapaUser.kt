@@ -52,8 +52,6 @@ class MapaUser : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
         if (ActivityCompat.checkSelfPermission(
                 requireActivity(),
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -81,8 +79,10 @@ class MapaUser : Fragment() {
         paseoRepository.getPaseoUser(userSession.dni).addOnCompleteListener {
             val paseo = it.result?.getValue(PaseoProgramado::class.java)
             if (paseo == null) {
+                //Trae todos los paseos
                 getLocation()
             }else{
+                //Trae un solo paseo
                 mapaViewModel.getPaseoUser(gMap, it.result!!)
             }
         }

@@ -7,6 +7,7 @@ import com.example.myapplication.R
 import com.example.myapplication.entities.Paseador
 import com.example.myapplication.repository.PaseadorRepository
 import com.example.myapplication.repository.PaseoRepository
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
@@ -42,6 +43,7 @@ class MapaViewModel : ViewModel() {
                             LatLng(userLatitude.toDouble(), userLongitude.toDouble())
                     } else {
                         addMarcador(gMap, LatLng(userLatitude, userLongitude), paseador.dni)
+
                     }
                 }
             }
@@ -77,6 +79,7 @@ class MapaViewModel : ViewModel() {
                         marcador.position = LatLng(latitude, longitude)
                     } else {
                         addMarcador(gMap, LatLng(latitude, longitude), paseadorDni)
+                        gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(latitude as Double, longitude as Double), 15f))
                     }
                 }
 

@@ -147,7 +147,7 @@ class PaseoProgramadoDetail : Fragment() {
             btnCalificar.visibility = View.GONE
         }
 
-        if (((fechaHoy.time - 10800000) - fecha.time).absoluteValue >= 300000 && paseo.estado == EstadoEnum.PENDIENTE) {
+        if (((fechaHoy.time - 10800000) - fecha.time).absoluteValue >= 600000 && paseo.estado == EstadoEnum.PENDIENTE) {
             Log.d("FECHA", "FECHA")
             btnIniciarPaseo.visibility = View.GONE
         }
