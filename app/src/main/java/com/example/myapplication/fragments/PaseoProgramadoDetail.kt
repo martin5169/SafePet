@@ -15,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
 import com.example.myapplication.entities.EstadoEnum
 import com.example.myapplication.entities.MedioDePagoEnum
+import com.example.myapplication.entities.Paseador
 import com.example.myapplication.entities.PaseoProgramado
 import com.example.myapplication.entities.User
 import com.example.myapplication.entities.UserAbstract
@@ -113,44 +114,48 @@ class PaseoProgramadoDetail : Fragment() {
             btnIniciarPaseo.text = "El paseo ya inicio"
             btnIniciarPaseo.isEnabled = false
             btnCancelarPaseo.visibility = View.GONE
-            btnCalificar.visibility = if(paseo.calificacion == 0) {
-                View.VISIBLE
-            }else {
-                View.GONE
-            }
         } else if(paseo.estado == EstadoEnum.ACTIVO){
             btnIniciarPaseo.text = "El paseo ya inicio"
             btnIniciarPaseo.isEnabled = false
             btnCancelarPaseo.text = "Finalizar paseo"
             btnCancelarPaseo.visibility = View.VISIBLE
             btnCalificar.visibility = View.GONE
-        } else if (paseo.estado == EstadoEnum.FINALIZADO) {
+        } else if (paseo.estado == EstadoEnum.FINALIZADO && userSession is User) {
             btnIniciarPaseo.text = "El paseo ya finalizo"
             btnIniciarPaseo.isEnabled = false
             btnCancelarPaseo.visibility = View.GONE
+            btnCalificar.visibility = if(paseo.calificacion == 0) {
+                View.VISIBLE
+            }else {
+                View.GONE
+            }
         } else if(paseo.estado == EstadoEnum.FINALIZADO) {
+            btnIniciarPaseo.text = "El paseo ya finalizo"
+            btnIniciarPaseo.isEnabled = false
             btnCancelarPaseo.visibility = View.GONE
             btnCalificar.visibility = View.GONE
-            btnIniciarPaseo.visibility = View.GONE
-        } else if(paseo.estado == EstadoEnum.SOLICITADO) {
+        } else if(paseo.estado == EstadoEnum.SOLICITADO && userSession is Paseador) {
             btnIniciarPaseo.text = "Aceptar paseo"
             btnIniciarPaseo.visibility = View.VISIBLE
             btnCancelarPaseo.text = "Rechazar paseo"
             btnCancelarPaseo.visibility = View.VISIBLE
+        } else if(paseo.estado == EstadoEnum.SOLICITADO && userSession is User) {
+            btnIniciarPaseo.visibility = View.GONE
+            btnCancelarPaseo.visibility = View.VISIBLE
+        } else if(paseo.estado == EstadoEnum.PENDIENTE && userSession is User) {
+            btnIniciarPaseo.visibility = View.GONE
+            btnCalificar.visibility = View.GONE
         }
 
         if (((fechaHoy.time - 10800000) - fecha.time).absoluteValue >= 300000 && paseo.estado == EstadoEnum.PENDIENTE) {
             Log.d("FECHA", "FECHA")
             btnIniciarPaseo.visibility = View.GONE
         }
+
         btnIniciarPaseo.setOnClickListener {
-            if(paseo.estado == EstadoEnum.PAGO_PENDIENTE) {
-                viewModel.realizarPago()
-            }else {
                 comenzarPaseo(location, paseo)
                 findNavController().popBackStack()
                 Snackbar.make(v, "Paseo iniciado exitosamente", Snackbar.LENGTH_SHORT).show()
-            }
         }
 
         btnCancelarPaseo.setOnClickListener {
