@@ -109,14 +109,8 @@ class PaseoProgramadoDetail : Fragment() {
             btnCancelarPaseo.visibility = View.VISIBLE
         }
 
-        if (paseo.estado == EstadoEnum.ACTIVO) {
+        if (paseo.estado == EstadoEnum.ACTIVO && UserSession.user is User) {
             btnIniciarPaseo.text = "El paseo ya inicio"
-            btnIniciarPaseo.isEnabled = false
-            btnCancelarPaseo.visibility = View.GONE
-            btnCancelarPaseo.text = "Finalizar paseo"
-
-        } else if (paseo.estado == EstadoEnum.FINALIZADO && UserSession.user is User) {
-            btnIniciarPaseo.text = "El paseo ya finalizo"
             btnIniciarPaseo.isEnabled = false
             btnCancelarPaseo.visibility = View.GONE
             btnCalificar.visibility = if(paseo.calificacion == 0) {
@@ -124,6 +118,16 @@ class PaseoProgramadoDetail : Fragment() {
             }else {
                 View.GONE
             }
+        } else if(paseo.estado == EstadoEnum.ACTIVO){
+            btnIniciarPaseo.text = "El paseo ya inicio"
+            btnIniciarPaseo.isEnabled = false
+            btnCancelarPaseo.text = "Finalizar paseo"
+            btnCancelarPaseo.visibility = View.VISIBLE
+            btnCalificar.visibility = View.GONE
+        } else if (paseo.estado == EstadoEnum.FINALIZADO) {
+            btnIniciarPaseo.text = "El paseo ya finalizo"
+            btnIniciarPaseo.isEnabled = false
+            btnCancelarPaseo.visibility = View.GONE
         } else if(paseo.estado == EstadoEnum.FINALIZADO) {
             btnCancelarPaseo.visibility = View.GONE
             btnCalificar.visibility = View.GONE
@@ -133,15 +137,6 @@ class PaseoProgramadoDetail : Fragment() {
             btnIniciarPaseo.visibility = View.VISIBLE
             btnCancelarPaseo.text = "Rechazar paseo"
             btnCancelarPaseo.visibility = View.VISIBLE
-        } else if(paseo.estado == EstadoEnum.PAGO_PENDIENTE && userSession is User) {
-            Log.d("PAGO", "PAGO")
-            btnIniciarPaseo.text = "Realizar Pago"
-            btnIniciarPaseo.visibility = View.VISIBLE
-            btnCancelarPaseo.visibility = View.GONE
-            btnCalificar.visibility = View.VISIBLE
-        } else if(paseo.estado == EstadoEnum.PAGO_PENDIENTE) {
-            btnCancelarPaseo.visibility = View.GONE
-            btnCalificar.visibility = View.GONE
         }
 
         if (((fechaHoy.time - 10800000) - fecha.time).absoluteValue >= 300000 && paseo.estado == EstadoEnum.PENDIENTE) {
@@ -177,9 +172,7 @@ class PaseoProgramadoDetail : Fragment() {
         builder.setMessage("¿Estás seguro de finalizar este paseo?")
         builder.setPositiveButton("Sí") { _, _ ->
             // USUARIO CONFIRMA, HACER VALIDACIÓN DE FECHA DISPONIBLE
-            if(paseo.medioDePago == MedioDePagoEnum.TRANSFERENCIA && paseo.estado != EstadoEnum.PENDIENTE) {
-                paseosRepository.updateEstadoPaseo(paseo.id, EstadoEnum.PAGO_PENDIENTE)
-            } else if(paseo.estado == EstadoEnum.PENDIENTE){
+            if(paseo.estado == EstadoEnum.PENDIENTE){
                 paseosRepository.deletePaseo(paseo)
             } else {
                 paseosRepository.updateEstadoPaseo(paseo.id, EstadoEnum.FINALIZADO)
