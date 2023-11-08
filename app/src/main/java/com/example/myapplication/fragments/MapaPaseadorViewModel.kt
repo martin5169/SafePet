@@ -27,9 +27,7 @@ import com.google.firebase.database.ValueEventListener
 class MapaPaseadorViewModel : ViewModel() {
     // TODO: Implement the ViewModel
 
-    val paseoRepository = PaseoRepository.getInstance()
     lateinit var locationCallback: LocationCallback
-    lateinit var finalizar: Button
     val database = FirebaseDatabase.getInstance()
     val marcadores: MutableList<Marker?> = mutableListOf()
 
@@ -42,7 +40,6 @@ class MapaPaseadorViewModel : ViewModel() {
                     val locationRef = database.reference.child("users").child("1").child("location")
 
                     locationRef.setValue(com.example.myapplication.entities.Location(location.latitude, location.longitude))
-                    updateMarker(location)
                 }
             }
         }
@@ -78,13 +75,6 @@ class MapaPaseadorViewModel : ViewModel() {
 
         })
     }
-    private fun updateMarker(location: Location) {
-        val currentLatLng = LatLng(location.latitude, location.longitude)
-        // Si ya existe un marcador en el mapa, quítalo antes de agregar uno nuevo.
-
-        // Mover la cámara al nuevo marcador.
-    }
-
     fun addMarcador(gMap: GoogleMap, latLng: LatLng, key: String) {
         val marker = gMap.addMarker(
             MarkerOptions()

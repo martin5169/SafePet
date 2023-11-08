@@ -56,13 +56,12 @@ class Login : Fragment() {
                 auth.signInWithEmailAndPassword(enteredMail, enteredPass)
                     .addOnCompleteListener(requireActivity()) { task ->
                         if (task.isSuccessful) {
-                            // Sign in success, update UI with the signed-in user's information
                             Log.d("LOGIN", "signInWithEmail:success")
                             val userAuth = auth.currentUser
-                            /*if(!userAuth!!.isEmailVerified){
+                            if(!userAuth!!.isEmailVerified){
                                 Snackbar.make(v, "El mail aun no está verificado", Snackbar.LENGTH_SHORT).show()
                                 return@addOnCompleteListener
-                            }*/
+                            }
                             userRepository.getUsers { userList ->
                                 val user = userList.find { it.mail == enteredMail }
                                 if (user != null) {
@@ -82,7 +81,6 @@ class Login : Fragment() {
                                 }
                             }
                         } else {
-                            // If sign in fails, display a message to the user.
                             Log.w("LOGIN", "signInWithEmail:failure", task.exception)
                             Toast.makeText(
                                 requireContext(),

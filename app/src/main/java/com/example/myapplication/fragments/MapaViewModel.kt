@@ -1,5 +1,6 @@
 package com.example.myapplication.fragments
 
+import android.location.Location
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.myapplication.R
@@ -42,8 +43,6 @@ class MapaViewModel : ViewModel() {
                     } else {
                         addMarcador(gMap, LatLng(userLatitude, userLongitude), paseador.dni)
                     }
-
-                    //gMap.setOnInfoWindowClickListener {}
                 }
             }
 

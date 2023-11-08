@@ -31,7 +31,6 @@ class PerfilUser : Fragment() {
     lateinit var dni: TextView
     lateinit var contraseña : Button
     lateinit var mail : TextView
-    lateinit var btnEdit: Button
     lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
@@ -46,7 +45,6 @@ class PerfilUser : Fragment() {
         dni = v.findViewById(R.id.dniUser)
         contraseña = v.findViewById(R.id.cambiarPass2)
         mail = v.findViewById(R.id.userMail)
-        //btnEdit = v.findViewById(R.id.editPerfil)
         auth = Firebase.auth
 
         return v
@@ -92,28 +90,4 @@ class PerfilUser : Fragment() {
         }
 
     }
-    private fun showConfirmationDialog(user: UserAbstract, enteredMail: String) {
-        val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("Confirmación")
-        builder.setMessage("¿Estás seguro de actualizar tus datos de perfil?")
-
-        builder.setPositiveButton("Sí") { _, _ ->
-            // Usuario confirma, realiza la actualización
-            val paseadorRepository = PaseadorRepository.getInstance()
-            paseadorRepository.updatePaseador(user.dni, enteredMail, "")
-            Snackbar.make(v, "Datos actualizados con éxito", Snackbar.LENGTH_SHORT).show()
-            user.mail = enteredMail
-            user.password = ""
-            val action = PerfilPaseadorDirections.actionPerfilPaseador2ToHomePaseador()
-            findNavController().navigate(action)
-        }
-
-        builder.setNegativeButton("No") { _, _ ->
-            // Usuario cancela, no se realiza la actualizacion
-        }
-
-        val dialog = builder.create()
-        dialog.show()
-    }
-
 }

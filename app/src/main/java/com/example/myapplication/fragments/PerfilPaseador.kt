@@ -101,7 +101,6 @@ class PerfilPaseador : Fragment() {
             paseadorRepository.updatePaseador(user.dni, enteredMail, "")
             Snackbar.make(v, "Datos actualizados con éxito", Snackbar.LENGTH_SHORT).show()
             user.mail = enteredMail
-            user.password = ""
             val action = PerfilPaseadorDirections.actionPerfilPaseador2ToHomePaseador()
             findNavController().navigate(action)
         }

@@ -87,7 +87,6 @@ class RegisterForm : Fragment() {
                             enteredDni,
                             enteredMail
                         )
-                        paseadoresRepository.addUser(newPaseador)
 
                         auth.createUserWithEmailAndPassword(enteredMail, enteredPass)
                             .addOnCompleteListener(requireActivity()) { task ->
@@ -102,6 +101,7 @@ class RegisterForm : Fragment() {
                                         Snackbar.LENGTH_SHORT
                                     )
                                         .show()
+                                    paseadoresRepository.addUser(newPaseador)
                                     val action =
                                         RegisterFormDirections.actionRegisterForm2ToLogin22()
                                     findNavController().navigate(action)

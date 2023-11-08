@@ -97,7 +97,6 @@ class CalendarioPaseador : Fragment() {
                         adaptadorActual.addAll(fechasFiltradas)
                         adaptadorActual.notifyDataSetChanged()
                     } else {
-                        Log.d("ASD", "isEmpty")
                         val adaptadorActual = spinner.adapter as ArrayAdapter<String>
                         adaptadorActual.clear()
                         adaptadorActual.addAll(originalHorarios)
