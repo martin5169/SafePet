@@ -23,6 +23,7 @@ import com.example.myapplication.entities.PaseoProgramado
 import com.example.myapplication.entities.UserSession
 import com.example.myapplication.repository.PaseoRepository
 import java.text.SimpleDateFormat
+import java.util.Date
 
 class UserHistorial : Fragment() {
 
@@ -65,6 +66,7 @@ class UserHistorial : Fragment() {
         val userDNI = UserSession.user.dni
         val format = SimpleDateFormat("dd/MM/yyyy HH:mm")
         paseosRepository.getPaseos { paseosList ->
+            paseosList.map { paseo -> actualizarPaseo(paseo) }
             paseosFiltrados = paseosList.filter { paseo ->
                 paseo.user.dni == userDNI
             }
@@ -114,6 +116,15 @@ class UserHistorial : Fragment() {
             override fun onNothingSelected(parentView: AdapterView<*>?) {
                 // Aquí se ejecutará el código cuando no se haya seleccionado ningún elemento
             }
+        }
+    }
+
+    private fun actualizarPaseo(paseo: PaseoProgramado) {
+        val format = SimpleDateFormat("dd/MM/yyyy HH:mm")
+        val fecha = format.parse(paseo.fecha)
+        val fechaHoy = Date()
+        if (((fechaHoy.time - 10800000) - fecha.time) >= 3600000 && paseo.estado != EstadoEnum.FINALIZADO) {
+            paseosRepository.updateEstadoPaseo(paseo.id, EstadoEnum.FINALIZADO)
         }
     }
 }

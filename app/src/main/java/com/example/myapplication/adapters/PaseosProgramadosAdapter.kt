@@ -25,7 +25,6 @@ class PaseosProgramadosAdapter(var paseos : MutableList<PaseoProgramado>,
                     var onClick : (Int) -> Unit
 ) : RecyclerView.Adapter<PaseosProgramadosAdapter.UserHolder>() {
 
-
        class UserHolder(v: View): RecyclerView.ViewHolder(v)
     {
         private var view : View
@@ -82,7 +81,6 @@ class PaseosProgramadosAdapter(var paseos : MutableList<PaseoProgramado>,
 
     override fun onBindViewHolder(holder: UserHolder, position: Int) {
         val paseo = paseos[position]
-
        // val cardLayout = holder.getCard().getChildAt(position) as View
 
        // val colorPaseoAnterior = ContextCompat.getColor(holder.getCard().context, R.color.colorPaseoAnterior)
@@ -105,7 +103,6 @@ class PaseosProgramadosAdapter(var paseos : MutableList<PaseoProgramado>,
             }
         }
     }
-
 }
 
 
