@@ -66,7 +66,7 @@ class MapaPaseadorViewModel : ViewModel() {
                             LatLng(userLatitude as Double, userLongitude as Double)
                     } else {
                         addMarcador(gMap, LatLng(userLatitude as Double, userLongitude as Double), snapshot.key!!)
-
+                        gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(userLatitude as Double, userLongitude as Double), 15f))
                     }
 
                 }

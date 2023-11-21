@@ -89,7 +89,6 @@ class MapaPaseador : Fragment() {
         }
 
 
-        //paseoRepository.addPaseo(Paseo(Paseador(), userSession as User))
     }
 
     private fun getUsersLocation(paseos: List<PaseoProgramado>) {

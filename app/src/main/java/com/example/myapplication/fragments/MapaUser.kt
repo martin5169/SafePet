@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.core.app.ActivityCompat
 import com.example.myapplication.R
+import com.example.myapplication.entities.EstadoEnum
 import com.example.myapplication.entities.PaseoProgramado
 import com.example.myapplication.entities.UserAbstract
 import com.example.myapplication.entities.UserSession
@@ -21,6 +23,7 @@ import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.FirebaseDatabase
 
 class MapaUser : Fragment() {
@@ -76,14 +79,15 @@ class MapaUser : Fragment() {
         location = LocationServices.getFusedLocationProviderClient(requireContext())
         userSession = UserSession.user
 
-        paseoRepository.getPaseoUser(userSession.dni).addOnCompleteListener {
-            val paseo = it.result?.getValue(PaseoProgramado::class.java)
+        paseoRepository.getPaseos() {paseos ->
+            val paseosUser = paseos.filter { it.user.dni == userSession.dni }
+            val paseo = paseosUser.find { it.estado == EstadoEnum.ACTIVO }
             if (paseo == null) {
                 //Trae todos los paseos
                 getLocation()
             }else{
-                //Trae un solo paseo
-                mapaViewModel.getPaseoUser(gMap, it.result!!)
+                Log.d("UN PASEO", "UN PASEO")
+                mapaViewModel.getPaseoUser(gMap, paseo)
             }
         }
     }

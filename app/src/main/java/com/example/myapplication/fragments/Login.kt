@@ -84,7 +84,7 @@ class Login : Fragment() {
                             Log.w("LOGIN", "signInWithEmail:failure", task.exception)
                             Toast.makeText(
                                 requireContext(),
-                                "El usuario no está registrado.",
+                                "Las credenciales son incorrectas.",
                                 Toast.LENGTH_SHORT,
                             ).show()
                         }

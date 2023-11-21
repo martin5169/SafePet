@@ -32,8 +32,8 @@ class PaseoRepository {
        return paseosReference.orderByChild("user/dni").equalTo(dniUser).get()
     }
 
-    fun getPaseoUserRef(dniUser: String): Query {
-        return paseosReference.orderByChild("user/dni").equalTo(dniUser)
+    fun getPaseoUserRef(id: String): Query {
+        return paseosReference.orderByChild("id").equalTo(id)
     }
 
     fun getPaseosPaseador(dniPaseador: String, callback: (List<PaseoProgramado>) -> Unit) {

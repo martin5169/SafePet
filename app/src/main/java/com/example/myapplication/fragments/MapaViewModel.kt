@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.myapplication.R
 import com.example.myapplication.entities.Paseador
+import com.example.myapplication.entities.PaseoProgramado
 import com.example.myapplication.repository.PaseadorRepository
 import com.example.myapplication.repository.PaseoRepository
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -55,13 +56,10 @@ class MapaViewModel : ViewModel() {
         })
     }
 
-    fun getPaseoUser(gMap: GoogleMap,dataSnapshot: DataSnapshot) {
-        val mapData = dataSnapshot.value as HashMap<*, *>
-        Log.d("MAP DATA", mapData.toString())
-        val mapPaseo = mapData.get(mapData.keys.first()) as HashMap<*, *>
-        val dniUser = (mapPaseo.get("user") as HashMap<*, *>).get("dni") as String
+    fun getPaseoUser(gMap: GoogleMap,paseo: PaseoProgramado) {
+        val dniUser = paseo.user.dni
 
-        paseoRepository.getPaseoUserRef(dniUser).addValueEventListener(object :
+        paseoRepository.getPaseoUserRef(paseo.id).addValueEventListener(object :
             ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val mapDataSnap = snapshot.value as HashMap<*, *>
